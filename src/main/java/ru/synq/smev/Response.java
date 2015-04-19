@@ -1,6 +1,7 @@
 package ru.synq.smev;
 
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
@@ -11,6 +12,10 @@ public class Response {
 
     public static PageResponse page(Page page) {
         return new PageResponse(page);
+    }
+
+    public static ErrorResponse error(HttpStatus status) {
+        return new ErrorResponse(String.valueOf(status.value()), status.getReasonPhrase());
     }
 
     public static class ErrorResponse {
