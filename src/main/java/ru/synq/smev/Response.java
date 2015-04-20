@@ -18,7 +18,11 @@ public class Response {
         return new ErrorResponse(String.valueOf(status.value()), status.getReasonPhrase());
     }
 
-    public static class ErrorResponse {
+    public static ErrorResponse error(HttpStatus status, String message) {
+        return new ErrorResponse(String.valueOf(status.value()), message);
+    }
+
+    public static class ErrorResponse extends Response {
         public final String error;
         public final String message;
 

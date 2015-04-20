@@ -28,12 +28,6 @@ public class SmevApplication {
     private static Logger log = LoggerFactory.getLogger(SmevApplication.class);
 
     public static void main(String[] args) {
-        /*try {
-            new ru.CryptoPro.Crypto.CryptoProvider();
-        } catch (NoClassDefFoundError error) {
-            log.error("CryptoPro not found");
-            return;
-        }*/
         SpringApplication.run(SmevApplication.class, args);
     }
 
@@ -43,12 +37,6 @@ public class SmevApplication {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorResponse notFoundError() {
         return Response.error(HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ErrorResponse handleError(Exception exception) {
-        return Response.error(exception);
     }
 
     @Bean
