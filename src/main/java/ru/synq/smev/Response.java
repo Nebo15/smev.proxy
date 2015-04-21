@@ -7,7 +7,13 @@ import java.util.List;
 
 public class Response {
     public static ErrorResponse error(Exception exception) {
-        return new ErrorResponse(exception.getClass().getName(), exception.getMessage());
+        return new ErrorResponse(exception.getClass().getName(), exception.getMessage()+causeToString(exception));
+    }
+
+    private static String causeToString(Throwable cause) {
+        String s = cause.getClass().getSimpleName();
+        String message = cause.getLocalizedMessage();
+        return " < " + (message != null ? message : s) + (cause.getCause() != null ? causeToString(cause.getCause()) : "");
     }
 
     public static PageResponse page(Page page) {

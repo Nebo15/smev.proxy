@@ -70,6 +70,15 @@ public class RestExceptionHandler {
     }
 
     @RequestMapping
+    @ExceptionHandler(SecurityException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public @ResponseBody
+    Response handleUncaughtException() throws IOException {
+        log.error("Unauthorized");
+        return error(HttpStatus.UNAUTHORIZED);
+    }
+
+    @RequestMapping
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public @ResponseBody

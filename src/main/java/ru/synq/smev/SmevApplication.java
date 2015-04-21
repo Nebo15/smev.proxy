@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.synq.smev.Response.ErrorResponse;
 import ru.synq.smev.soap.xml.security.action.LocalSignatureAction;
 
+import javax.servlet.DispatcherType;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,8 +34,6 @@ public class SmevApplication {
         SpringApplication.run(SmevApplication.class, args);
     }
 
-    @Autowired AsyncTaskExecutor executor;
-
     @RequestMapping("**")
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorResponse notFoundError() {
@@ -40,10 +41,13 @@ public class SmevApplication {
     }
 
     @Bean
-    public AsyncTaskExecutor taskScheduler() {
-        final ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
-        scheduler.setPoolSize(3);
-        return scheduler;
+    @Autowired
+    public FilterRegistrationBean authenticationFilter(AuthenticationFilter filter) {
+        FilterRegistrationBean registration = new FilterRegistrationBean();
+        registration.setFilter(filter);
+        registration.setDispatcherTypes(EnumSet.allOf(DispatcherType.class));
+        registration.addUrlPatterns("/**");
+        return registration;
     }
 
     @Bean
