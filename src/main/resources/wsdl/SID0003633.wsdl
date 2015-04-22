@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is Metro/2.1.1 (branches/2.1-6844; 2011-07-29T12:07:24+0000) JAXWS-RI/2.2.5 JAXWS/2.2. --><wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns="http://www.w3.org/2000/09/xmldsig#" xmlns:smev="http://smev.gosuslugi.ru/rev120315" xmlns:tns="http://ws.unisoft/" targetNamespace="http://ws.unisoft/">
+	<wsdl:types>
+		<xs:schema targetNamespace="http://ws.unisoft/">
+			<xs:import namespace="http://smev.gosuslugi.ru/rev120315" schemaLocation="http://smev-mvf.test.gosuslugi.ru:7777/gateway/services/SID0003633/1.00/wsdl/FNSR01/92475162-2e24-428d-bfcf-b5eeaff505ca"/>
+			<xs:element name="sendSvFMSIG" type="smev:sendSvFMSIGRequestType"/>
+			<xs:element name="sendSvFMSIGResponse" type="smev:sendSvFMSIGResponseType"/>
+			<xs:element name="getSvFMSIG" type="smev:getSvFMSIGRequestType"/>
+			<xs:element name="getSvFMSIGResponse" type="smev:getSvFMSIGResponseType"/>
+			<xs:element name="TestRequest">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="TestResponse">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="sendSvFMSIG">
+		<wsdl:part name="sendSvFMSIG_InputMessage" element="tns:sendSvFMSIG"/>
+	</wsdl:message>
+	<wsdl:message name="sendSvFMSIGResponse">
+		<wsdl:part name="sendSvFMSIG_OutputMessage" element="tns:sendSvFMSIGResponse"/>
+	</wsdl:message>
+	<wsdl:message name="getSvFMSIG">
+		<wsdl:part name="getSvFMSIG_InputMessage" element="tns:getSvFMSIG"/>
+	</wsdl:message>
+	<wsdl:message name="getSvFMSIGResponse">
+		<wsdl:part name="getSvFMSIG_OutputMessage" element="tns:getSvFMSIGResponse"/>
+	</wsdl:message>
+	<wsdl:message name="TestIn">
+		<wsdl:part name="TestParams" element="tns:TestRequest"/>
+	</wsdl:message>
+	<wsdl:message name="TestOut">
+		<wsdl:part name="TestResponseParams" element="tns:TestResponse"/>
+	</wsdl:message>
+	<wsdl:portType name="FNSINRWSPort">
+		<wsdl:operation name="sendSvFMSIG">
+			<wsdl:input message="tns:sendSvFMSIG"/>
+			<wsdl:output message="tns:sendSvFMSIGResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="getSvFMSIG">
+			<wsdl:input message="tns:getSvFMSIG"/>
+			<wsdl:output message="tns:getSvFMSIGResponse"/>
+		</wsdl:operation>
+		<!-- send -->
+		<!-- get -->
+		<!-- finished -->
+		<wsdl:operation name="Test">
+			<wsdl:input message="tns:TestIn"/>
+			<wsdl:output message="tns:TestOut"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="FNSINRWSSoap11" type="tns:FNSINRWSPort">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="sendSvFMSIG">
+			<soap:operation soapAction="sendSvFMSIG" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+<wsdl:operation name="getSvFMSIG">
+			<soap:operation soapAction="getSvFMSIG" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="Test">
+			<soap:operation soapAction="Test" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="FNSINRWS">
+		<wsdl:port name="FNSINRWSPort" binding="tns:FNSINRWSSoap11">
+			<soap:address location="http://smev-mvf.test.gosuslugi.ru:7777/gateway/services/SID0003633/1.00"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
