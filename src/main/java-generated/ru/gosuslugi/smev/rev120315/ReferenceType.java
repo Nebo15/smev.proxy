@@ -1,33 +1,30 @@
 
-package org.w3._2000._09.xmldsig;
+package ru.gosuslugi.smev.rev120315;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlMixed;
 import javax.xml.bind.annotation.XmlType;
-import org.w3c.dom.Element;
+import org.w3._2004._08.xop.include.Include;
 
 
 /**
- * <p>Java class for KeyValueType complex type.
+ * <p>Java class for ReferenceType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="KeyValueType">
+ * &lt;complexType name="ReferenceType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;choice>
- *         &lt;element ref="{http://www.w3.org/2000/09/xmldsig#}DSAKeyValue"/>
- *         &lt;element ref="{http://www.w3.org/2000/09/xmldsig#}RSAKeyValue"/>
- *         &lt;any processContents='lax' namespace='##other'/>
- *       &lt;/choice>
+ *       &lt;sequence>
+ *         &lt;element ref="{http://www.w3.org/2004/08/xop/include}Include" minOccurs="0"/>
+ *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -36,18 +33,14 @@ import org.w3c.dom.Element;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "KeyValueType", propOrder = {
+@XmlType(name = "ReferenceType", propOrder = {
     "content"
 })
-public class KeyValueType {
+public class ReferenceType {
 
-    @XmlElementRefs({
-        @XmlElementRef(name = "DSAKeyValue", namespace = "http://www.w3.org/2000/09/xmldsig#", type = JAXBElement.class),
-        @XmlElementRef(name = "RSAKeyValue", namespace = "http://www.w3.org/2000/09/xmldsig#", type = JAXBElement.class)
-    })
+    @XmlElementRef(name = "Include", namespace = "http://www.w3.org/2004/08/xop/include", type = JAXBElement.class)
     @XmlMixed
-    @XmlAnyElement(lax = true)
-    protected List<Object> content;
+    protected List<Serializable> content;
 
     /**
      * Gets the value of the content property.
@@ -68,16 +61,13 @@ public class KeyValueType {
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
-     * {@link Element }
-     * {@link Object }
-     * {@link JAXBElement }{@code <}{@link DSAKeyValueType }{@code >}
-     * {@link JAXBElement }{@code <}{@link RSAKeyValueType }{@code >}
+     * {@link JAXBElement }{@code <}{@link Include }{@code >}
      * 
      * 
      */
-    public List<Object> getContent() {
+    public List<Serializable> getContent() {
         if (content == null) {
-            content = new ArrayList<Object>();
+            content = new ArrayList<Serializable>();
         }
         return this.content;
     }

@@ -60,30 +60,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link AppDataType }
-     * 
-     */
-    public AppDataType createAppDataType() {
-        return new AppDataType();
-    }
-
-    /**
-     * Create an instance of {@link ReferenceType }
-     * 
-     */
-    public ReferenceType createReferenceType() {
-        return new ReferenceType();
-    }
-
-    /**
-     * Create an instance of {@link MessageType }
-     * 
-     */
-    public MessageType createMessageType() {
-        return new MessageType();
-    }
-
-    /**
      * Create an instance of {@link AppDocumentType }
      * 
      */
@@ -100,11 +76,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link HeaderType }
+     * Create an instance of {@link AppDataType }
      * 
      */
-    public HeaderType createHeaderType() {
-        return new HeaderType();
+    public AppDataType createAppDataType() {
+        return new AppDataType();
     }
 
     /**
@@ -116,11 +92,35 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link MessageType }
+     * 
+     */
+    public MessageType createMessageType() {
+        return new MessageType();
+    }
+
+    /**
+     * Create an instance of {@link HeaderType }
+     * 
+     */
+    public HeaderType createHeaderType() {
+        return new HeaderType();
+    }
+
+    /**
      * Create an instance of {@link BaseMessageType }
      * 
      */
     public BaseMessageType createBaseMessageType() {
         return new BaseMessageType();
+    }
+
+    /**
+     * Create an instance of {@link ReferenceType }
+     * 
+     */
+    public ReferenceType createReferenceType() {
+        return new ReferenceType();
     }
 
     /**

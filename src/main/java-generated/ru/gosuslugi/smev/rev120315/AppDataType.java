@@ -1,5 +1,5 @@
 
-package org.w3._2004._08.xop.include;
+package ru.gosuslugi.smev.rev120315;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,26 +9,24 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAnyAttribute;
 import javax.xml.bind.annotation.XmlAnyElement;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.namespace.QName;
+import org.w3c.dom.Element;
 
 
 /**
- * <p>Java class for Include complex type.
+ * <p>Java class for AppDataType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="Include">
+ * &lt;complexType name="AppDataType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;any namespace='##other' maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;any processContents='lax' maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
- *       &lt;attribute name="href" use="required" type="{http://www.w3.org/2001/XMLSchema}anyURI" />
- *       &lt;anyAttribute namespace='##other'/>
+ *       &lt;anyAttribute processContents='lax'/>
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -37,16 +35,13 @@ import javax.xml.namespace.QName;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Include", propOrder = {
+@XmlType(name = "AppDataType", propOrder = {
     "any"
 })
-public class Include {
+public class AppDataType {
 
     @XmlAnyElement(lax = true)
     protected List<Object> any;
-    @XmlAttribute(name = "href", required = true)
-    @XmlSchemaType(name = "anyURI")
-    protected String href;
     @XmlAnyAttribute
     private Map<QName, String> otherAttributes = new HashMap<QName, String>();
 
@@ -68,6 +63,7 @@ public class Include {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
+     * {@link Element }
      * {@link Object }
      * 
      * 
@@ -77,30 +73,6 @@ public class Include {
             any = new ArrayList<Object>();
         }
         return this.any;
-    }
-
-    /**
-     * Gets the value of the href property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getHref() {
-        return href;
-    }
-
-    /**
-     * Sets the value of the href property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setHref(String value) {
-        this.href = value;
     }
 
     /**

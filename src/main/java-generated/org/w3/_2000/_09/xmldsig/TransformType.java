@@ -70,8 +70,8 @@ public class TransformType {
      * Objects of the following type(s) are allowed in the list
      * {@link String }
      * {@link Element }
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link Object }
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * 
      * 
      */
