@@ -26,8 +26,8 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 
     private final static QName _DigestValue_QNAME = new QName("http://smev.gosuslugi.ru/rev120315", "DigestValue");
-    private final static QName _AppDocument_QNAME = new QName("http://smev.gosuslugi.ru/rev120315", "AppDocument");
     private final static QName _Originator_QNAME = new QName("http://smev.gosuslugi.ru/rev120315", "Originator");
+    private final static QName _AppDocument_QNAME = new QName("http://smev.gosuslugi.ru/rev120315", "AppDocument");
     private final static QName _Message_QNAME = new QName("http://smev.gosuslugi.ru/rev120315", "Message");
     private final static QName _BinaryData_QNAME = new QName("http://smev.gosuslugi.ru/rev120315", "BinaryData");
     private final static QName _AppData_QNAME = new QName("http://smev.gosuslugi.ru/rev120315", "AppData");
@@ -40,16 +40,18 @@ public class ObjectFactory {
     private final static QName _Id_QNAME = new QName("http://smev.gosuslugi.ru/rev120315", "Id");
     private final static QName _SubMessage_QNAME = new QName("http://smev.gosuslugi.ru/rev120315", "SubMessage");
     private final static QName _RequestCode_QNAME = new QName("http://smev.gosuslugi.ru/rev120315", "RequestCode");
+    private final static QName _Service_QNAME = new QName("http://smev.gosuslugi.ru/rev120315", "Service");
     private final static QName _MessageClass_QNAME = new QName("http://smev.gosuslugi.ru/rev120315", "MessageClass");
+    private final static QName _OKTMO_QNAME = new QName("http://smev.gosuslugi.ru/rev120315", "OKTMO");
     private final static QName _TestMsg_QNAME = new QName("http://smev.gosuslugi.ru/rev120315", "TestMsg");
     private final static QName _MessageData_QNAME = new QName("http://smev.gosuslugi.ru/rev120315", "MessageData");
-    private final static QName _ExchangeType_QNAME = new QName("http://smev.gosuslugi.ru/rev120315", "ExchangeType");
-    private final static QName _Sender_QNAME = new QName("http://smev.gosuslugi.ru/rev120315", "Sender");
     private final static QName _NodeId_QNAME = new QName("http://smev.gosuslugi.ru/rev120315", "NodeId");
+    private final static QName _Sender_QNAME = new QName("http://smev.gosuslugi.ru/rev120315", "Sender");
+    private final static QName _ExchangeType_QNAME = new QName("http://smev.gosuslugi.ru/rev120315", "ExchangeType");
     private final static QName _RequestIdRef_QNAME = new QName("http://smev.gosuslugi.ru/rev120315", "RequestIdRef");
     private final static QName _PacketIds_QNAME = new QName("http://smev.gosuslugi.ru/rev120315", "PacketIds");
-    private final static QName _ServiceName_QNAME = new QName("http://smev.gosuslugi.ru/rev120315", "ServiceName");
     private final static QName _MessageId_QNAME = new QName("http://smev.gosuslugi.ru/rev120315", "MessageId");
+    private final static QName _ServiceName_QNAME = new QName("http://smev.gosuslugi.ru/rev120315", "ServiceName");
     private final static QName _Header_QNAME = new QName("http://smev.gosuslugi.ru/rev120315", "Header");
     private final static QName _TypeCode_QNAME = new QName("http://smev.gosuslugi.ru/rev120315", "TypeCode");
     private final static QName _Date_QNAME = new QName("http://smev.gosuslugi.ru/rev120315", "Date");
@@ -66,115 +68,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link PacketIdsType }
+     * Create an instance of {@link ServiceType }
      * 
      */
-    public PacketIdsType createPacketIdsType() {
-        return new PacketIdsType();
-    }
-
-    /**
-     * Create an instance of {@link GetSvFMSIGRequestType }
-     * 
-     */
-    public GetSvFMSIGRequestType createGetSvFMSIGRequestType() {
-        return new GetSvFMSIGRequestType();
-    }
-
-    /**
-     * Create an instance of {@link SubMessagesType }
-     * 
-     */
-    public SubMessagesType createSubMessagesType() {
-        return new SubMessagesType();
-    }
-
-    /**
-     * Create an instance of {@link OrgExternalType }
-     * 
-     */
-    public OrgExternalType createOrgExternalType() {
-        return new OrgExternalType();
-    }
-
-    /**
-     * Create an instance of {@link AppDataType }
-     * 
-     */
-    public AppDataType createAppDataType() {
-        return new AppDataType();
-    }
-
-    /**
-     * Create an instance of {@link MessageType }
-     * 
-     */
-    public MessageType createMessageType() {
-        return new MessageType();
-    }
-
-    /**
-     * Create an instance of {@link MessageRootType }
-     * 
-     */
-    public MessageRootType createMessageRootType() {
-        return new MessageRootType();
-    }
-
-    /**
-     * Create an instance of {@link AppDocumentType }
-     * 
-     */
-    public AppDocumentType createAppDocumentType() {
-        return new AppDocumentType();
-    }
-
-    /**
-     * Create an instance of {@link ReferenceType }
-     * 
-     */
-    public ReferenceType createReferenceType() {
-        return new ReferenceType();
-    }
-
-    /**
-     * Create an instance of {@link SendSvFMSIGRequestType }
-     * 
-     */
-    public SendSvFMSIGRequestType createSendSvFMSIGRequestType() {
-        return new SendSvFMSIGRequestType();
-    }
-
-    /**
-     * Create an instance of {@link BaseMessageType }
-     * 
-     */
-    public BaseMessageType createBaseMessageType() {
-        return new BaseMessageType();
-    }
-
-    /**
-     * Create an instance of {@link PacketIdType }
-     * 
-     */
-    public PacketIdType createPacketIdType() {
-        return new PacketIdType();
-    }
-
-    /**
-     * Create an instance of {@link GetSvFMSIGResponseType }
-     * 
-     */
-    public GetSvFMSIGResponseType createGetSvFMSIGResponseType() {
-        return new GetSvFMSIGResponseType();
-    }
-
-    /**
-     * Create an instance of {@link HeaderType }
-     * 
-     */
-    public HeaderType createHeaderType() {
-        return new HeaderType();
+    public ServiceType createServiceType() {
+        return new ServiceType();
     }
 
     /**
@@ -186,6 +84,70 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link OrgExternalType }
+     * 
+     */
+    public OrgExternalType createOrgExternalType() {
+        return new OrgExternalType();
+    }
+
+    /**
+     * Create an instance of {@link HeaderType }
+     * 
+     */
+    public HeaderType createHeaderType() {
+        return new HeaderType();
+    }
+
+    /**
+     * Create an instance of {@link PacketIdsType }
+     * 
+     */
+    public PacketIdsType createPacketIdsType() {
+        return new PacketIdsType();
+    }
+
+    /**
+     * Create an instance of {@link MessageType }
+     * 
+     */
+    public MessageType createMessageType() {
+        return new MessageType();
+    }
+
+    /**
+     * Create an instance of {@link AppDocumentType }
+     * 
+     */
+    public AppDocumentType createAppDocumentType() {
+        return new AppDocumentType();
+    }
+
+    /**
+     * Create an instance of {@link AppDataType }
+     * 
+     */
+    public AppDataType createAppDataType() {
+        return new AppDataType();
+    }
+
+    /**
+     * Create an instance of {@link SubMessagesType }
+     * 
+     */
+    public SubMessagesType createSubMessagesType() {
+        return new SubMessagesType();
+    }
+
+    /**
+     * Create an instance of {@link BaseMessageType }
+     * 
+     */
+    public BaseMessageType createBaseMessageType() {
+        return new BaseMessageType();
+    }
+
+    /**
      * Create an instance of {@link SubMessageType }
      * 
      */
@@ -194,19 +156,35 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link SendSvFMSIGResponseType }
+     * Create an instance of {@link PacketIdType }
      * 
      */
-    public SendSvFMSIGResponseType createSendSvFMSIGResponseType() {
-        return new SendSvFMSIGResponseType();
+    public PacketIdType createPacketIdType() {
+        return new PacketIdType();
     }
 
     /**
-     * Create an instance of {@link TRoot }
+     * Create an instance of {@link ReferenceType }
      * 
      */
-    public TRoot createTRoot() {
-        return new TRoot();
+    public ReferenceType createReferenceType() {
+        return new ReferenceType();
+    }
+
+    /**
+     * Create an instance of {@link SnilsValidationResponseType }
+     * 
+     */
+    public SnilsValidationResponseType createSnilsValidationResponseType() {
+        return new SnilsValidationResponseType();
+    }
+
+    /**
+     * Create an instance of {@link SnilsValidationRequestType }
+     * 
+     */
+    public SnilsValidationRequestType createSnilsValidationRequestType() {
+        return new SnilsValidationRequestType();
     }
 
     /**
@@ -219,21 +197,21 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link AppDocumentType }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://smev.gosuslugi.ru/rev120315", name = "AppDocument")
-    public JAXBElement<AppDocumentType> createAppDocument(AppDocumentType value) {
-        return new JAXBElement<AppDocumentType>(_AppDocument_QNAME, AppDocumentType.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link OrgExternalType }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://smev.gosuslugi.ru/rev120315", name = "Originator")
     public JAXBElement<OrgExternalType> createOriginator(OrgExternalType value) {
         return new JAXBElement<OrgExternalType>(_Originator_QNAME, OrgExternalType.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link AppDocumentType }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://smev.gosuslugi.ru/rev120315", name = "AppDocument")
+    public JAXBElement<AppDocumentType> createAppDocument(AppDocumentType value) {
+        return new JAXBElement<AppDocumentType>(_AppDocument_QNAME, AppDocumentType.class, null, value);
     }
 
     /**
@@ -345,12 +323,30 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ServiceType }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://smev.gosuslugi.ru/rev120315", name = "Service")
+    public JAXBElement<ServiceType> createService(ServiceType value) {
+        return new JAXBElement<ServiceType>(_Service_QNAME, ServiceType.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link MessageClassType }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://smev.gosuslugi.ru/rev120315", name = "MessageClass")
     public JAXBElement<MessageClassType> createMessageClass(MessageClassType value) {
         return new JAXBElement<MessageClassType>(_MessageClass_QNAME, MessageClassType.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://smev.gosuslugi.ru/rev120315", name = "OKTMO")
+    public JAXBElement<String> createOKTMO(String value) {
+        return new JAXBElement<String>(_OKTMO_QNAME, String.class, null, value);
     }
 
     /**
@@ -375,9 +371,9 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://smev.gosuslugi.ru/rev120315", name = "ExchangeType")
-    public JAXBElement<String> createExchangeType(String value) {
-        return new JAXBElement<String>(_ExchangeType_QNAME, String.class, null, value);
+    @XmlElementDecl(namespace = "http://smev.gosuslugi.ru/rev120315", name = "NodeId")
+    public JAXBElement<String> createNodeId(String value) {
+        return new JAXBElement<String>(_NodeId_QNAME, String.class, null, value);
     }
 
     /**
@@ -393,9 +389,9 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://smev.gosuslugi.ru/rev120315", name = "NodeId")
-    public JAXBElement<String> createNodeId(String value) {
-        return new JAXBElement<String>(_NodeId_QNAME, String.class, null, value);
+    @XmlElementDecl(namespace = "http://smev.gosuslugi.ru/rev120315", name = "ExchangeType")
+    public JAXBElement<String> createExchangeType(String value) {
+        return new JAXBElement<String>(_ExchangeType_QNAME, String.class, null, value);
     }
 
     /**
@@ -420,18 +416,18 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://smev.gosuslugi.ru/rev120315", name = "ServiceName")
-    public JAXBElement<String> createServiceName(String value) {
-        return new JAXBElement<String>(_ServiceName_QNAME, String.class, null, value);
+    @XmlElementDecl(namespace = "http://smev.gosuslugi.ru/rev120315", name = "MessageId")
+    public JAXBElement<String> createMessageId(String value) {
+        return new JAXBElement<String>(_MessageId_QNAME, String.class, null, value);
     }
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://smev.gosuslugi.ru/rev120315", name = "MessageId")
-    public JAXBElement<String> createMessageId(String value) {
-        return new JAXBElement<String>(_MessageId_QNAME, String.class, null, value);
+    @XmlElementDecl(namespace = "http://smev.gosuslugi.ru/rev120315", name = "ServiceName")
+    public JAXBElement<String> createServiceName(String value) {
+        return new JAXBElement<String>(_ServiceName_QNAME, String.class, null, value);
     }
 
     /**

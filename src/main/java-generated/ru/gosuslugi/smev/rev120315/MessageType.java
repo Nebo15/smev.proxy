@@ -22,7 +22,10 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element ref="{http://smev.gosuslugi.ru/rev120315}Sender"/>
  *         &lt;element ref="{http://smev.gosuslugi.ru/rev120315}Recipient"/>
  *         &lt;element ref="{http://smev.gosuslugi.ru/rev120315}Originator" minOccurs="0"/>
- *         &lt;element ref="{http://smev.gosuslugi.ru/rev120315}ServiceName"/>
+ *         &lt;choice>
+ *           &lt;element ref="{http://smev.gosuslugi.ru/rev120315}ServiceName"/>
+ *           &lt;element ref="{http://smev.gosuslugi.ru/rev120315}Service"/>
+ *         &lt;/choice>
  *         &lt;element ref="{http://smev.gosuslugi.ru/rev120315}TypeCode"/>
  *         &lt;element ref="{http://smev.gosuslugi.ru/rev120315}Status"/>
  *         &lt;element ref="{http://smev.gosuslugi.ru/rev120315}Date"/>
@@ -33,6 +36,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element ref="{http://smev.gosuslugi.ru/rev120315}CaseNumber" minOccurs="0"/>
  *         &lt;element ref="{http://smev.gosuslugi.ru/rev120315}SubMessages" minOccurs="0"/>
  *         &lt;element ref="{http://smev.gosuslugi.ru/rev120315}TestMsg" minOccurs="0"/>
+ *         &lt;element ref="{http://smev.gosuslugi.ru/rev120315}OKTMO" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -47,6 +51,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "recipient",
     "originator",
     "serviceName",
+    "service",
     "typeCode",
     "status",
     "date",
@@ -56,7 +61,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "serviceCode",
     "caseNumber",
     "subMessages",
-    "testMsg"
+    "testMsg",
+    "oktmo"
 })
 public class MessageType {
 
@@ -66,8 +72,10 @@ public class MessageType {
     protected OrgExternalType recipient;
     @XmlElement(name = "Originator")
     protected OrgExternalType originator;
-    @XmlElement(name = "ServiceName", required = true)
+    @XmlElement(name = "ServiceName")
     protected String serviceName;
+    @XmlElement(name = "Service")
+    protected ServiceType service;
     @XmlElement(name = "TypeCode", required = true)
     protected TypeCodeType typeCode;
     @XmlElement(name = "Status", required = true)
@@ -89,6 +97,8 @@ public class MessageType {
     protected SubMessagesType subMessages;
     @XmlElement(name = "TestMsg")
     protected String testMsg;
+    @XmlElement(name = "OKTMO")
+    protected String oktmo;
 
     /**
      * Gets the value of the sender property.
@@ -184,6 +194,30 @@ public class MessageType {
      */
     public void setServiceName(String value) {
         this.serviceName = value;
+    }
+
+    /**
+     * Gets the value of the service property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link ServiceType }
+     *     
+     */
+    public ServiceType getService() {
+        return service;
+    }
+
+    /**
+     * Sets the value of the service property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link ServiceType }
+     *     
+     */
+    public void setService(ServiceType value) {
+        this.service = value;
     }
 
     /**
@@ -424,6 +458,30 @@ public class MessageType {
      */
     public void setTestMsg(String value) {
         this.testMsg = value;
+    }
+
+    /**
+     * Gets the value of the oktmo property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getOKTMO() {
+        return oktmo;
+    }
+
+    /**
+     * Sets the value of the oktmo property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setOKTMO(String value) {
+        this.oktmo = value;
     }
 
 }

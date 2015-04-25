@@ -16,6 +16,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,16 +30,19 @@ import ru.synq.smev.soap.xml.security.action.LocalSignatureAction;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.DispatcherType;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 import java.io.IOException;
 import java.net.URL;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static java.util.Collections.singletonMap;
 
+@SuppressWarnings("SpringJavaAutowiringInspection")
 @RestController
 @SpringBootApplication
+@ImportResource("beans.xml")
 public class Application {
     private static Logger log = LoggerFactory.getLogger(Application.class);
 
@@ -91,6 +96,11 @@ public class Application {
         outProps.put("signatureDigestAlgorithm", "http://www.w3.org/2001/04/xmldsig-more#gostr3411");
         outProps.put("mustUnderstand", "false");
         return new WSS4JOutInterceptor(outProps);
+    }
+
+    @Bean(name = "currentDate")
+    public XMLGregorianCalendar getCurrentDate() throws DatatypeConfigurationException {
+        return DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar());
     }
 
 }

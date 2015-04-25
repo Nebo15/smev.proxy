@@ -60,11 +60,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link AppDocumentType }
+     * Create an instance of {@link MessageDataType }
      * 
      */
-    public AppDocumentType createAppDocumentType() {
-        return new AppDocumentType();
+    public MessageDataType createMessageDataType() {
+        return new MessageDataType();
     }
 
     /**
@@ -76,19 +76,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link AppDataType }
+     * Create an instance of {@link HeaderType }
      * 
      */
-    public AppDataType createAppDataType() {
-        return new AppDataType();
-    }
-
-    /**
-     * Create an instance of {@link MessageDataType }
-     * 
-     */
-    public MessageDataType createMessageDataType() {
-        return new MessageDataType();
+    public HeaderType createHeaderType() {
+        return new HeaderType();
     }
 
     /**
@@ -100,11 +92,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link HeaderType }
+     * Create an instance of {@link AppDocumentType }
      * 
      */
-    public HeaderType createHeaderType() {
-        return new HeaderType();
+    public AppDocumentType createAppDocumentType() {
+        return new AppDocumentType();
+    }
+
+    /**
+     * Create an instance of {@link AppDataType }
+     * 
+     */
+    public AppDataType createAppDataType() {
+        return new AppDataType();
     }
 
     /**

@@ -94,7 +94,7 @@ public class AppDocumentType {
      *     byte[]
      */
     public void setBinaryData(byte[] value) {
-        this.binaryData = ((byte[]) value);
+        this.binaryData = value;
     }
 
     /**
@@ -140,7 +140,7 @@ public class AppDocumentType {
      *     byte[]
      */
     public void setDigestValue(byte[] value) {
-        this.digestValue = ((byte[]) value);
+        this.digestValue = value;
     }
 
 }

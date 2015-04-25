@@ -7,16 +7,14 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * \u0421\u0432\u0435\u0434\u0435\u043d\u0438\u044f \u043e \u043f\u043e\u0441\u0442\u0430\u043d\u043e\u0432\u043a\u0435 \u043d\u0430 \u0443\u0447\u0435\u0442  \u0438\u043d\u043e\u0441\u0442\u0440\u0430\u043d\u043d\u043e\u0433\u043e \u0433\u0440\u0430\u0436\u0434\u0430\u043d\u0438\u043d\u0430 \u043b\u0438\u0431\u043e \u043b\u0438\u0446\u0430 \u0431\u0435\u0437 \u0433\u0440\u0430\u0436\u0434\u0430\u043d\u0441\u0442\u0432\u0430, \u0432 \u043e\u0442\u043d\u043e\u0448\u0435\u043d\u0438\u0438 \u043a\u043e\u0442\u043e\u0440\u043e\u0433\u043e \u0440\u0430\u043d\u0435\u0435 \u0431\u044b\u043b\u0438 \u043d\u0430\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u044b \u0441\u0432\u0435\u0434\u0435\u043d\u0438\u044f
- * 
- * <p>Java class for getSvFMSIGResponseType complex type.
+ * <p>Java class for SnilsValidationRequestType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="getSvFMSIGResponseType">
+ * &lt;complexType name="SnilsValidationRequestType">
  *   &lt;complexContent>
- *     &lt;restriction base="{http://smev.gosuslugi.ru/rev120315}MessageRootType">
+ *     &lt;restriction base="{http://smev.gosuslugi.ru/rev120315}BaseMessageType">
  *       &lt;sequence>
  *         &lt;element ref="{http://smev.gosuslugi.ru/rev120315}Message"/>
  *         &lt;element name="MessageData">
@@ -24,14 +22,13 @@ import javax.xml.bind.annotation.XmlType;
  *             &lt;complexContent>
  *               &lt;restriction base="{http://smev.gosuslugi.ru/rev120315}MessageDataType">
  *                 &lt;sequence>
- *                   &lt;element name="AppData">
+ *                   &lt;element name="AppData" minOccurs="0">
  *                     &lt;complexType>
  *                       &lt;complexContent>
  *                         &lt;restriction base="{http://smev.gosuslugi.ru/rev120315}AppDataType">
  *                           &lt;sequence>
- *                             &lt;element ref="{http://ws.unisoft/getSvFMSIGResponse}\u0414\u043e\u043a\u0443\u043c\u0435\u043d\u0442"/>
+ *                             &lt;element name="request" type="{http://snils-validation.skmv.rstyle.com}SnilsValidationData"/>
  *                           &lt;/sequence>
- *                           &lt;anyAttribute processContents='lax'/>
  *                         &lt;/restriction>
  *                       &lt;/complexContent>
  *                     &lt;/complexType>
@@ -51,9 +48,9 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "getSvFMSIGResponseType")
-public class GetSvFMSIGResponseType
-    extends MessageRootType
+@XmlType(name = "SnilsValidationRequestType")
+public class SnilsValidationRequestType
+    extends BaseMessageType
 {
 
 

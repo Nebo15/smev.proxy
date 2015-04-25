@@ -50,7 +50,9 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-web",
             "org.springframework.boot:spring-boot-starter-data-rest",
             "org.bouncycastle:bcpg-jdk15on:$bouncycastleVersion",
-            "org.slf4j:slf4j-api:1.7.2"
+            "org.slf4j:slf4j-api:1.7.2",
+            'javax.inject:javax.inject:1'
+
 
     cxfArtifacts.each { artifact ->
         compile "org.apache.cxf:$artifact:$cxfVersion"
@@ -73,11 +75,12 @@ wsdl2java {
     generatedWsdlDir = file("src/main/java-generated")  // target directory for generated source code
     wsdlDir = file("src/main/resources/wsdl") // define to support incremental build
     wsdlsToGenerate = [
+            ["$projectDir/src/main/resources/wsdl/SID0003450.wsdl"],
             ["$projectDir/src/main/resources/wsdl/SID0003422.wsdl"],
-            ["$projectDir/src/main/resources/wsdl/SID0003633.wsdl"],
+//            ["$projectDir/src/main/resources/wsdl/SID0003633.wsdl"],
 //            ["$projectDir/src/main/resources/wsdl/SID0004632.wsdl"],
     ]
-    cxfVersion = "2.6.1"
+    //cxfVersion = "2.6.1"
 }
 
-sourceSets.main.java.srcDirs 'src/main/java', 'src/main/java-generated'
+sourceSets.main.java.srcDirs 'src/main/java-generated', 'src/main/java'
