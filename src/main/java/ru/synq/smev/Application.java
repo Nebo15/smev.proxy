@@ -11,6 +11,7 @@ import org.apache.xml.security.signature.XMLSignatureException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
@@ -25,6 +26,7 @@ import ru.synq.smev.soap.xml.security.XmlDSignTools;
 import ru.synq.smev.soap.xml.security.action.LocalSignatureAction;
 import ru.CryptoPro.JCP.KeyStore.HDImage.HDImageStore;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.DispatcherType;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
@@ -49,10 +51,14 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-    public Application() throws XMLSignatureException, AlgorithmAlreadyRegisteredException, ClassNotFoundException, IOException {
-        HDImageStore.setDir("/home/smev");
-	log.info("HDImageStore path: {}", HDImageStore.getDir());
-	XmlDSignTools.init();
+    @Value("${HDImageStore.path}") String hdImageStorePath;
+    @Value("${crypto.user}") String cryptoUser;
+
+    @PostConstruct
+    public void init() throws XMLSignatureException, AlgorithmAlreadyRegisteredException, ClassNotFoundException, IOException {
+        HDImageStore.setDir(hdImageStorePath);
+	    log.info("HDImageStore path: {}, user: {}", HDImageStore.getDir(), cryptoUser);
+	    XmlDSignTools.init();
         SpringBusFactory bf = new SpringBusFactory();
         URL resource = this.getClass().getClassLoader().getResource("wssec.xml");
         Bus bus = bf.createBus(resource);
@@ -87,10 +93,10 @@ public class Application {
         outProps.put("wss4j.action.map", wssConfigMap);
         outProps.put("action", "Signature");
         outProps.put("passwordType", "PasswordDigest");
-        outProps.put("user", "RaUser");
+//        outProps.put("user", "RaUser");
         outProps.put("actor", "http://smev.gosuslugi.ru/actors/smev");
         outProps.put("passwordCallbackClass", "demo.wssec.client.UTPasswordCallback");
-        outProps.put("signaturePropFile", "etc/Client_Sign.properties");
+        outProps.put("signaturePropFile", "application.properties");
         outProps.put("signatureKeyIdentifier", "DirectReference");
         outProps.put("signatureParts", "{Element}{http://schemas.xmlsoap.org/soap/envelope/}Body");
         outProps.put("signatureAlgorithm", "http://www.w3.org/2001/04/xmldsig-more#gostr34102001-gostr3411");
