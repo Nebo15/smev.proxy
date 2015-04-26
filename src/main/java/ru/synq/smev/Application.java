@@ -93,7 +93,7 @@ public class Application {
         outProps.put("wss4j.action.map", wssConfigMap);
         outProps.put("action", "Signature");
         outProps.put("passwordType", "PasswordDigest");
-//        outProps.put("user", "RaUser");
+        outProps.put("user", cryptoUser);
         outProps.put("actor", "http://smev.gosuslugi.ru/actors/smev");
         outProps.put("passwordCallbackClass", "demo.wssec.client.UTPasswordCallback");
         outProps.put("signaturePropFile", "application.properties");
