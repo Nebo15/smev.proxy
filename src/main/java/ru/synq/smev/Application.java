@@ -51,7 +51,7 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-    @Value("${HDImageStore.path}") String hdImageStorePath;
+    @Value("${org.apache.ws.security.crypto.merlin.keystore.file}") String hdImageStorePath;
     @Value("${crypto.user}") String cryptoUser;
 
     @PostConstruct

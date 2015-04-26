@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.gosuslugi.smev.rev120315.*;
 
-@RestController
+//@RestController
 @RequestMapping({"snils","SID0003450"})
 public class SnilsController {
     @Autowired WSS4JOutInterceptor wss4JOutInterceptor;
