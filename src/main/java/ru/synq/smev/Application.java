@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.synq.smev.Response.ErrorResponse;
 import ru.synq.smev.soap.xml.security.XmlDSignTools;
 import ru.synq.smev.soap.xml.security.action.LocalSignatureAction;
+import ru.CryptoPro.JCP.KeyStore.HDImage.HDImageStore;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.DispatcherType;
@@ -51,7 +52,9 @@ public class Application {
     }
 
     public Application() throws XMLSignatureException, AlgorithmAlreadyRegisteredException, ClassNotFoundException, IOException {
-        XmlDSignTools.init();
+        HDImageStore.setDir("/home/smev");
+	log.info("HDImageStore path: {}", HDImageStore.getDir());
+	XmlDSignTools.init();
         SpringBusFactory bf = new SpringBusFactory();
         URL resource = this.getClass().getClassLoader().getResource("wssec.xml");
         Bus bus = bf.createBus(resource);
