@@ -16,17 +16,16 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package demo.wssec.client;
+package ru.synq.smev.soap.client;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import org.apache.ws.security.WSPasswordCallback;
 
 import javax.security.auth.callback.Callback;
 import javax.security.auth.callback.CallbackHandler;
 import javax.security.auth.callback.UnsupportedCallbackException;
-
-import org.apache.ws.security.WSPasswordCallback;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  */

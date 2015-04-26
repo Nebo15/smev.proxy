@@ -95,7 +95,7 @@ public class Application {
         outProps.put("passwordType", "PasswordDigest");
         outProps.put("user", cryptoUser);
         outProps.put("actor", "http://smev.gosuslugi.ru/actors/smev");
-        outProps.put("passwordCallbackClass", "demo.wssec.client.UTPasswordCallback");
+        outProps.put("passwordCallbackClass", "ru.synq.smev.soap.client.UTPasswordCallback");
         outProps.put("signaturePropFile", "application.properties");
         outProps.put("signatureKeyIdentifier", "DirectReference");
         outProps.put("signatureParts", "{Element}{http://schemas.xmlsoap.org/soap/envelope/}Body");
