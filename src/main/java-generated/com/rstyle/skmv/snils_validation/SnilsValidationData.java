@@ -1,13 +1,12 @@
 
 package com.rstyle.skmv.snils_validation;
 
-import com.rstyle.skmv.pfr.FIO;
-import com.rstyle.skmv.pfr.GENDER;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import com.rstyle.skmv.pfr.FIO;
+import com.rstyle.skmv.pfr.GENDER;
 
 
 /**
