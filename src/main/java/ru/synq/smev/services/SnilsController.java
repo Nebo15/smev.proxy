@@ -13,19 +13,20 @@ import ru.gosuslugi.smev.rev120315.*;
 @RequestMapping({"snils","SID0003450"})
 public class SnilsController {
     @Autowired WSS4JOutInterceptor wss4JOutInterceptor;
+//    @Autowired Provider
 
     @RequestMapping("test")
-    public void test() {
+    @Autowired
+    public SnilsValidationResponseType test(MessageType message) {
         HeaderType smevHeader = new HeaderType();
         SnilsValidationRequestType parameters = new SnilsValidationRequestType();
-        MessageType message = new MessageType();
-        OrgExternalType sender = new OrgExternalType();
-        sender.setCode("PFRF01001");
-        message.setSender(sender);
         parameters.setMessage(message);
         MessageDataType messageData = new MessageDataType();
+        AppDataType appData = new AppDataType();
+//        appData.
+        messageData.setAppData(appData);
         parameters.setMessageData(messageData);
-        request(smevHeader, parameters);
+        return request(smevHeader, parameters);
     }
 
     protected SnilsValidationResponseType request(HeaderType smevHeader, SnilsValidationRequestType parameters) {

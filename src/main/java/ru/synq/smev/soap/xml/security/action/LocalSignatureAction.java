@@ -17,10 +17,6 @@
 package ru.synq.smev.soap.xml.security.action;
  
  
-import java.util.List;
- 
-import javax.security.auth.callback.CallbackHandler;
- 
 import org.apache.ws.security.WSConstants;
 import org.apache.ws.security.WSEncryptionPart;
 import org.apache.ws.security.WSPasswordCallback;
@@ -30,12 +26,13 @@ import org.apache.ws.security.handler.RequestData;
 import org.apache.ws.security.handler.WSHandler;
 import org.apache.ws.security.message.WSSecSignature;
 import org.apache.ws.security.util.WSSecurityUtil;
- 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
- 
 import ru.synq.smev.soap.ws.security.message.LocalWSSecSignature;
+
+import javax.security.auth.callback.CallbackHandler;
+import java.util.List;
  
 /**
  * Замена базового механизма подписания SOAP запроса.
@@ -43,7 +40,6 @@ import ru.synq.smev.soap.ws.security.message.LocalWSSecSignature;
  * 
  * @see org.apache.ws.security.action.SignatureAction
  * @see org.apache.ws.security.message.WSSecSignature
- * @see org.company.soap.impl.ws.security.message.LocalWSSecSignature
  * @author Aleksey Sushko
  *
  */

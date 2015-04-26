@@ -80,7 +80,12 @@ wsdl2java {
 //            ["$projectDir/src/main/resources/wsdl/SID0003633.wsdl"],
 //            ["$projectDir/src/main/resources/wsdl/SID0004632.wsdl"],
     ]
-    //cxfVersion = "2.6.1"
+    cxfVersion = "2.6.1"
 }
 
 sourceSets.main.java.srcDirs 'src/main/java-generated', 'src/main/java'
+
+/*
+run {
+    jvmArgs = ['-Xdebug', '-Xrunjdwp:server=y,transport=dt_socket,address=4000,suspend=y']
+}*/
