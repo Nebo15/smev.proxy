@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by hasano (abc) -->
+<!-- edited with XMLSPY v2004 rel. 4 U (http://www.xmlspy.com) by Home (Home) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:doc="urn:exch:document:1.0" xmlns:tns="http://ws.unisoft/FNSINN/getINNFLGR" targetNamespace="http://ws.unisoft/FNSINN/getINNFLGR" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="Документ">
+		<xs:annotation>
+			<xs:documentation>Повторный запрос на получение ответа по предоставлению информации об ИНН физического лица на основании полных паспортных данных</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="ВерсФорм" use="required">
+				<xs:annotation>
+					<xs:documentation>Версия формата</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="5"/>
+						<xs:enumeration value="4.01"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ИдПакетЗапрос" use="required">
+				<xs:annotation>
+					<xs:documentation>Идентификатор пакета запросов</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="36"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

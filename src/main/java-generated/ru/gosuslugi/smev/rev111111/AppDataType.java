@@ -112,7 +112,7 @@ public class AppDataType {
      *     byte[]
      */
     public void setFilePFR(byte[] value) {
-        this.filePFR = value;
+        this.filePFR = ((byte[]) value);
     }
 
 }

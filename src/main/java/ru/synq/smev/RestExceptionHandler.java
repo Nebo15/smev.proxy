@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
+import static java.lang.String.format;
 import static ru.synq.smev.Response.error;
 
 
@@ -31,7 +32,7 @@ public class RestExceptionHandler {
     public final Logger log = LoggerFactory.getLogger(RestExceptionHandler.class);
 
     @RequestMapping
-    @ExceptionHandler({BindException.class,
+    @ExceptionHandler({
             MissingServletRequestParameterException.class,
             HttpMessageNotReadableException.class,
             UnsatisfiedServletRequestParameterException.class,
@@ -44,6 +45,28 @@ public class RestExceptionHandler {
     Response handleRequestException(Exception ex) {
         log.debug("Bad request: {}", ex.getMessage());
         return error(HttpStatus.BAD_REQUEST, ex.getMessage());
+    }
+
+    @RequestMapping
+    @ExceptionHandler(BindException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public @ResponseBody
+    Response handleException(BindException ex) {
+        log.debug("Bad request: {}", ex.getMessage());
+        String message = "Validation errors:";
+        for (FieldError error : ex.getBindingResult().getFieldErrors()) {
+            message += format(" field %s: ", error.getField());
+            if (error.getRejectedValue() == null) {
+                message += "reject empty value";
+            } else {
+                message += "reject value: "+error.getRejectedValue();
+            }
+            if (error.getDefaultMessage() != null && !error.getDefaultMessage().isEmpty()) {
+                message += ", "+error.getDefaultMessage();
+            }
+            message += ";";
+        }
+        return error(HttpStatus.BAD_REQUEST, message);
     }
 
     @RequestMapping

@@ -37,7 +37,7 @@ public class AuthenticationFilter implements Filter {
             res.setContentType(MediaType.APPLICATION_JSON_VALUE);
             res.setStatus(HttpStatus.UNAUTHORIZED.value());
             objectMapper.writeValue(res.getWriter(), Response.error(HttpStatus.UNAUTHORIZED));
-            log.warn("Unauthorized with key:{}, secret:{}", api_keyParam, api_secretParam);
+//            log.warn("Unauthorized with key:{}, secret:{}", api_keyParam, api_secretParam);
         } else {
             chain.doFilter(request, response);
         }

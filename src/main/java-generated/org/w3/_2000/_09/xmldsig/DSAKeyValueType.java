@@ -82,7 +82,7 @@ public class DSAKeyValueType {
      *     byte[]
      */
     public void setP(byte[] value) {
-        this.p = value;
+        this.p = ((byte[]) value);
     }
 
     /**
@@ -104,7 +104,7 @@ public class DSAKeyValueType {
      *     byte[]
      */
     public void setQ(byte[] value) {
-        this.q = value;
+        this.q = ((byte[]) value);
     }
 
     /**
@@ -126,7 +126,7 @@ public class DSAKeyValueType {
      *     byte[]
      */
     public void setG(byte[] value) {
-        this.g = value;
+        this.g = ((byte[]) value);
     }
 
     /**
@@ -148,7 +148,7 @@ public class DSAKeyValueType {
      *     byte[]
      */
     public void setY(byte[] value) {
-        this.y = value;
+        this.y = ((byte[]) value);
     }
 
     /**
@@ -170,7 +170,7 @@ public class DSAKeyValueType {
      *     byte[]
      */
     public void setJ(byte[] value) {
-        this.j = value;
+        this.j = ((byte[]) value);
     }
 
     /**
@@ -192,7 +192,7 @@ public class DSAKeyValueType {
      *     byte[]
      */
     public void setSeed(byte[] value) {
-        this.seed = value;
+        this.seed = ((byte[]) value);
     }
 
     /**
@@ -214,7 +214,7 @@ public class DSAKeyValueType {
      *     byte[]
      */
     public void setPgenCounter(byte[] value) {
-        this.pgenCounter = value;
+        this.pgenCounter = ((byte[]) value);
     }
 
 }

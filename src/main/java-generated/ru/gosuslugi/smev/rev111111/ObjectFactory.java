@@ -60,19 +60,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link MessageDataType }
+     * Create an instance of {@link ReferenceType }
      * 
      */
-    public MessageDataType createMessageDataType() {
-        return new MessageDataType();
-    }
-
-    /**
-     * Create an instance of {@link OrgExternalType }
-     * 
-     */
-    public OrgExternalType createOrgExternalType() {
-        return new OrgExternalType();
+    public ReferenceType createReferenceType() {
+        return new ReferenceType();
     }
 
     /**
@@ -84,19 +76,27 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link BaseMessageType }
+     * 
+     */
+    public BaseMessageType createBaseMessageType() {
+        return new BaseMessageType();
+    }
+
+    /**
+     * Create an instance of {@link OrgExternalType }
+     * 
+     */
+    public OrgExternalType createOrgExternalType() {
+        return new OrgExternalType();
+    }
+
+    /**
      * Create an instance of {@link MessageType }
      * 
      */
     public MessageType createMessageType() {
         return new MessageType();
-    }
-
-    /**
-     * Create an instance of {@link AppDocumentType }
-     * 
-     */
-    public AppDocumentType createAppDocumentType() {
-        return new AppDocumentType();
     }
 
     /**
@@ -108,19 +108,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link BaseMessageType }
+     * Create an instance of {@link MessageDataType }
      * 
      */
-    public BaseMessageType createBaseMessageType() {
-        return new BaseMessageType();
+    public MessageDataType createMessageDataType() {
+        return new MessageDataType();
     }
 
     /**
-     * Create an instance of {@link ReferenceType }
+     * Create an instance of {@link AppDocumentType }
      * 
      */
-    public ReferenceType createReferenceType() {
-        return new ReferenceType();
+    public AppDocumentType createAppDocumentType() {
+        return new AppDocumentType();
     }
 
     /**

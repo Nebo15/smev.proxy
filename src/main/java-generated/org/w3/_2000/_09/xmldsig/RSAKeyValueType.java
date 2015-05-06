@@ -58,7 +58,7 @@ public class RSAKeyValueType {
      *     byte[]
      */
     public void setModulus(byte[] value) {
-        this.modulus = value;
+        this.modulus = ((byte[]) value);
     }
 
     /**
@@ -80,7 +80,7 @@ public class RSAKeyValueType {
      *     byte[]
      */
     public void setExponent(byte[] value) {
-        this.exponent = value;
+        this.exponent = ((byte[]) value);
     }
 
 }

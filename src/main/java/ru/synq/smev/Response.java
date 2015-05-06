@@ -10,10 +10,11 @@ public class Response {
         return new ErrorResponse(exception.getClass().getName(), exception.getMessage()+causeToString(exception));
     }
 
-    private static String causeToString(Throwable cause) {
-        String s = cause.getClass().getSimpleName();
-        String message = cause.getLocalizedMessage();
-        return " < " + (message != null ? message : s) + (cause.getCause() != null ? causeToString(cause.getCause()) : "");
+    private static String causeToString(Throwable e) {
+        String s = e.getClass().getSimpleName();
+        String message = e.getLocalizedMessage();
+        return " < " + (message != null ? message : s)
+                + (e.getCause() != null && !e.getCause().getLocalizedMessage().equals(message) ? causeToString(e.getCause()) : "");
     }
 
     public static PageResponse page(Page page) {

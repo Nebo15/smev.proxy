@@ -3,7 +3,7 @@
        xmlns:util="http://www.springframework.org/schema/util"
        xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
-    <bean class="ru.gosuslugi.smev.rev120315.MessageType" p:typeCode="GSRV" p:status="REQUEST" p:exchangeType="2" p:date-ref="currentDate" scope="prototype">
+    <!--<bean class="ru.gosuslugi.smev.rev120315.MessageType" p:typeCode="GSRV" p:status="REQUEST" p:exchangeType="2" p:date-ref="currentDate" scope="prototype">
         <property name="sender">
             <bean class="ru.gosuslugi.smev.rev120315.OrgExternalType" p:code="PFRF01001" p:name="Пенсионный фонд РФ"/>
         </property>
@@ -14,5 +14,10 @@
             <bean class="ru.gosuslugi.smev.rev120315.ServiceType" p:mnemonic="SNILS_VALIDATION" p:version="1.00"/>
         </property>
 
-    </bean>
+    </bean>-->
+    <bean id="innMessage" class="ru.gosuslugi.smev.rev111111.MessageType" scope="prototype"
+          p:status="REQUEST" p:exchangeType="3" p:date-ref="currentDate" p:typeCode="GSRV"
+          p:sender-ref="innSender" p:originator-ref="innSender" p:recipient-ref="innRecipient"/>
+    <bean id="innSender" class="ru.gosuslugi.smev.rev111111.OrgExternalType" p:code="TEST001001" p:name="Test"/>
+    <bean id="innRecipient" class="ru.gosuslugi.smev.rev111111.OrgExternalType" p:code="FNS001001" p:name="ФНС России"/>
 </beans>

@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:FNSINN="http://ws.unisoft/FNSINN/queryINNFL" xmlns:FNSINN1="http://ws.unisoft/FNSINN/queryINNFLGR" xmlns:FNSINN2="http://ws.unisoft/FNSINN/getINNFLGR" xmlns:FNSINN3="http://ws.unisoft/FNSINN/response" xmlns:tns="http://smev.gosuslugi.ru/rev111111" targetNamespace="http://smev.gosuslugi.ru/rev111111" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<!-- includes -->
+	<xs:include schemaLocation="smev.xsd"/>
+
+    <!-- imports -->
+	<xs:import namespace="http://ws.unisoft/FNSINN/queryINNFL" schemaLocation="./../../WS_ZPINNPAS_2_270_18_04_01_01.xsd"/>
+	<xs:import namespace="http://ws.unisoft/FNSINN/queryINNFLGR" schemaLocation="./../../WS_ZPINNPASGR_2_270_24_04_01_01.xsd"/>
+	<xs:import namespace="http://ws.unisoft/FNSINN/getINNFLGR" schemaLocation="./../../WS_ZPINNPASID_2_270_26_04_01_01.xsd"/>
+	<xs:import namespace="http://ws.unisoft/FNSINN/response" schemaLocation="./../../WS_OTINNPAS_2_270_25_04_01_01.xsd"/>
+    
+    <!-- types -->
+    <xs:complexType name="INNFL">
+		<xs:complexContent>
+			<xs:restriction base="tns:BaseMessageType">
+				<xs:sequence>
+					<xs:element ref="tns:Message"/>
+					<xs:element name="MessageData">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:restriction base="tns:MessageDataType">
+									<xs:sequence>
+										<xs:element name="AppData" minOccurs="0">
+											<xs:complexType>
+												<xs:complexContent>
+													<xs:restriction base="tns:AppDataType">
+														<xs:sequence>
+															<xs:element ref="FNSINN:Документ"/>
+														</xs:sequence>
+														<xs:anyAttribute processContents="lax"/>
+													</xs:restriction>
+												</xs:complexContent>
+											</xs:complexType>
+										</xs:element>
+										<xs:element ref="tns:AppDocument" minOccurs="0"/>
+									</xs:sequence>
+								</xs:restriction>
+							</xs:complexContent>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+
+    <xs:complexType name="INNFLGR">
+		<xs:complexContent>
+			<xs:restriction base="tns:BaseMessageType">
+				<xs:sequence>
+					<xs:element ref="tns:Message"/>
+					<xs:element name="MessageData">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:restriction base="tns:MessageDataType">
+									<xs:sequence>
+										<xs:element name="AppData" minOccurs="0">
+											<xs:complexType>
+												<xs:complexContent>
+													<xs:restriction base="tns:AppDataType">
+														<xs:sequence>
+															<xs:element ref="FNSINN1:Документ"/>
+														</xs:sequence>
+														<xs:anyAttribute processContents="lax"/>
+													</xs:restriction>
+												</xs:complexContent>
+											</xs:complexType>
+										</xs:element>
+										<xs:element ref="tns:AppDocument" minOccurs="0"/>
+									</xs:sequence>
+								</xs:restriction>
+							</xs:complexContent>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+    
+    <xs:complexType name="ZPINNFLGR">
+		<xs:complexContent>
+			<xs:restriction base="tns:BaseMessageType">
+				<xs:sequence>
+					<xs:element ref="tns:Message"/>
+					<xs:element name="MessageData">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:restriction base="tns:MessageDataType">
+									<xs:sequence>
+										<xs:element name="AppData" minOccurs="0">
+											<xs:complexType>
+												<xs:complexContent>
+													<xs:restriction base="tns:AppDataType">
+														<xs:sequence>
+															<xs:element ref="FNSINN2:Документ"/>
+														</xs:sequence>
+														<xs:anyAttribute processContents="lax"/>
+													</xs:restriction>
+												</xs:complexContent>
+											</xs:complexType>
+										</xs:element>
+										<xs:element ref="tns:AppDocument" minOccurs="0"/>
+									</xs:sequence>
+								</xs:restriction>
+							</xs:complexContent>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+
+    <xs:complexType name="OTINNFLGR">
+		<xs:complexContent>
+			<xs:restriction base="tns:BaseMessageType">
+				<xs:sequence>
+					<xs:element ref="tns:Message"/>
+					<xs:element name="MessageData">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:restriction base="tns:MessageDataType">
+									<xs:sequence>
+										<xs:element name="AppData" minOccurs="0">
+											<xs:complexType>
+												<xs:complexContent>
+													<xs:restriction base="tns:AppDataType">
+														<xs:sequence>
+                                                            <xs:choice>
+                                                                <xs:element ref="FNSINN3:Документ"/>
+                                                                <xs:element name="noreturn">
+                                                                    <xs:complexType>
+                                                                        <xs:attribute name="КодОбр" use="required">
+                                                                            <xs:simpleType>
+                                                                                <xs:restriction base="xs:string">
+                                                                                    <xs:length value="2"/>
+                                                                                </xs:restriction>
+                                                                            </xs:simpleType>
+                                                                        </xs:attribute>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                            </xs:choice>
+                                                        </xs:sequence>
+														<xs:anyAttribute processContents="lax"/>
+													</xs:restriction>
+												</xs:complexContent>
+											</xs:complexType>
+										</xs:element>
+										<xs:element ref="tns:AppDocument" minOccurs="0"/>
+									</xs:sequence>
+								</xs:restriction>
+							</xs:complexContent>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+    
+    <xs:complexType name="INNFL_Rs">
+		<xs:complexContent>
+			<xs:restriction base="tns:BaseMessageType">
+				<xs:sequence>
+					<xs:element ref="tns:Message"/>
+					<xs:element name="MessageData">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:restriction base="tns:MessageDataType">
+									<xs:sequence>
+										<xs:element name="AppData" minOccurs="0">
+											<xs:complexType>
+												<xs:complexContent>
+													<xs:restriction base="tns:AppDataType">
+														<xs:sequence>
+                                                            <xs:choice>
+                                                                <xs:element name="return" type="FNSINN3:ИННФЛТип"/>
+                                                                <xs:element name="noreturn">
+                                                                    <xs:complexType>
+                                                                        <xs:attribute name="КодОбр" use="required">
+                                                                            <xs:simpleType>
+                                                                                <xs:restriction base="xs:string">
+                                                                                    <xs:length value="2"/>
+                                                                                </xs:restriction>
+                                                                            </xs:simpleType>
+                                                                        </xs:attribute>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                            </xs:choice>
+                                                        </xs:sequence>
+														<xs:anyAttribute processContents="lax"/>
+													</xs:restriction>
+												</xs:complexContent>
+											</xs:complexType>
+										</xs:element>
+										<xs:element ref="tns:AppDocument" minOccurs="0"/>
+									</xs:sequence>
+								</xs:restriction>
+							</xs:complexContent>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+
+    <xs:complexType name="INNFLGR_Rs">
+		<xs:complexContent>
+			<xs:restriction base="tns:BaseMessageType">
+				<xs:sequence>
+					<xs:element ref="tns:Message"/>
+					<xs:element name="MessageData">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:restriction base="tns:MessageDataType">
+									<xs:sequence>
+										<xs:element name="AppData" minOccurs="0">
+											<xs:complexType>
+												<xs:complexContent>
+													<xs:restriction base="tns:AppDataType">
+														<xs:sequence>
+                                                            <xs:element name="return" type="xs:string"/>
+                                                        </xs:sequence>
+														<xs:anyAttribute processContents="lax"/>
+													</xs:restriction>
+												</xs:complexContent>
+											</xs:complexType>
+										</xs:element>
+										<xs:element ref="tns:AppDocument" minOccurs="0"/>
+									</xs:sequence>
+								</xs:restriction>
+							</xs:complexContent>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

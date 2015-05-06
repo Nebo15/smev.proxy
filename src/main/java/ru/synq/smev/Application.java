@@ -15,16 +15,18 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import ru.CryptoPro.JCP.KeyStore.HDImage.HDImageStore;
 import ru.synq.smev.Response.ErrorResponse;
 import ru.synq.smev.soap.xml.security.XmlDSignTools;
 import ru.synq.smev.soap.xml.security.action.LocalSignatureAction;
-import ru.CryptoPro.JCP.KeyStore.HDImage.HDImageStore;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.DispatcherType;
@@ -33,6 +35,8 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.io.IOException;
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.EnumSet;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -53,10 +57,20 @@ public class Application {
 
     @Value("${org.apache.ws.security.crypto.merlin.keystore.file}") String hdImageStorePath;
     @Value("${crypto.user}") String cryptoUser;
+    @Value("${skip-cxf-init:false}") boolean skipCxfInitFlag;
 
     @PostConstruct
-    public void init() throws XMLSignatureException, AlgorithmAlreadyRegisteredException, ClassNotFoundException, IOException {
-        HDImageStore.setDir(hdImageStorePath);
+    public void init() throws XMLSignatureException, AlgorithmAlreadyRegisteredException, ClassNotFoundException, IOException, NoSuchAlgorithmException {
+        if (skipCxfInitFlag) {
+            log.info("Apache cxf initialization skipped by parameter skip-cxf-init");
+            return;
+        }
+
+        if (hdImageStorePath.startsWith("/")) { // run only under linux
+            HDImageStore.setDir(hdImageStorePath);
+        } else {
+            SecureRandom.getInstance("SHA1PRNG");
+        }
 	    log.info("HDImageStore path: {}, user: {}", HDImageStore.getDir(), cryptoUser);
 	    XmlDSignTools.init();
         SpringBusFactory bf = new SpringBusFactory();
@@ -108,6 +122,14 @@ public class Application {
     @Bean(name = "currentDate")
     public XMLGregorianCalendar getCurrentDate() throws DatatypeConfigurationException {
         return DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar());
+    }
+
+    @Bean
+    @Autowired
+    public LocalValidatorFactoryBean validator(MessageSource messageSource) {
+        LocalValidatorFactoryBean validatorFactoryBean = new LocalValidatorFactoryBean();
+        validatorFactoryBean.setValidationMessageSource(messageSource);
+        return validatorFactoryBean;
     }
 
 }
