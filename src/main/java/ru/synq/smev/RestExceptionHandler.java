@@ -10,6 +10,7 @@ import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.UnsatisfiedServletRequestParameterException;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.List;
 
 import static java.lang.String.format;
 import static ru.synq.smev.Response.error;
@@ -53,8 +53,12 @@ public class RestExceptionHandler {
     public @ResponseBody
     Response handleException(BindException ex) {
         log.debug("Bad request: {}", ex.getMessage());
+        return error(HttpStatus.BAD_REQUEST, formatBindingResult(ex.getBindingResult()));
+    }
+
+    private String formatBindingResult(BindingResult bindingResult) {
         String message = "Validation errors:";
-        for (FieldError error : ex.getBindingResult().getFieldErrors()) {
+        for (FieldError error : bindingResult.getFieldErrors()) {
             message += format(" field %s: ", error.getField());
             if (error.getRejectedValue() == null) {
                 message += "reject empty value";
@@ -66,7 +70,7 @@ public class RestExceptionHandler {
             }
             message += ";";
         }
-        return error(HttpStatus.BAD_REQUEST, message);
+        return message;
     }
 
     @RequestMapping
@@ -75,12 +79,7 @@ public class RestExceptionHandler {
     public @ResponseBody
     Response handleValidationException(MethodArgumentNotValidException ex) throws IOException {
         log.debug("Invalid request: {}", ex.getMessage());
-        final List<FieldError> errors = ex.getBindingResult().getFieldErrors();
-        if (errors.isEmpty()) {
-            return error(HttpStatus.UNPROCESSABLE_ENTITY);
-        } else {
-            return error(HttpStatus.UNPROCESSABLE_ENTITY, errors.get(0).getDefaultMessage());
-        }
+        return error(HttpStatus.UNPROCESSABLE_ENTITY, formatBindingResult(ex.getBindingResult()));
     }
 
     @RequestMapping

@@ -131,5 +131,4 @@ public class Application {
         validatorFactoryBean.setValidationMessageSource(messageSource);
         return validatorFactoryBean;
     }
-
 }

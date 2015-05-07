@@ -5,6 +5,7 @@ import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,8 +48,13 @@ public class InnController {
      либо
      - строку с xml <noreturn КодОбр="90"> (по заданным сведениям о ФЛ не найдено ни одного либо найдено несколько ИНН ФЛ).
      */
-    @RequestMapping(method = { RequestMethod.POST, RequestMethod.GET })
-    public INNFLRs query(@Valid InnIndividualDocument doc) {
+    @RequestMapping
+    public INNFLRs queryGet(@Valid InnIndividualDocument doc) {
+        return query(doc);
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public INNFLRs query(@Valid @RequestBody InnIndividualDocument doc) {
         doc.setИдЗапрос(UUID.randomUUID().toString());
         final InnPort port = getPort();
         final InnFlRequest inn = new InnFlRequest();

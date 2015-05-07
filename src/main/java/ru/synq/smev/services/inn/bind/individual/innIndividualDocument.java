@@ -1,6 +1,8 @@
 
 package ru.synq.smev.services.inn.bind.individual;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -226,6 +228,7 @@ public class InnIndividualDocument {
 
         @XmlElement(name = "\u0424\u0418\u041e", required = true)
         @NotNull @Valid
+//        @JsonProperty("ФИО")
         protected ФИОТип ФИО;
         @XmlElement(name = "\u0423\u0434\u041b\u0438\u0447\u043d\u0424\u041b", required = true)
         @NotNull @Valid
@@ -405,9 +408,11 @@ public class InnIndividualDocument {
         protected String НаимОрг;
         @XmlAttribute(name = "\u0418\u041d\u041d\u042e\u041b", required = true)
         @NotNull @Size(min = 10, max = 10)
+        @JsonProperty("ИННЮЛ")
         protected String ИННЮЛ;
         @XmlAttribute(name = "\u041e\u0413\u0420\u041d", required = true)
         @NotNull @Size(min = 13, max = 13)
+        @JsonProperty("ОГРН")
         protected String ОГРН;
 
         public String getНаимОрг() {
