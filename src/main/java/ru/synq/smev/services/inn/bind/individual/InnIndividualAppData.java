@@ -1,7 +1,5 @@
 
-package ru.synq.smev.services.inn.bind;
-
-import ru.synq.smev.services.inn.bind.individual.InnIndividualDocument;
+package ru.synq.smev.services.inn.bind.individual;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -9,10 +7,10 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "InnAppData")
-public class InnAppData {
+@XmlType(name = "AppData")
+public class InnIndividualAppData {
 
-    @XmlElement(name = "Документ", namespace = "http://smev.gosuslugi.ru/rev111111")
+    @XmlElement(name = "Документ", namespace = "http://ws.unisoft/FNSINN/queryINNFL")
     protected InnIndividualDocument документ;
 
     public InnIndividualDocument getДокумент() {

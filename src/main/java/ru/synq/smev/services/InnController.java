@@ -13,10 +13,14 @@ import ru.gosuslugi.smev.rev111111.INNFLRs;
 import ru.gosuslugi.smev.rev111111.MessageType;
 import ru.synq.smev.services.inn.InnPort;
 import ru.synq.smev.services.inn.InnService;
-import ru.synq.smev.services.inn.bind.InnAppData;
-import ru.synq.smev.services.inn.bind.InnFlRequest;
-import ru.synq.smev.services.inn.bind.InnMessageData;
+import ru.synq.smev.services.inn.bind.group.InnGroupAppData;
+import ru.synq.smev.services.inn.bind.group.InnGroupDocument;
+import ru.synq.smev.services.inn.bind.group.InnGroupMessageData;
+import ru.synq.smev.services.inn.bind.group.InnGroupRequest;
+import ru.synq.smev.services.inn.bind.individual.InnIndividualAppData;
 import ru.synq.smev.services.inn.bind.individual.InnIndividualDocument;
+import ru.synq.smev.services.inn.bind.individual.InnIndividualMessageData;
+import ru.synq.smev.services.inn.bind.individual.InnIndividualRequest;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -57,10 +61,10 @@ public class InnController {
     public INNFLRs query(@Valid @RequestBody InnIndividualDocument doc) {
         doc.setИдЗапрос(UUID.randomUUID().toString());
         final InnPort port = getPort();
-        final InnFlRequest inn = new InnFlRequest();
-        InnAppData appData = new InnAppData();
+        final InnIndividualRequest inn = new InnIndividualRequest();
+        InnIndividualAppData appData = new InnIndividualAppData();
         appData.setДокумент(doc);
-        InnMessageData mData = new InnMessageData();
+        InnIndividualMessageData mData = new InnIndividualMessageData();
         mData.setAppData(appData);
         inn.setMessageData(mData);
         inn.setMessage(messageProvider.get());
@@ -73,9 +77,20 @@ public class InnController {
      * Назначение:
      * Передача группового запроса для определения ИНН ФЛ в формате XML и получение строки с идентификатором группы запросов.
      */
-    @RequestMapping("group/query")
-    public void groupQuery() {
-
+    @RequestMapping(value = "group", method = RequestMethod.POST)
+    public INNFLRs groupQuery(@Valid @RequestBody InnGroupDocument doc) {
+        for (InnGroupDocument.Запрос request : doc.getЗапрос()) {
+            request.setIndex(String.valueOf(doc.getЗапрос().indexOf(request)+1));
+        }
+        final InnPort port = getPort();
+        final InnGroupRequest inn = new InnGroupRequest();
+        InnGroupAppData appData = new InnGroupAppData();
+        appData.setДокумент(doc);
+        InnGroupMessageData mData = new InnGroupMessageData();
+        mData.setAppData(appData);
+        inn.setMessageData(mData);
+        inn.setMessage(messageProvider.get());
+        return port.queryINNFLGR(inn);
     }
 
     /**

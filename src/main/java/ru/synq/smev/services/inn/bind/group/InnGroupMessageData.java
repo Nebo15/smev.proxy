@@ -1,5 +1,5 @@
 
-package ru.synq.smev.services.inn.bind;
+package ru.synq.smev.services.inn.bind.group;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -28,33 +28,33 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "InnMessageData")
-public class InnMessageData {
+@XmlType(name = "MessageData")
+public class InnGroupMessageData {
 
     @XmlElement(name = "AppData", namespace = "http://smev.gosuslugi.ru/rev111111")
-    protected InnAppData appData;
+    protected InnGroupAppData appData;
 
     /**
      * Gets the value of the appData property.
-     * 
+     *
      * @return
      *     possible object is
-     *     {@link InnAppData }
-     *     
+     *     {@link InnGroupAppData }
+     *
      */
-    public InnAppData getAppData() {
+    public InnGroupAppData getAppData() {
         return appData;
     }
 
     /**
      * Sets the value of the appData property.
-     * 
+     *
      * @param value
      *     allowed object is
-     *     {@link InnAppData }
-     *     
+     *     {@link InnGroupAppData }
+     *
      */
-    public void setAppData(InnAppData value) {
+    public void setAppData(InnGroupAppData value) {
         this.appData = value;
     }
 }

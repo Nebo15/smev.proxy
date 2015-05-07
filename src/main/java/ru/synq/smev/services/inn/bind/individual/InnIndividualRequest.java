@@ -1,5 +1,5 @@
 
-package ru.synq.smev.services.inn.bind;
+package ru.synq.smev.services.inn.bind.individual;
 
 import ru.gosuslugi.smev.rev111111.MessageType;
 
@@ -52,62 +52,30 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "InnFlRequest", propOrder = {
+@XmlType(name = "", propOrder = {
         "message",
         "messageData"
 })
-public class InnFlRequest
+public class InnIndividualRequest
 {
     @XmlElement(name = "Message", required = true, namespace = "http://smev.gosuslugi.ru/rev111111")
     protected MessageType message;
     @XmlElement(name = "MessageData", required = true, namespace = "http://smev.gosuslugi.ru/rev111111")
-    protected InnMessageData messageData;
+    protected InnIndividualMessageData messageData;
 
-    /**
-     * Gets the value of the message property.
-     *
-     * @return
-     *     possible object is
-     *     {@link ru.gosuslugi.smev.rev111111.MessageType }
-     *
-     */
     public MessageType getMessage() {
         return message;
     }
 
-    /**
-     * Sets the value of the message property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link ru.gosuslugi.smev.rev111111.MessageType }
-     *
-     */
     public void setMessage(MessageType value) {
         this.message = value;
     }
 
-    /**
-     * Gets the value of the messageData property.
-     *
-     * @return
-     *     possible object is
-     *     {@link InnMessageData }
-     *
-     */
-    public InnMessageData getMessageData() {
+    public InnIndividualMessageData getMessageData() {
         return messageData;
     }
 
-    /**
-     * Sets the value of the messageData property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link InnMessageData }
-     *
-     */
-    public void setMessageData(InnMessageData value) {
+    public void setMessageData(InnIndividualMessageData value) {
         this.messageData = value;
     }
 
