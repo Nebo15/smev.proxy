@@ -2,6 +2,7 @@
 package ru.synq.smev.services.inn.bind.individual;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import ru.synq.smev.services.inn.bind.InnDocument;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -10,114 +11,7 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 
 
-/**
- * <p>Java class for anonymous complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
- * <pre>
- * &lt;complexType>
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="СвЮЛ">
- *           &lt;complexType>
- *             &lt;complexContent>
- *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *                 &lt;attribute name="НаимОрг" use="required">
- *                   &lt;simpleType>
- *                     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *                       &lt;minLength value="1"/>
- *                       &lt;maxLength value="1000"/>
- *                     &lt;/restriction>
- *                   &lt;/simpleType>
- *                 &lt;/attribute>
- *                 &lt;attribute name="ИННЮЛ" use="required" type="{http://ws.unisoft/FNSINN/queryINNFL}ИННЮЛТип" />
- *                 &lt;attribute name="ОГРН" use="required" type="{http://ws.unisoft/FNSINN/queryINNFL}ОГРНТип" />
- *               &lt;/restriction>
- *             &lt;/complexContent>
- *           &lt;/complexType>
- *         &lt;/element>
- *         &lt;element name="СвФЛ">
- *           &lt;complexType>
- *             &lt;complexContent>
- *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *                 &lt;sequence>
- *                   &lt;element name="ФИО" type="{http://ws.unisoft/FNSINN/queryINNFL}ФИОТип"/>
- *                   &lt;element name="УдЛичнФЛ">
- *                     &lt;complexType>
- *                       &lt;complexContent>
- *                         &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *                           &lt;attribute name="КодВидДок" use="required">
- *                             &lt;simpleType>
- *                               &lt;restriction base="{http://ws.unisoft/FNSINN/queryINNFL}СПДУЛТип">
- *                               &lt;/restriction>
- *                             &lt;/simpleType>
- *                           &lt;/attribute>
- *                           &lt;attribute name="СерНомДок" use="required" type="{http://ws.unisoft/FNSINN/queryINNFL}СПДУЛШТип" />
- *                           &lt;attribute name="ДатаДок" type="{http://ws.unisoft/FNSINN/queryINNFL}ДатаТип" />
- *                           &lt;attribute name="ВыдДок">
- *                             &lt;simpleType>
- *                               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *                                 &lt;minLength value="1"/>
- *                                 &lt;maxLength value="255"/>
- *                               &lt;/restriction>
- *                             &lt;/simpleType>
- *                           &lt;/attribute>
- *                           &lt;attribute name="КодВыдДок">
- *                             &lt;simpleType>
- *                               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *                                 &lt;length value="7"/>
- *                               &lt;/restriction>
- *                             &lt;/simpleType>
- *                           &lt;/attribute>
- *                         &lt;/restriction>
- *                       &lt;/complexContent>
- *                     &lt;/complexType>
- *                   &lt;/element>
- *                 &lt;/sequence>
- *                 &lt;attribute name="ДатаРожд" use="required" type="{http://ws.unisoft/FNSINN/queryINNFL}ДатаТип" />
- *                 &lt;attribute name="МестоРожд">
- *                   &lt;simpleType>
- *                     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *                       &lt;minLength value="1"/>
- *                       &lt;maxLength value="255"/>
- *                     &lt;/restriction>
- *                   &lt;/simpleType>
- *                 &lt;/attribute>
- *               &lt;/restriction>
- *             &lt;/complexContent>
- *           &lt;/complexType>
- *         &lt;/element>
- *       &lt;/sequence>
- *       &lt;attribute name="ВерсФорм" use="required">
- *         &lt;simpleType>
- *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *             &lt;minLength value="1"/>
- *             &lt;maxLength value="5"/>
- *             &lt;enumeration value="4.01"/>
- *           &lt;/restriction>
- *         &lt;/simpleType>
- *       &lt;/attribute>
- *       &lt;attribute name="ИдЗапрос" use="required">
- *         &lt;simpleType>
- *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *             &lt;maxLength value="36"/>
- *             &lt;minLength value="1"/>
- *           &lt;/restriction>
- *         &lt;/simpleType>
- *       &lt;/attribute>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
- * 
- * 
- */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "")
-@XmlRootElement(name = "\u0414\u043e\u043a\u0443\u043c\u0435\u043d\u0442")
-public class InnIndividualDocument {
+public class InnIndividualDocument extends InnDocument {
 
     @XmlElement(name = "\u0421\u0432\u042e\u041b", required = true)
     @NotNull @Valid

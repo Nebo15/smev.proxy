@@ -5,18 +5,12 @@ import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.gosuslugi.smev.rev111111.INNFLRs;
 import ru.gosuslugi.smev.rev111111.MessageType;
 import ru.synq.smev.services.inn.InnPort;
 import ru.synq.smev.services.inn.InnService;
-import ru.synq.smev.services.inn.bind.group.InnGroupAppData;
-import ru.synq.smev.services.inn.bind.group.InnGroupDocument;
-import ru.synq.smev.services.inn.bind.group.InnGroupMessageData;
-import ru.synq.smev.services.inn.bind.group.InnGroupRequest;
+import ru.synq.smev.services.inn.bind.group.*;
 import ru.synq.smev.services.inn.bind.individual.InnIndividualAppData;
 import ru.synq.smev.services.inn.bind.individual.InnIndividualDocument;
 import ru.synq.smev.services.inn.bind.individual.InnIndividualMessageData;
@@ -68,7 +62,7 @@ public class InnController {
         mData.setAppData(appData);
         inn.setMessageData(mData);
         inn.setMessage(messageProvider.get());
-        return port.queryINNFL(inn);
+        return port.queryIndividual(inn);
     }
 
     /**
@@ -79,6 +73,7 @@ public class InnController {
      */
     @RequestMapping(value = "group", method = RequestMethod.POST)
     public INNFLRs groupQuery(@Valid @RequestBody InnGroupDocument doc) {
+        if (doc.getИдПакетЗапрос() == null)
         for (InnGroupDocument.Запрос request : doc.getЗапрос()) {
             request.setIndex(String.valueOf(doc.getЗапрос().indexOf(request)+1));
         }
@@ -90,7 +85,7 @@ public class InnController {
         mData.setAppData(appData);
         inn.setMessageData(mData);
         inn.setMessage(messageProvider.get());
-        return port.queryINNFLGR(inn);
+        return port.queryGroup(inn);
     }
 
     /**
@@ -102,24 +97,11 @@ public class InnController {
      либо
      - в виде строки с xml <noreturn КодОбр="91"> (групповой запрос не найден) или с xml <noreturn КодОбр="92"> (групповой запрос не обработан)
      */
-    @RequestMapping("group/get")
-    public void groupGet() {
-
+    @RequestMapping("group/{id:\\d+}")
+    public INNFLRs groupGet(@PathVariable String id) {
+        InnGroupDocument doc = new InnGroupDocument(id);
+        return groupQuery(doc);
     }
-
-/*    @RequestMapping("test")
-    @Autowired
-    public SnilsValidationResponseType test(MessageType message) {
-        HeaderType smevHeader = new HeaderType();
-        SnilsValidationRequestType parameters = new SnilsValidationRequestType();
-        parameters.setMessage(message);
-        MessageDataType messageData = new MessageDataType();
-        AppDataType appData = new AppDataType();
-        // SnilsValidationRequestType does not has request property
-        messageData.setAppData(appData);
-        parameters.setMessageData(messageData);
-        return request(smevHeader, parameters);
-    }*/
 
     protected InnPort getPort() {
         InnService service = new InnService();

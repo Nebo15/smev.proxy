@@ -13,7 +13,7 @@
 
 ### Индивидуальный запрос
 
-Адрес: `/inn`
+GET|POST `/inn`
 
 Примеры запросов:
 
@@ -54,7 +54,7 @@ curl "http://localhost:8080/inn?api_key=1&api_secret=1" -H "Content-Type: applic
 
 ### Групповой запрос
 
-Адрес: `/inn/group`
+POST `/inn/group`
 
 Пример данных запроса:
 
@@ -86,3 +86,10 @@ curl "http://localhost:8080/inn?api_key=1&api_secret=1" -H "Content-Type: applic
 }
 ```
 
+### Получение результата группового запроса
+
+GET `/inn/group/<идентификатор групового запроса>`
+
+Пример запроса:
+
+`http://46.101.155.216:8080/inn/group/543901?api_key=1&api_secret=1`

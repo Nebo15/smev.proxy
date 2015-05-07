@@ -1,6 +1,7 @@
 
 package ru.synq.smev.services.inn.bind.group;
 
+import ru.synq.smev.services.inn.bind.InnDocument;
 import ru.synq.smev.services.inn.bind.individual.InnIndividualDocument;
 
 import javax.validation.Valid;
@@ -11,10 +12,7 @@ import javax.xml.bind.annotation.*;
 import java.util.List;
 
 
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "")
-@XmlRootElement(name = "\u0414\u043e\u043a\u0443\u043c\u0435\u043d\u0442")
-public class InnGroupDocument {
+public class InnGroupDocument extends InnDocument {
 
     @XmlElement(name = "\u0421\u0432\u042e\u041b", required = true)
     @NotNull @Valid
@@ -24,6 +22,23 @@ public class InnGroupDocument {
     protected List<InnGroupDocument.Запрос> Запрос;
     @XmlAttribute(name = "\u0412\u0435\u0440\u0441\u0424\u043e\u0440\u043c", required = true)
     protected String ВерсФорм = "4.01";
+    @XmlAttribute(name = "ИдПакетЗапрос")
+    protected String ИдПакетЗапрос;
+
+    public InnGroupDocument() {
+    }
+
+    public InnGroupDocument(String id) {
+        ИдПакетЗапрос = id;
+    }
+
+    public String getИдПакетЗапрос() {
+        return ИдПакетЗапрос;
+    }
+
+    public void setИдПакетЗапрос(String идПакетЗапрос) {
+        ИдПакетЗапрос = идПакетЗапрос;
+    }
 
     public InnGroupDocument.СвЮЛ getСвЮЛ() {
         return СвЮЛ;
