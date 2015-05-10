@@ -6,7 +6,6 @@ package ru.synq.smev;
 
 import com.sun.xml.bind.v2.runtime.IllegalAnnotationException;
 import com.sun.xml.bind.v2.runtime.IllegalAnnotationsException;
-import org.apache.cxf.service.factory.ServiceConstructionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.TypeMismatchException;
@@ -23,6 +22,7 @@ import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.UnsatisfiedServletRequestParameterException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.ws.WebServiceException;
 import java.io.IOException;
 
 import static java.lang.String.format;
@@ -104,10 +104,10 @@ public class RestExceptionHandler {
     }
 
     @RequestMapping
-    @ExceptionHandler(ServiceConstructionException.class)
+    @ExceptionHandler(WebServiceException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public @ResponseBody
-    Response handleIllegalAnnotationsException(ServiceConstructionException ex) throws IOException {
+    Response handleIllegalAnnotationsException(WebServiceException ex) throws IOException {
         IllegalAnnotationsException aEx = null;
         Throwable cause = ex.getCause();
         while (cause != null && aEx == null) {

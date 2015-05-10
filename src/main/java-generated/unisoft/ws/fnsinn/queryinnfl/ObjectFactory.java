@@ -46,14 +46,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Документ.СвФЛ }
-     * 
-     */
-    public Документ.СвФЛ createДокументСвФЛ() {
-        return new Документ.СвФЛ();
-    }
-
-    /**
      * Create an instance of {@link Документ.СвФЛ.УдЛичнФЛ }
      * 
      */
@@ -67,6 +59,14 @@ public class ObjectFactory {
      */
     public Документ.СвЮЛ createДокументСвЮЛ() {
         return new Документ.СвЮЛ();
+    }
+
+    /**
+     * Create an instance of {@link Документ.СвФЛ }
+     * 
+     */
+    public Документ.СвФЛ createДокументСвФЛ() {
+        return new Документ.СвФЛ();
     }
 
 }

@@ -26,64 +26,16 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 
     private final static QName _Service_QNAME = new QName("http://baseTypes.border.webservices.kernel.sx.fms.ru", "service");
-    private final static QName _DateRestrictionValueTypeYearsOffset_QNAME = new QName("http://baseTypes.border.webservices.kernel.sx.fms.ru", "yearsOffset");
-    private final static QName _DateRestrictionValueTypeDateValue_QNAME = new QName("http://baseTypes.border.webservices.kernel.sx.fms.ru", "dateValue");
     private final static QName _ServiceIncomingParametersRules_QNAME = new QName("http://baseTypes.border.webservices.kernel.sx.fms.ru", "incomingParametersRules");
     private final static QName _ParametersLogicalRuleTypeRestrictionRegexp_QNAME = new QName("http://baseTypes.border.webservices.kernel.sx.fms.ru", "restrictionRegexp");
+    private final static QName _DateRestrictionValueTypeYearsOffset_QNAME = new QName("http://baseTypes.border.webservices.kernel.sx.fms.ru", "yearsOffset");
+    private final static QName _DateRestrictionValueTypeDateValue_QNAME = new QName("http://baseTypes.border.webservices.kernel.sx.fms.ru", "dateValue");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: ru.fms.sx.kernel.webservices.border.basetypes
      * 
      */
     public ObjectFactory() {
-    }
-
-    /**
-     * Create an instance of {@link ParametersDateRulesType }
-     * 
-     */
-    public ParametersDateRulesType createParametersDateRulesType() {
-        return new ParametersDateRulesType();
-    }
-
-    /**
-     * Create an instance of {@link SendErrorReportResponseMessageType }
-     * 
-     */
-    public SendErrorReportResponseMessageType createSendErrorReportResponseMessageType() {
-        return new SendErrorReportResponseMessageType();
-    }
-
-    /**
-     * Create an instance of {@link ParametersLogicalRulesType }
-     * 
-     */
-    public ParametersLogicalRulesType createParametersLogicalRulesType() {
-        return new ParametersLogicalRulesType();
-    }
-
-    /**
-     * Create an instance of {@link GetResultResponseMessageType }
-     * 
-     */
-    public GetResultResponseMessageType createGetResultResponseMessageType() {
-        return new GetResultResponseMessageType();
-    }
-
-    /**
-     * Create an instance of {@link GetResultMessageType }
-     * 
-     */
-    public GetResultMessageType createGetResultMessageType() {
-        return new GetResultMessageType();
-    }
-
-    /**
-     * Create an instance of {@link ParametersRulesType }
-     * 
-     */
-    public ParametersRulesType createParametersRulesType() {
-        return new ParametersRulesType();
     }
 
     /**
@@ -95,91 +47,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetTaskTypesResponseMessageType }
+     * Create an instance of {@link SendErrorReportResponseMessageType }
      * 
      */
-    public GetTaskTypesResponseMessageType createGetTaskTypesResponseMessageType() {
-        return new GetTaskTypesResponseMessageType();
-    }
-
-    /**
-     * Create an instance of {@link Attachment }
-     * 
-     */
-    public Attachment createAttachment() {
-        return new Attachment();
-    }
-
-    /**
-     * Create an instance of {@link EditRequestResponseMessageType }
-     * 
-     */
-    public EditRequestResponseMessageType createEditRequestResponseMessageType() {
-        return new EditRequestResponseMessageType();
-    }
-
-    /**
-     * Create an instance of {@link GetDictionaryValuesResponseMessageType }
-     * 
-     */
-    public GetDictionaryValuesResponseMessageType createGetDictionaryValuesResponseMessageType() {
-        return new GetDictionaryValuesResponseMessageType();
-    }
-
-    /**
-     * Create an instance of {@link GetDictionaryValuesMessageType }
-     * 
-     */
-    public GetDictionaryValuesMessageType createGetDictionaryValuesMessageType() {
-        return new GetDictionaryValuesMessageType();
-    }
-
-    /**
-     * Create an instance of {@link ParametersDateRuleType }
-     * 
-     */
-    public ParametersDateRuleType createParametersDateRuleType() {
-        return new ParametersDateRuleType();
-    }
-
-    /**
-     * Create an instance of {@link DateRestrictionValueType }
-     * 
-     */
-    public DateRestrictionValueType createDateRestrictionValueType() {
-        return new DateRestrictionValueType();
-    }
-
-    /**
-     * Create an instance of {@link FieldsBlockType }
-     * 
-     */
-    public FieldsBlockType createFieldsBlockType() {
-        return new FieldsBlockType();
-    }
-
-    /**
-     * Create an instance of {@link DictionaryItem }
-     * 
-     */
-    public DictionaryItem createDictionaryItem() {
-        return new DictionaryItem();
-    }
-
-    /**
-     * Create an instance of {@link BookRequestResponseMessageType }
-     * 
-     */
-    public BookRequestResponseMessageType createBookRequestResponseMessageType() {
-        return new BookRequestResponseMessageType();
-    }
-
-    /**
-     * Create an instance of {@link Person }
-     * 
-     */
-    public Person createPerson() {
-        return new Person();
+    public SendErrorReportResponseMessageType createSendErrorReportResponseMessageType() {
+        return new SendErrorReportResponseMessageType();
     }
 
     /**
@@ -191,27 +63,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Service }
+     * Create an instance of {@link GetTaskTypesResponseMessageType }
      * 
      */
-    public Service createService() {
-        return new Service();
-    }
-
-    /**
-     * Create an instance of {@link User }
-     * 
-     */
-    public User createUser() {
-        return new User();
-    }
-
-    /**
-     * Create an instance of {@link TaskParameter }
-     * 
-     */
-    public TaskParameter createTaskParameter() {
-        return new TaskParameter();
+    public GetTaskTypesResponseMessageType createGetTaskTypesResponseMessageType() {
+        return new GetTaskTypesResponseMessageType();
     }
 
     /**
@@ -231,27 +87,43 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ParametersVariativeRuleType }
+     * Create an instance of {@link Attachment }
      * 
      */
-    public ParametersVariativeRuleType createParametersVariativeRuleType() {
-        return new ParametersVariativeRuleType();
+    public Attachment createAttachment() {
+        return new Attachment();
     }
 
     /**
-     * Create an instance of {@link TaskParameterDefinition }
+     * Create an instance of {@link GetDictionaryValuesMessageType }
      * 
      */
-    public TaskParameterDefinition createTaskParameterDefinition() {
-        return new TaskParameterDefinition();
+    public GetDictionaryValuesMessageType createGetDictionaryValuesMessageType() {
+        return new GetDictionaryValuesMessageType();
     }
 
     /**
-     * Create an instance of {@link ServiceRequestMessageType }
+     * Create an instance of {@link ParametersDateRuleType }
      * 
      */
-    public ServiceRequestMessageType createServiceRequestMessageType() {
-        return new ServiceRequestMessageType();
+    public ParametersDateRuleType createParametersDateRuleType() {
+        return new ParametersDateRuleType();
+    }
+
+    /**
+     * Create an instance of {@link User }
+     * 
+     */
+    public User createUser() {
+        return new User();
+    }
+
+    /**
+     * Create an instance of {@link FieldsBlockType }
+     * 
+     */
+    public FieldsBlockType createFieldsBlockType() {
+        return new FieldsBlockType();
     }
 
     /**
@@ -263,11 +135,139 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetResultMessageType }
+     * 
+     */
+    public GetResultMessageType createGetResultMessageType() {
+        return new GetResultMessageType();
+    }
+
+    /**
+     * Create an instance of {@link ServiceRequestMessageType }
+     * 
+     */
+    public ServiceRequestMessageType createServiceRequestMessageType() {
+        return new ServiceRequestMessageType();
+    }
+
+    /**
+     * Create an instance of {@link ParametersDateRulesType }
+     * 
+     */
+    public ParametersDateRulesType createParametersDateRulesType() {
+        return new ParametersDateRulesType();
+    }
+
+    /**
+     * Create an instance of {@link Service }
+     * 
+     */
+    public Service createService() {
+        return new Service();
+    }
+
+    /**
+     * Create an instance of {@link GetDictionaryValuesResponseMessageType }
+     * 
+     */
+    public GetDictionaryValuesResponseMessageType createGetDictionaryValuesResponseMessageType() {
+        return new GetDictionaryValuesResponseMessageType();
+    }
+
+    /**
+     * Create an instance of {@link Person }
+     * 
+     */
+    public Person createPerson() {
+        return new Person();
+    }
+
+    /**
+     * Create an instance of {@link ParametersLogicalRulesType }
+     * 
+     */
+    public ParametersLogicalRulesType createParametersLogicalRulesType() {
+        return new ParametersLogicalRulesType();
+    }
+
+    /**
+     * Create an instance of {@link TaskParameterDefinition }
+     * 
+     */
+    public TaskParameterDefinition createTaskParameterDefinition() {
+        return new TaskParameterDefinition();
+    }
+
+    /**
      * Create an instance of {@link ParametersLogicalRuleType }
      * 
      */
     public ParametersLogicalRuleType createParametersLogicalRuleType() {
         return new ParametersLogicalRuleType();
+    }
+
+    /**
+     * Create an instance of {@link GetResultResponseMessageType }
+     * 
+     */
+    public GetResultResponseMessageType createGetResultResponseMessageType() {
+        return new GetResultResponseMessageType();
+    }
+
+    /**
+     * Create an instance of {@link ParametersRulesType }
+     * 
+     */
+    public ParametersRulesType createParametersRulesType() {
+        return new ParametersRulesType();
+    }
+
+    /**
+     * Create an instance of {@link BookRequestResponseMessageType }
+     * 
+     */
+    public BookRequestResponseMessageType createBookRequestResponseMessageType() {
+        return new BookRequestResponseMessageType();
+    }
+
+    /**
+     * Create an instance of {@link DictionaryItem }
+     * 
+     */
+    public DictionaryItem createDictionaryItem() {
+        return new DictionaryItem();
+    }
+
+    /**
+     * Create an instance of {@link EditRequestResponseMessageType }
+     * 
+     */
+    public EditRequestResponseMessageType createEditRequestResponseMessageType() {
+        return new EditRequestResponseMessageType();
+    }
+
+    /**
+     * Create an instance of {@link DateRestrictionValueType }
+     * 
+     */
+    public DateRestrictionValueType createDateRestrictionValueType() {
+        return new DateRestrictionValueType();
+    }
+
+    /**
+     * Create an instance of {@link TaskParameter }
+     * 
+     */
+    public TaskParameter createTaskParameter() {
+        return new TaskParameter();
+    }
+
+    /**
+     * Create an instance of {@link ParametersVariativeRuleType }
+     * 
+     */
+    public ParametersVariativeRuleType createParametersVariativeRuleType() {
+        return new ParametersVariativeRuleType();
     }
 
     /**
@@ -277,24 +277,6 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://baseTypes.border.webservices.kernel.sx.fms.ru", name = "service")
     public JAXBElement<Service> createService(Service value) {
         return new JAXBElement<Service>(_Service_QNAME, Service.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Integer }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://baseTypes.border.webservices.kernel.sx.fms.ru", name = "yearsOffset", scope = DateRestrictionValueType.class)
-    public JAXBElement<Integer> createDateRestrictionValueTypeYearsOffset(Integer value) {
-        return new JAXBElement<Integer>(_DateRestrictionValueTypeYearsOffset_QNAME, Integer.class, DateRestrictionValueType.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link XMLGregorianCalendar }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://baseTypes.border.webservices.kernel.sx.fms.ru", name = "dateValue", scope = DateRestrictionValueType.class)
-    public JAXBElement<XMLGregorianCalendar> createDateRestrictionValueTypeDateValue(XMLGregorianCalendar value) {
-        return new JAXBElement<XMLGregorianCalendar>(_DateRestrictionValueTypeDateValue_QNAME, XMLGregorianCalendar.class, DateRestrictionValueType.class, value);
     }
 
     /**
@@ -313,6 +295,24 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://baseTypes.border.webservices.kernel.sx.fms.ru", name = "restrictionRegexp", scope = ParametersLogicalRuleType.class)
     public JAXBElement<String> createParametersLogicalRuleTypeRestrictionRegexp(String value) {
         return new JAXBElement<String>(_ParametersLogicalRuleTypeRestrictionRegexp_QNAME, String.class, ParametersLogicalRuleType.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Integer }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://baseTypes.border.webservices.kernel.sx.fms.ru", name = "yearsOffset", scope = DateRestrictionValueType.class)
+    public JAXBElement<Integer> createDateRestrictionValueTypeYearsOffset(Integer value) {
+        return new JAXBElement<Integer>(_DateRestrictionValueTypeYearsOffset_QNAME, Integer.class, DateRestrictionValueType.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link XMLGregorianCalendar }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://baseTypes.border.webservices.kernel.sx.fms.ru", name = "dateValue", scope = DateRestrictionValueType.class)
+    public JAXBElement<XMLGregorianCalendar> createDateRestrictionValueTypeDateValue(XMLGregorianCalendar value) {
+        return new JAXBElement<XMLGregorianCalendar>(_DateRestrictionValueTypeDateValue_QNAME, XMLGregorianCalendar.class, DateRestrictionValueType.class, value);
     }
 
 }

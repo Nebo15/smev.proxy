@@ -13,13 +13,13 @@ import javax.xml.bind.annotation.XmlType;
 
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "SnilsValidationData", propOrder = {
+@XmlType(name = "SnilsValidationData", namespace = "http://snils-validation.skmv.rstyle.com", propOrder = {
         "fio",
         "snils",
         "gender",
         "birthDate"
 })
-public class SnilsData {
+public class SnilsValidationData {
 
     @XmlElement(required = true)
     @NotNull @Valid

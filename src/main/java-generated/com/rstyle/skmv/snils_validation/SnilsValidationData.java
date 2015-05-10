@@ -10,16 +10,15 @@ import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
 
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "SnilsValidationData", propOrder = {
+/*@XmlType(name = "SnilsValidationData", propOrder = {
     "fio",
     "snils",
     "gender",
     "birthDate"
-})
+})*/
 public class SnilsValidationData {
 
     @XmlElement(required = true)

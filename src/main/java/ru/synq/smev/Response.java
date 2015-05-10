@@ -6,6 +6,15 @@ import org.springframework.http.HttpStatus;
 import java.util.List;
 
 public class Response {
+    public Object data;
+
+    public Response(Object data) {
+        this.data = data;
+    }
+
+    public Response() {
+    }
+
     public static ErrorResponse error(Exception exception) {
         return new ErrorResponse(exception.getClass().getName(), exception.getMessage()+causeToString(exception));
     }
@@ -28,6 +37,10 @@ public class Response {
 
     public static ErrorResponse error(HttpStatus status, String message) {
         return new ErrorResponse(String.valueOf(status.value()), message);
+    }
+
+    public static Response data(Object data) {
+        return new Response(data);
     }
 
     public static class ErrorResponse extends Response {

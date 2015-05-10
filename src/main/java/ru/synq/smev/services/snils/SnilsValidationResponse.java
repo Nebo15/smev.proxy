@@ -1,8 +1,6 @@
 
 package ru.synq.smev.services.snils;
 
-import ru.gosuslugi.smev.rev120315.BaseMessageType;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
@@ -51,10 +49,6 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "SnilsValidationResponseType")
-public class SnilsValidationResponseType
-    extends BaseMessageType
-{
-
-
+@XmlType(name = "SnilsValidationResponse")
+public class SnilsValidationResponse extends SnilsBaseMessage {
 }

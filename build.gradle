@@ -66,18 +66,16 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.3'
 }
 
-wsdl2java {
+/*wsdl2java {
     generatedWsdlDir = file("src/main/java-generated")  // target directory for generated source code
     wsdlDir = file("src/main/resources/wsdl") // define to support incremental build
     wsdlsToGenerate = [
             ["$projectDir/src/main/resources/wsdl/SID0003450/smev/v_2_4/FNSINNSvc.wsdl"],
             ["$projectDir/src/main/resources/wsdl/SID0003418/fms.wsdl"],
             ["$projectDir/src/main/resources/wsdl/SNILS/snils.wsdl"],
-//            ["$projectDir/src/main/resources/wsdl/SID0003633.wsdl"],
-//            ["$projectDir/src/main/resources/wsdl/SID0004632.wsdl"],
     ]
     cxfVersion = "2.6.1"
-}
+}*/
 
 sourceSets.main.java.srcDirs 'src/main/java-generated', 'src/main/java'
 /*

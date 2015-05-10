@@ -30,35 +30,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Документ.Запрос.СвФЛ }
-     * 
-     */
-    public Документ.Запрос.СвФЛ createДокументЗапросСвФЛ() {
-        return new Документ.Запрос.СвФЛ();
-    }
-
-    /**
-     * Create an instance of {@link Документ.Запрос }
-     * 
-     */
-    public Документ.Запрос createДокументЗапрос() {
-        return new Документ.Запрос();
-    }
-
-    /**
-     * Create an instance of {@link ФИОТип }
-     * 
-     */
-    public ФИОТип createФИОТип() {
-        return new ФИОТип();
-    }
-
-    /**
      * Create an instance of {@link Документ }
      * 
      */
     public Документ createДокумент() {
         return new Документ();
+    }
+
+    /**
+     * Create an instance of {@link Документ.Запрос.СвФЛ }
+     * 
+     */
+    public Документ.Запрос.СвФЛ createДокументЗапросСвФЛ() {
+        return new Документ.Запрос.СвФЛ();
     }
 
     /**
@@ -75,6 +59,22 @@ public class ObjectFactory {
      */
     public Документ.СвЮЛ createДокументСвЮЛ() {
         return new Документ.СвЮЛ();
+    }
+
+    /**
+     * Create an instance of {@link Документ.Запрос }
+     * 
+     */
+    public Документ.Запрос createДокументЗапрос() {
+        return new Документ.Запрос();
+    }
+
+    /**
+     * Create an instance of {@link ФИОТип }
+     * 
+     */
+    public ФИОТип createФИОТип() {
+        return new ФИОТип();
     }
 
 }

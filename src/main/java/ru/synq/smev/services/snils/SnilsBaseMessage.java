@@ -19,7 +19,7 @@ public class SnilsBaseMessage
     @XmlElement(name = "Message", required = true, namespace = "http://smev.gosuslugi.ru/rev120315")
     protected MessageType message;
     @XmlElement(name = "MessageData", required = true, namespace = "http://smev.gosuslugi.ru/rev120315")
-    protected MessageData messageData;
+    protected SnilsMessageData messageData;
 
     public MessageType getMessage() {
         return message;
@@ -29,11 +29,11 @@ public class SnilsBaseMessage
         this.message = value;
     }
 
-    public MessageData getMessageData() {
+    public SnilsMessageData getMessageData() {
         return messageData;
     }
 
-    public void setMessageData(MessageData value) {
+    public void setMessageData(SnilsMessageData value) {
         this.messageData = value;
     }
 

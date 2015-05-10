@@ -8,16 +8,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "AppData")
-public class AppData {
-    @XmlElement(name = "request")
-    protected SnilsData request;
+@XmlType(name = "SnilsMessageData")
+public class SnilsMessageData {
+    @XmlElement(name = "AppData")
+    protected SnilsAppData appData;
 
-    public SnilsData getRequest() {
-        return request;
+    public SnilsAppData getAppData() {
+        return appData;
     }
 
-    public void setRequest(SnilsData request) {
-        this.request = request;
+    public void setAppData(SnilsAppData value) {
+        this.appData = value;
     }
 }

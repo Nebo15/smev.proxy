@@ -1,17 +1,12 @@
 
 package org.w3._2000._09.xmldsig;
 
+import org.w3c.dom.Element;
+
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAnyElement;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlElementRefs;
-import javax.xml.bind.annotation.XmlMixed;
-import javax.xml.bind.annotation.XmlType;
-import org.w3c.dom.Element;
 
 
 /**
@@ -67,11 +62,11 @@ public class KeyValueType {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link DSAKeyValueType }{@code >}
-     * {@link Element }
      * {@link String }
      * {@link Object }
      * {@link JAXBElement }{@code <}{@link RSAKeyValueType }{@code >}
+     * {@link JAXBElement }{@code <}{@link DSAKeyValueType }{@code >}
+     * {@link Element }
      * 
      * 
      */
