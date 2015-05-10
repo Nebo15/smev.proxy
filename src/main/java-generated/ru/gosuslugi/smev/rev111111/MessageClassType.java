@@ -24,17 +24,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum MessageClassType {
 
-
-    /**
-     * Запрос от потребителя к поставщику 
-     * 
-     */
     REQUEST,
-
-    /**
-     * Ответ поставщика потребителю
-     * 
-     */
     RESPONSE;
 
     public String value() {

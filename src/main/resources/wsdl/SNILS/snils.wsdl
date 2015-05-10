@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:tns="http://snils-validation.skmv.rstyle.com" xmlns:pfr="http://pfr.skmv.rstyle.com" xmlns:smev="http://smev.gosuslugi.ru/rev120315" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://snils-validation.skmv.rstyle.com">
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:snils="http://snils-validation.skmv.rstyle.com" xmlns:tns="http://smev.gosuslugi.ru/rev120315" targetNamespace="http://smev.gosuslugi.ru/rev120315" elementFormDefault="qualified">
+            <include schemaLocation="http://smev-mvf.test.gosuslugi.ru:7777/gateway/services/SID0003556/1.00/wsdl/PFRF01/f2a44943-b064-4d7a-a86e-c12a50987833"/>
+            <import namespace="http://snils-validation.skmv.rstyle.com"/>
+            <import namespace="http://pfr.skmv.rstyle.com" schemaLocation="http://smev-mvf.test.gosuslugi.ru:7777/gateway/services/SID0003556/1.00/wsdl/PFRF01/61a670a4-1f39-43f4-b75b-e30abe878bda"/>
+
+            <complexType name="SnilsValidationRequestType">
+                <complexContent>
+                    <restriction base="tns:BaseMessageType">
+                        <sequence>
+                            <element ref="tns:Message"/>
+                            <element name="MessageData">
+                                <complexType>
+                                    <complexContent>
+                                        <restriction base="tns:MessageDataType">
+                                            <sequence>
+                                                <element name="AppData" minOccurs="0">
+                                                    <complexType>
+                                                        <complexContent>
+                                                            <restriction base="tns:AppDataType">
+                                                                <sequence>
+                                                                    <element name="request" type="snils:SnilsValidationData" nillable="false" minOccurs="1" maxOccurs="1"/>
+                                                                </sequence>
+                                                            </restriction>
+                                                        </complexContent>
+                                                    </complexType>
+                                                </element>
+                                                <element ref="tns:AppDocument" minOccurs="0"/>
+                                            </sequence>
+                                        </restriction>
+                                    </complexContent>
+                                </complexType>
+                            </element>
+                        </sequence>
+                    </restriction>
+                </complexContent>
+            </complexType>
+            <complexType name="SnilsValidationResponseType">
+                <complexContent>
+                    <restriction base="tns:BaseMessageType">
+                        <sequence>
+                            <element ref="tns:Message"/>
+                            <element name="MessageData">
+                                <complexType>
+                                    <complexContent>
+                                        <restriction base="tns:MessageDataType">
+                                            <sequence>
+                                                <element name="AppData" minOccurs="0">
+                                                    <complexType>
+                                                        <complexContent>
+                                                            <restriction base="tns:AppDataType">
+                                                                <sequence>
+                                                                    <element ref="snils:result" minOccurs="0" maxOccurs="1"/>
+                                                                    <element ref="pfr:fault" minOccurs="0" maxOccurs="1"/>
+                                                                </sequence>
+                                                            </restriction>
+                                                        </complexContent>
+                                                    </complexType>
+                                                </element>
+                                                <element ref="tns:AppDocument" minOccurs="0"/>
+                                            </sequence>
+                                        </restriction>
+                                    </complexContent>
+                                </complexType>
+                            </element>
+                        </sequence>
+                    </restriction>
+                </complexContent>
+            </complexType>
+        </schema>
+        
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://pfr.skmv.rstyle.com" elementFormDefault="qualified">
+            <element name="fault" type="pfr:PFR_FAULT"/>
+        </schema>
+        
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://snils-validation.skmv.rstyle.com" elementFormDefault="qualified">
+            <import namespace="http://pfr.skmv.rstyle.com" schemaLocation="http://smev-mvf.test.gosuslugi.ru:7777/gateway/services/SID0003556/1.00/wsdl/PFRF01/61a670a4-1f39-43f4-b75b-e30abe878bda"/>
+            <import namespace="http://smev.gosuslugi.ru/rev120315"/>
+            
+           <element name="result" type="boolean"/>
+        
+            <complexType name="SnilsValidationData">
+                <sequence minOccurs="1" maxOccurs="1">
+                    <element name="fio" type="pfr:FIO" nillable="false" minOccurs="1" maxOccurs="1"/>
+                    <element name="snils" type="pfr:SNILS" nillable="false" minOccurs="1" maxOccurs="1"/>
+                    <element name="gender" type="pfr:GENDER" minOccurs="0" maxOccurs="1"/>
+                    <element name="birthDate" type="pfr:PFR_DATE" minOccurs="0" maxOccurs="1"/>
+                    <!-- PFR #1 -->
+                    <!--element name="gender" type="pfr:GENDER" minOccurs="1" maxOccurs="1" nillable="false"/>
+                    <element name="birthDate" type="pfr:PFR_DATE" minOccurs="1" maxOccurs="1" nillable="false"/-->
+                </sequence>
+            </complexType>
+            <element name="SnilsValidationRequest" type="smev:SnilsValidationRequestType"/>
+            <element name="SnilsValidationResponse" type="smev:SnilsValidationResponseType"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="SnilsValidationRequestMessage">
+        <wsdl:part name="SmevHeader" element="smev:Header"/>
+        <wsdl:part name="parameters" element="tns:SnilsValidationRequest"/>
+    </wsdl:message>
+    <wsdl:message name="SnilsValidationResponseMessage">
+        <wsdl:part name="parameters" element="tns:SnilsValidationResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="SnilsValidationPortType">
+        <wsdl:operation name="SnilsValidationRequest">
+            <wsdl:input message="tns:SnilsValidationRequestMessage"/>
+            <wsdl:output message="tns:SnilsValidationResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="SnilsValidationSoapBinding" type="tns:SnilsValidationPortType">
+        <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="SnilsValidationRequest">
+            <wsdlsoap:operation soapAction=""/>
+            <wsdl:input>
+                <wsdlsoap:header message="tns:SnilsValidationRequestMessage" part="SmevHeader" use="literal"/>
+                <wsdlsoap:body parts="parameters" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="SnilsValidationService">
+        <wsdl:port name="SnilsValidationPort" binding="tns:SnilsValidationSoapBinding">
+            <wsdlsoap:address location="http://smev-mvf.test.gosuslugi.ru:7777/gateway/services/SID0003556/1.00"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

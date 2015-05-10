@@ -30,19 +30,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Документ }
-     * 
-     */
-    public Документ createДокумент() {
-        return new Документ();
-    }
-
-    /**
      * Create an instance of {@link Документ.Ответ }
      * 
      */
     public Документ.Ответ createДокументОтвет() {
         return new Документ.Ответ();
+    }
+
+    /**
+     * Create an instance of {@link Документ }
+     * 
+     */
+    public Документ createДокумент() {
+        return new Документ();
     }
 
 }

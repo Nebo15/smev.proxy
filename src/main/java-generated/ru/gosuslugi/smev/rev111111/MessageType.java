@@ -63,7 +63,7 @@ public class MessageType {
     @XmlElement(name = "Originator")
     protected OrgExternalType originator;
     @XmlElement(name = "TypeCode", required = true)
-    protected String typeCode;
+    protected TypeCodeType typeCode;
     @XmlElement(name = "Status", required = true)
     protected StatusType status;
     @XmlElement(name = "Date", required = true)
@@ -159,10 +159,10 @@ public class MessageType {
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link TypeCodeType }
      *     
      */
-    public String getTypeCode() {
+    public TypeCodeType getTypeCode() {
         return typeCode;
     }
 
@@ -171,10 +171,10 @@ public class MessageType {
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link TypeCodeType }
      *     
      */
-    public void setTypeCode(String value) {
+    public void setTypeCode(TypeCodeType value) {
         this.typeCode = value;
     }
 

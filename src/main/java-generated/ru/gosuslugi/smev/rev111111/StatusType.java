@@ -33,71 +33,16 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum StatusType {
 
-
-    /**
-     * Запрос
-     * 
-     */
     REQUEST,
-
-    /**
-     * Результат
-     * 
-     */
     RESULT,
-
-    /**
-     * Мотивированный отказ
-     * 
-     */
     REJECT,
-
-    /**
-     * Ошибка при ФЛК
-     * 
-     */
     INVALID,
-
-    /**
-     * Сообщение-квиток о приеме
-     * 
-     */
     ACCEPT,
-
-    /**
-     * Запрос данных/результатов
-     * 
-     */
     PING,
-
-    /**
-     * В обработке
-     * 
-     */
     PROCESS,
-
-    /**
-     * Уведомление об ошибке
-     * 
-     */
     NOTIFY,
-
-    /**
-     * Технический сбой
-     * 
-     */
     FAILURE,
-
-    /**
-     * Отзыв заявления
-     * 
-     */
     CANCEL,
-
-    /**
-     * Возврат состояния
-     * 
-     */
     STATE;
 
     public String value() {

@@ -4,6 +4,9 @@
 
 package ru.synq.smev;
 
+import com.sun.xml.bind.v2.runtime.IllegalAnnotationException;
+import com.sun.xml.bind.v2.runtime.IllegalAnnotationsException;
+import org.apache.cxf.service.factory.ServiceConstructionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.TypeMismatchException;
@@ -98,6 +101,32 @@ public class RestExceptionHandler {
     Response handleUncaughtException() throws IOException {
         log.error("Unauthorized");
         return error(HttpStatus.UNAUTHORIZED);
+    }
+
+    @RequestMapping
+    @ExceptionHandler(ServiceConstructionException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public @ResponseBody
+    Response handleIllegalAnnotationsException(ServiceConstructionException ex) throws IOException {
+        IllegalAnnotationsException aEx = null;
+        Throwable cause = ex.getCause();
+        while (cause != null && aEx == null) {
+            if (cause instanceof IllegalAnnotationsException) {
+                aEx = (IllegalAnnotationsException) cause;
+            } else {
+                cause = cause.getCause();
+            }
+        }
+        if (aEx != null) {
+            String message = "JAXB validation error:";
+            for (IllegalAnnotationException exception : aEx.getErrors()) {
+                message += "\n" + exception.getMessage();
+            }
+            log.error(message);
+            return error(HttpStatus.INTERNAL_SERVER_ERROR, message);
+        } else {
+            return handleUncaughtException(ex);
+        }
     }
 
     @RequestMapping

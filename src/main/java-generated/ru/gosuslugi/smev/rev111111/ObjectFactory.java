@@ -60,19 +60,43 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ReferenceType }
+     * Create an instance of {@link MessageType }
      * 
      */
-    public ReferenceType createReferenceType() {
-        return new ReferenceType();
+    public MessageType createMessageType() {
+        return new MessageType();
     }
 
     /**
-     * Create an instance of {@link HeaderType }
+     * Create an instance of {@link GetResultResponseMessageData }
      * 
      */
-    public HeaderType createHeaderType() {
-        return new HeaderType();
+    public GetResultResponseMessageData createGetResultResponseMessageData() {
+        return new GetResultResponseMessageData();
+    }
+
+    /**
+     * Create an instance of {@link GetDictionaryValuesMessageData }
+     * 
+     */
+    public GetDictionaryValuesMessageData createGetDictionaryValuesMessageData() {
+        return new GetDictionaryValuesMessageData();
+    }
+
+    /**
+     * Create an instance of {@link SendErrorReportMessageData }
+     * 
+     */
+    public SendErrorReportMessageData createSendErrorReportMessageData() {
+        return new SendErrorReportMessageData();
+    }
+
+    /**
+     * Create an instance of {@link AppDocumentType }
+     * 
+     */
+    public AppDocumentType createAppDocumentType() {
+        return new AppDocumentType();
     }
 
     /**
@@ -84,27 +108,75 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link OrgExternalType }
+     * Create an instance of {@link GetResultResponseMessage }
      * 
      */
-    public OrgExternalType createOrgExternalType() {
-        return new OrgExternalType();
+    public GetResultResponseMessage createGetResultResponseMessage() {
+        return new GetResultResponseMessage();
     }
 
     /**
-     * Create an instance of {@link MessageType }
+     * Create an instance of {@link GetTaskTypesMessage }
      * 
      */
-    public MessageType createMessageType() {
-        return new MessageType();
+    public GetTaskTypesMessage createGetTaskTypesMessage() {
+        return new GetTaskTypesMessage();
     }
 
     /**
-     * Create an instance of {@link AppDataType }
+     * Create an instance of {@link GetTaskTypesMessageData }
      * 
      */
-    public AppDataType createAppDataType() {
-        return new AppDataType();
+    public GetTaskTypesMessageData createGetTaskTypesMessageData() {
+        return new GetTaskTypesMessageData();
+    }
+
+    /**
+     * Create an instance of {@link GetResultMessageData }
+     * 
+     */
+    public GetResultMessageData createGetResultMessageData() {
+        return new GetResultMessageData();
+    }
+
+    /**
+     * Create an instance of {@link GetTaskTypesResponseMessageData }
+     * 
+     */
+    public GetTaskTypesResponseMessageData createGetTaskTypesResponseMessageData() {
+        return new GetTaskTypesResponseMessageData();
+    }
+
+    /**
+     * Create an instance of {@link ServiceRequestMessageData }
+     * 
+     */
+    public ServiceRequestMessageData createServiceRequestMessageData() {
+        return new ServiceRequestMessageData();
+    }
+
+    /**
+     * Create an instance of {@link ReferenceType }
+     * 
+     */
+    public ReferenceType createReferenceType() {
+        return new ReferenceType();
+    }
+
+    /**
+     * Create an instance of {@link ServiceRequestMessage }
+     * 
+     */
+    public ServiceRequestMessage createServiceRequestMessage() {
+        return new ServiceRequestMessage();
+    }
+
+    /**
+     * Create an instance of {@link SendErrorReportMessage }
+     * 
+     */
+    public SendErrorReportMessage createSendErrorReportMessage() {
+        return new SendErrorReportMessage();
     }
 
     /**
@@ -116,11 +188,115 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link AppDocumentType }
+     * Create an instance of {@link HeaderType }
      * 
      */
-    public AppDocumentType createAppDocumentType() {
-        return new AppDocumentType();
+    public HeaderType createHeaderType() {
+        return new HeaderType();
+    }
+
+    /**
+     * Create an instance of {@link GetDictionaryValuesResponseMessageData }
+     * 
+     */
+    public GetDictionaryValuesResponseMessageData createGetDictionaryValuesResponseMessageData() {
+        return new GetDictionaryValuesResponseMessageData();
+    }
+
+    /**
+     * Create an instance of {@link GetTaskTypesResponseMessage }
+     * 
+     */
+    public GetTaskTypesResponseMessage createGetTaskTypesResponseMessage() {
+        return new GetTaskTypesResponseMessage();
+    }
+
+    /**
+     * Create an instance of {@link ProcessTaskResponseMessageData }
+     * 
+     */
+    public ProcessTaskResponseMessageData createProcessTaskResponseMessageData() {
+        return new ProcessTaskResponseMessageData();
+    }
+
+    /**
+     * Create an instance of {@link GetResultMessage }
+     * 
+     */
+    public GetResultMessage createGetResultMessage() {
+        return new GetResultMessage();
+    }
+
+    /**
+     * Create an instance of {@link BookRequestResponseMessageData }
+     * 
+     */
+    public BookRequestResponseMessageData createBookRequestResponseMessageData() {
+        return new BookRequestResponseMessageData();
+    }
+
+    /**
+     * Create an instance of {@link SendErrorReportResponseMessage }
+     * 
+     */
+    public SendErrorReportResponseMessage createSendErrorReportResponseMessage() {
+        return new SendErrorReportResponseMessage();
+    }
+
+    /**
+     * Create an instance of {@link BookRequestResponseMessage }
+     * 
+     */
+    public BookRequestResponseMessage createBookRequestResponseMessage() {
+        return new BookRequestResponseMessage();
+    }
+
+    /**
+     * Create an instance of {@link GetDictionaryValuesMessage }
+     * 
+     */
+    public GetDictionaryValuesMessage createGetDictionaryValuesMessage() {
+        return new GetDictionaryValuesMessage();
+    }
+
+    /**
+     * Create an instance of {@link OrgExternalType }
+     * 
+     */
+    public OrgExternalType createOrgExternalType() {
+        return new OrgExternalType();
+    }
+
+    /**
+     * Create an instance of {@link ProcessTaskResponseMessage }
+     * 
+     */
+    public ProcessTaskResponseMessage createProcessTaskResponseMessage() {
+        return new ProcessTaskResponseMessage();
+    }
+
+    /**
+     * Create an instance of {@link GetDictionaryValuesResponseMessage }
+     * 
+     */
+    public GetDictionaryValuesResponseMessage createGetDictionaryValuesResponseMessage() {
+        return new GetDictionaryValuesResponseMessage();
+    }
+
+    /**
+     * Create an instance of {@link SendErrorReportResponseMessageData }
+     * 
+     */
+    public SendErrorReportResponseMessageData createSendErrorReportResponseMessageData() {
+        return new SendErrorReportResponseMessageData();
+    }
+
+    /**
+     * Create an instance of {@link AppDataType }
+     * 
+     */
+    public AppDataType createAppDataType() {
+        return new AppDataType();
     }
 
     /**
@@ -169,12 +345,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link TypeCodeType }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://smev.gosuslugi.ru/rev111111", name = "TypeCode")
-    public JAXBElement<String> createTypeCode(String value) {
-        return new JAXBElement<String>(_TypeCode_QNAME, String.class, null, value);
+    public JAXBElement<TypeCodeType> createTypeCode(TypeCodeType value) {
+        return new JAXBElement<TypeCodeType>(_TypeCode_QNAME, TypeCodeType.class, null, value);
     }
 
     /**

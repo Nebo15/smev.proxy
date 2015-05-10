@@ -15,7 +15,7 @@
     <logger name="ru.synq" level="${logback.loglevel}"/>
     <logger name="ch.qos.logback" level="WARN"/>
     <logger name="org.apache" level="WARN"/>
-    <logger name="org.apache.cxf" level="INFO"/>
+    <logger name="org.apache.cxf" level="ALL"/>
     <logger name="org.hibernate.validator" level="WARN"/>
     <logger name="org.hibernate" level="WARN"/>
     <logger name="org.springframework" level="WARN"/>

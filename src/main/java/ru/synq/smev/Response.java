@@ -11,10 +11,11 @@ public class Response {
     }
 
     private static String causeToString(Throwable e) {
+        if (e.getCause() ==  null) return "";
         String s = e.getClass().getSimpleName();
         String message = e.getLocalizedMessage();
         return " < " + (message != null ? message : s)
-                + (e.getCause() != null && !e.getCause().getLocalizedMessage().equals(message) ? causeToString(e.getCause()) : "");
+                + (e.getCause().getLocalizedMessage() != null && !e.getCause().getLocalizedMessage().equals(message) ? causeToString(e.getCause()) : "");
     }
 
     public static PageResponse page(Page page) {

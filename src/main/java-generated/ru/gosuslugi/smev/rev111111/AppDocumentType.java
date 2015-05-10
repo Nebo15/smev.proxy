@@ -17,6 +17,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
+ *         &lt;element ref="{http://smev.gosuslugi.ru/rev111111}RequestCode"/>
  *         &lt;choice>
  *           &lt;element ref="{http://smev.gosuslugi.ru/rev111111}BinaryData"/>
  *           &lt;sequence>
@@ -34,18 +35,45 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AppDocumentType", propOrder = {
+    "requestCode",
     "binaryData",
     "reference",
     "digestValue"
 })
 public class AppDocumentType {
 
+    @XmlElement(name = "RequestCode", required = true)
+    protected String requestCode;
     @XmlElement(name = "BinaryData")
     protected byte[] binaryData;
     @XmlElement(name = "Reference")
     protected ReferenceType reference;
     @XmlElement(name = "DigestValue")
     protected byte[] digestValue;
+
+    /**
+     * Gets the value of the requestCode property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getRequestCode() {
+        return requestCode;
+    }
+
+    /**
+     * Sets the value of the requestCode property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setRequestCode(String value) {
+        this.requestCode = value;
+    }
 
     /**
      * Gets the value of the binaryData property.

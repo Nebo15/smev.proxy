@@ -30,19 +30,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Документ.СвФЛ }
+     * Create an instance of {@link Документ }
      * 
      */
-    public Документ.СвФЛ createДокументСвФЛ() {
-        return new Документ.СвФЛ();
-    }
-
-    /**
-     * Create an instance of {@link Документ.СвЮЛ }
-     * 
-     */
-    public Документ.СвЮЛ createДокументСвЮЛ() {
-        return new Документ.СвЮЛ();
+    public Документ createДокумент() {
+        return new Документ();
     }
 
     /**
@@ -54,6 +46,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Документ.СвФЛ }
+     * 
+     */
+    public Документ.СвФЛ createДокументСвФЛ() {
+        return new Документ.СвФЛ();
+    }
+
+    /**
      * Create an instance of {@link Документ.СвФЛ.УдЛичнФЛ }
      * 
      */
@@ -62,11 +62,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Документ }
+     * Create an instance of {@link Документ.СвЮЛ }
      * 
      */
-    public Документ createДокумент() {
-        return new Документ();
+    public Документ.СвЮЛ createДокументСвЮЛ() {
+        return new Документ.СвЮЛ();
     }
 
 }

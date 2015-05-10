@@ -1,8 +1,8 @@
 package ru.synq.smev.services.inn;
 
 import ru.gosuslugi.smev.rev111111.INNFLRs;
-import ru.synq.smev.services.inn.bind.group.InnGroupRequest;
-import ru.synq.smev.services.inn.bind.individual.InnIndividualRequest;
+import ru.synq.smev.services.inn.group.InnGroupRequest;
+import ru.synq.smev.services.inn.individual.InnIndividualRequest;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;

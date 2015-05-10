@@ -47,8 +47,8 @@ import org.w3c.dom.Element;
 public class PGPDataType {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "PGPKeyPacket", namespace = "http://www.w3.org/2000/09/xmldsig#", type = JAXBElement.class),
-        @XmlElementRef(name = "PGPKeyID", namespace = "http://www.w3.org/2000/09/xmldsig#", type = JAXBElement.class)
+        @XmlElementRef(name = "PGPKeyID", namespace = "http://www.w3.org/2000/09/xmldsig#", type = JAXBElement.class),
+        @XmlElementRef(name = "PGPKeyPacket", namespace = "http://www.w3.org/2000/09/xmldsig#", type = JAXBElement.class)
     })
     @XmlAnyElement(lax = true)
     protected List<Object> content;
@@ -59,8 +59,8 @@ public class PGPDataType {
      * <p>
      * You are getting this "catch-all" property because of the following reason: 
      * The field name "PGPKeyPacket" is used by two different parts of a schema. See: 
-     * line 0 of http://smev-mvf.test.gosuslugi.ru:7777/gateway/services/SID0003422/1.00/wsdl/PFRF01/9336ee56-c4b0-490f-9d58-0e6d865a705f
-     * line 0 of http://smev-mvf.test.gosuslugi.ru:7777/gateway/services/SID0003422/1.00/wsdl/PFRF01/9336ee56-c4b0-490f-9d58-0e6d865a705f
+     * line 0 of http://fms-sx.reksoft.ru:8080/serviceConcentrator/incomingRequests_v2_4_3?xsd=5
+     * line 0 of http://fms-sx.reksoft.ru:8080/serviceConcentrator/incomingRequests_v2_4_3?xsd=5
      * <p>
      * To get rid of this property, apply a property customization to one 
      * of both of the following declarations to change their names: 
@@ -81,10 +81,10 @@ public class PGPDataType {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link byte[]}{@code >}
      * {@link Element }
      * {@link JAXBElement }{@code <}{@link byte[]}{@code >}
      * {@link Object }
+     * {@link JAXBElement }{@code <}{@link byte[]}{@code >}
      * 
      * 
      */

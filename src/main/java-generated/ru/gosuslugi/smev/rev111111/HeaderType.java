@@ -19,10 +19,10 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{http://smev.gosuslugi.ru/rev111111}NodeId"/>
+ *         &lt;element ref="{http://smev.gosuslugi.ru/rev111111}NodeId" minOccurs="0"/>
  *         &lt;element ref="{http://smev.gosuslugi.ru/rev111111}MessageId"/>
  *         &lt;element ref="{http://smev.gosuslugi.ru/rev111111}TimeStamp"/>
- *         &lt;element ref="{http://smev.gosuslugi.ru/rev111111}MessageClass"/>
+ *         &lt;element ref="{http://smev.gosuslugi.ru/rev111111}MessageClass" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -40,14 +40,14 @@ import javax.xml.datatype.XMLGregorianCalendar;
 })
 public class HeaderType {
 
-    @XmlElement(name = "NodeId", required = true)
+    @XmlElement(name = "NodeId")
     protected String nodeId;
     @XmlElement(name = "MessageId", required = true)
     protected String messageId;
     @XmlElement(name = "TimeStamp", required = true)
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar timeStamp;
-    @XmlElement(name = "MessageClass", required = true)
+    @XmlElement(name = "MessageClass")
     protected MessageClassType messageClass;
 
     /**
