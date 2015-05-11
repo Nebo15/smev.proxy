@@ -34,7 +34,6 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.io.IOException;
-import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.EnumSet;
@@ -74,8 +73,7 @@ public class Application {
 	    log.info("HDImageStore path: {}, user: {}", HDImageStore.getDir(), cryptoUser);
 	    XmlDSignTools.init();
         SpringBusFactory bf = new SpringBusFactory();
-        URL resource = this.getClass().getClassLoader().getResource("wssec.xml");
-        Bus bus = bf.createBus(resource);
+        Bus bus = bf.createBus();
         BusFactory.setDefaultBus(bus);
 
         TransformOutInterceptor transformOutInterceptor = new TransformOutInterceptor();

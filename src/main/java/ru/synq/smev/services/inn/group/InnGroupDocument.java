@@ -2,7 +2,7 @@
 package ru.synq.smev.services.inn.group;
 
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import ru.synq.smev.SmevNamingStrategy;
+import ru.synq.smev.services.inn.InnNamingStrategy;
 import ru.synq.smev.services.inn.InnDocument;
 import ru.synq.smev.services.inn.individual.InnIndividualDocument;
 
@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 import java.util.List;
 
-@JsonNaming(SmevNamingStrategy.class)
+@JsonNaming(InnNamingStrategy.class)
 public class InnGroupDocument extends InnDocument {
 
     @XmlElement(name = "\u0421\u0432\u042e\u041b", required = true)
@@ -64,7 +64,7 @@ public class InnGroupDocument extends InnDocument {
 
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "")
-    @JsonNaming(SmevNamingStrategy.class)
+    @JsonNaming(InnNamingStrategy.class)
     public static class Запрос {
 
         @XmlElement(name = "\u0421\u0432\u0424\u041b", required = true)
@@ -92,7 +92,7 @@ public class InnGroupDocument extends InnDocument {
 
         @XmlAccessorType(XmlAccessType.FIELD)
         @XmlType(name = "")
-        @JsonNaming(SmevNamingStrategy.class)
+        @JsonNaming(InnNamingStrategy.class)
         public static class СвФЛ {
 
             @XmlElement(name = "ФИО", required = true)
@@ -142,7 +142,7 @@ public class InnGroupDocument extends InnDocument {
 
             @XmlAccessorType(XmlAccessType.FIELD)
             @XmlType(name = "")
-            @JsonNaming(SmevNamingStrategy.class)
+            @JsonNaming(InnNamingStrategy.class)
             public static class УдЛичнФЛ {
                 @XmlAttribute(name = "\u041a\u043e\u0434\u0412\u0438\u0434\u0414\u043e\u043a", required = true)
                 @NotNull @Size(min = 2, max = 2)
@@ -203,7 +203,7 @@ public class InnGroupDocument extends InnDocument {
         }
     }
 
-    @JsonNaming(SmevNamingStrategy.class)
+    @JsonNaming(InnNamingStrategy.class)
     public static class СвЮЛ extends InnIndividualDocument.СвЮЛ {}
 
 }

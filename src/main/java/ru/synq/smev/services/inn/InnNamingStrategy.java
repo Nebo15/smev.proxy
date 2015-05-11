@@ -1,10 +1,10 @@
-package ru.synq.smev;
+package ru.synq.smev.services.inn;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.cfg.MapperConfig;
 import com.fasterxml.jackson.databind.introspect.AnnotatedMethod;
 
-public class SmevNamingStrategy extends PropertyNamingStrategy.PascalCaseStrategy {
+public class InnNamingStrategy extends PropertyNamingStrategy.PascalCaseStrategy {
     @Override
     public String translate(String input) {
         return super.translate(input);
