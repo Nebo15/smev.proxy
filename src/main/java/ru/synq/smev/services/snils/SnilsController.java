@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import ru.gosuslugi.smev.rev120315.HeaderType;
 import ru.gosuslugi.smev.rev120315.MessageType;
-import ru.synq.smev.Response;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -28,7 +27,7 @@ public class SnilsController {
     @Inject @Qualifier("snilsMessage") Provider<MessageType> messageProvider;
 
     @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET})
-    public Response query(@Valid @RequestBody SnilsValidationData request) {
+    public SnilsAppData query(@Valid @RequestBody SnilsValidationData request) {
         SnilsBaseMessage baseMessage = new SnilsBaseMessage();
         baseMessage.setMessage(messageProvider.get());
         SnilsMessageData messageData = new SnilsMessageData();
@@ -48,7 +47,6 @@ public class SnilsController {
         httpClientPolicy.setReceiveTimeout(0);
         http.setClient(httpClientPolicy);
 
-        final SnilsValidationResponse response = port.snilsValidationRequest(new HeaderType(), baseMessage);
-        return Response.data(response.getMessageData().getAppData().getResult());
+        return port.snilsValidationRequest(new HeaderType(), baseMessage).getMessageData().getAppData();
     }
 }

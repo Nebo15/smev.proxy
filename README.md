@@ -93,3 +93,37 @@ GET `/inn/group/<идентификатор групового запроса>`
 Пример запроса:
 
 `http://46.101.155.216:8080/inn/group/543901?api_key=1&api_secret=1`
+
+## Валидация СНИЛС
+
+СМЭВ код SID0003822, [документация](http://smev.gosuslugi.ru/portal/services.jsp#!/F/SPFRvalidasiyasnils/3.00/p00smev/SID0003822)
+
+POST запрос с параметрами:
+
+```json
+{
+   "fio": {
+      "firstName": "ЕЛЕНА",
+      "lastName": "ПЕТИНА",
+      "patronymic": "ВЛАДИМИРОВНА"
+   },
+   "snils": "027-733-198 62"
+}
+```
+
+Успешный ответ:
+```json
+{
+   "result": "true"
+}
+```
+
+Безуспешный ответ:
+```json
+{
+   "fault": {
+      "code": "SKMV-SNILS-0001",
+      "message": "СНИЛС не соответствует контрольной сумме"
+   }
+}
+```
