@@ -1,6 +1,8 @@
 
 package ru.fms.sx.kernel.webservices.border.basetypes;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -40,10 +42,13 @@ public class Person {
 
     protected String id;
     @XmlElement(required = true)
+    @NotNull @Pattern(regexp = "^[а-яА-ЯёЁ\\-\\s]+$")
     protected String firstName;
     @XmlElement(required = true)
+    @NotNull @Pattern(regexp = "^[а-яА-ЯёЁ\\-\\s]+$")
     protected String secondName;
     @XmlElement(required = true)
+    @NotNull @Pattern(regexp = "^[а-яА-ЯёЁ\\-\\s]+$")
     protected String lastName;
 
     /**

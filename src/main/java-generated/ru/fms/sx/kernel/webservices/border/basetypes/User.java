@@ -1,6 +1,8 @@
 
 package ru.fms.sx.kernel.webservices.border.basetypes;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -35,8 +37,10 @@ import javax.xml.bind.annotation.XmlType;
 public class User {
 
     @XmlElement(required = true)
+    @NotNull
     protected String organization;
     @XmlElement(required = true)
+    @NotNull @Valid
     protected Person person;
 
     /**

@@ -46,8 +46,12 @@ public class RestExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public @ResponseBody
     Response handleRequestException(Exception ex) {
-        log.debug("Bad request: {}", ex.getMessage());
-        return error(HttpStatus.BAD_REQUEST, ex.getMessage());
+        String message = ex.getMessage();
+        log.debug("Bad request: {}", message);
+        if (ex instanceof TypeMismatchException && ((TypeMismatchException) ex).getRequiredType() == Environment.class) {
+            message = "Invalid environment. Expected 'test' or 'prod', actual: "+((TypeMismatchException) ex).getValue();
+        }
+        return error(HttpStatus.BAD_REQUEST, message);
     }
 
     @RequestMapping

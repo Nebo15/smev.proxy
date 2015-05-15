@@ -29,7 +29,7 @@ public class AuthenticationFilter implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+    public void doFilter(final ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         final String api_keyParam = request.getParameter("api_key");
         final String api_secretParam = request.getParameter("api_secret");
         if (!key.equals(api_keyParam) || !secret.equals(api_secretParam)) {
@@ -39,7 +39,8 @@ public class AuthenticationFilter implements Filter {
             objectMapper.writeValue(res.getWriter(), Response.error(HttpStatus.UNAUTHORIZED));
 //            log.warn("Unauthorized with key:{}, secret:{}", api_keyParam, api_secretParam);
         } else {
-            chain.doFilter(request, response);
+            // через FilterChain не работает почему-то
+            new RequestInputStreamBufferFilter().doFilter(request, response, chain);
         }
     }
 

@@ -25,9 +25,7 @@ public class SnilsValidationService extends Service {
     static {
         URL url = SnilsValidationService.class.getClassLoader().getResource("wsdl/SNILS/snils.wsdl");
         if (url == null) {
-            java.util.logging.Logger.getLogger(SnilsValidationService.class.getName())
-                .log(java.util.logging.Level.INFO, 
-                     "Can not initialize the default wsdl from {0}", "wsdl/SNILS/snils.wsdl");
+            throw new Error("Can not initialize the default wsdl from wsdl/SNILS/snils.wsdl");
         }       
         WSDL_LOCATION = url;
     }

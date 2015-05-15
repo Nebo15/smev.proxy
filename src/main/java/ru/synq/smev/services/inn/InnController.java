@@ -34,9 +34,9 @@ import java.util.UUID;
 @RestController
 @RequestMapping({"inn","SID0003450"})
 public class InnController {
+    @Value("${skip-cxf-init:false}") boolean skipCxfInitFlag;
     @Autowired WSS4JOutInterceptor wss4JOutInterceptor;
     @Inject @Qualifier("innMessage") Provider<MessageType> messageProvider;
-    @Value("${skip-cxf-init:false}") boolean skipCxfInitFlag;
 
     /**
      * Код: queryINNFL

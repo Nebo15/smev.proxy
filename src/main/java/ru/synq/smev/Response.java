@@ -1,10 +1,12 @@
 package ru.synq.smev;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
+@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
 public class Response {
     public Object data;
 

@@ -36,6 +36,14 @@ public class TaskParameter {
     protected String name;
     protected String value;
 
+    public TaskParameter() {
+    }
+
+    public TaskParameter(String name, String value) {
+        this.name = name;
+        this.value = value;
+    }
+
     /**
      * Gets the value of the name property.
      * 
