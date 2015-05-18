@@ -1,8 +1,6 @@
 
 package ru.fms.sx.kernel.webservices.border.basetypes;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
@@ -33,7 +31,6 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "processTaskResponseMessageType", propOrder = {
     "taskResult"
 })
-@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
 public class ProcessTaskResponseMessageType
     extends BaseResponseMessageType
 {

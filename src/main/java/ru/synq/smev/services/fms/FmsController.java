@@ -6,18 +6,10 @@ import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import ru.fms.sx.kernel.webservices.border.basetypes.ProcessTaskResponseMessageType;
-import ru.fms.sx.kernel.webservices.border.basetypes.ServiceRequestMessageType;
-import ru.fms.sx.kernel.webservices.border.basetypes.TaskParameter;
-import ru.fms.sx.kernel.webservices.border.basetypes.User;
+import org.springframework.web.bind.annotation.*;
+import ru.fms.sx.kernel.webservices.border.basetypes.*;
 import ru.fms.sx.kernel.webservices.incomingrequests.v2_4_3.IncomingRequestsServiceV243;
-import ru.gosuslugi.smev.rev111111.MessageType;
-import ru.gosuslugi.smev.rev111111.ServiceRequestMessage;
-import ru.gosuslugi.smev.rev111111.ServiceRequestMessageData;
+import ru.gosuslugi.smev.rev111111.*;
 import ru.synq.smev.Environment;
 import ru.synq.smev.Response;
 
@@ -48,7 +40,79 @@ public class FmsController {
         appData.setServiceCode("P001");
         appData.setVersionCode("001");
         setParams(appData.getParameters(), params);
-        return process(appData, env);
+        final ProcessTaskResponseMessage response = getPort(env).processTask(createServiceRequestMessage(appData));
+        return Response.data(response.getMessageData().getAppData());
+    }
+
+    @RequestMapping("extended")
+    public Response passportExtended(@PathVariable Environment env,
+                                     @Valid @RequestBody User user,
+                                     @Valid @RequestBody ExtendedPassportParams params
+    ) throws InvocationTargetException, IllegalAccessException {
+        ServiceRequestMessageType appData = new ServiceRequestMessageType();
+        appData.setUser(user);
+        appData.setServiceCode("P002");
+        appData.setVersionCode("001");
+        setParams(appData.getParameters(), params);
+        final BookRequestResponseMessage response = getPort(env).bookRequest(createServiceRequestMessage(appData));
+        return Response.data(response.getMessageData().getAppData());
+    }
+
+    @RequestMapping("extended/{taskId}")
+    public Response passportExtended(@PathVariable Environment env,
+                                     @PathVariable String taskId
+    ) throws InvocationTargetException, IllegalAccessException {
+        final GetResultMessage message = new GetResultMessage();
+        message.setMessage(messageProvider.get());
+        GetResultMessageData messageData = new GetResultMessageData();
+        GetResultMessageType appData = new GetResultMessageType();
+        appData.setTaskId(taskId);
+        messageData.setAppData(appData);
+        message.setMessageData(messageData);
+        final GetResultResponseMessage response = getPort(env).getResult(message);
+        final TaskResult result = response.getMessageData().getAppData().getTaskResult();
+
+        return Response.data(result);
+    }
+
+    @RequestMapping("dictionary/{code}")
+    public Response getDictionary(@PathVariable Environment env,
+                                  @PathVariable String code,
+                                  @Valid @RequestBody User user
+    ) throws InvocationTargetException, IllegalAccessException {
+        final GetDictionaryValuesMessage message = new GetDictionaryValuesMessage();
+        message.setMessage(messageProvider.get());
+        GetDictionaryValuesMessageData messageData = new GetDictionaryValuesMessageData();
+        GetDictionaryValuesMessageType appData = new GetDictionaryValuesMessageType();
+        appData.setDictionaryCode(code);
+        appData.setUser(user);
+        messageData.setAppData(appData);
+        message.setMessageData(messageData);
+        final GetDictionaryValuesResponseMessage response = getPort(env).getDictionaryValues(message);
+        final List<DictionaryItem> items = response.getMessageData().getAppData().getDictionaryItem();
+        if (items != null && !items.isEmpty())
+            return Response.data(items);
+        else
+            return Response.data(response.getMessageData().getAppData());
+    }
+
+    @RequestMapping(value = "error_report/{taskId}", method = RequestMethod.POST)
+    public Response getDictionary(@PathVariable Environment env,
+                                  @PathVariable String taskId,
+                                  @Valid @RequestBody User user,
+                                  @Valid @RequestBody ErrorReport errorReport
+    ) throws InvocationTargetException, IllegalAccessException {
+        final SendErrorReportMessage message = new SendErrorReportMessage();
+        message.setMessage(messageProvider.get());
+        SendErrorReportMessageData messageData = new SendErrorReportMessageData();
+        SendErrorReportMessageType appData = new SendErrorReportMessageType();
+        appData.setTaskId(taskId);
+        appData.setUser(user);
+        appData.setErrorReport(errorReport.errorReport);
+        messageData.setAppData(appData);
+        message.setMessageData(messageData);
+        final SendErrorReportResponseMessage response = getPort(env).sendErrorReport(message);
+        return Response.data(response.getMessageData().getAppData());
     }
 
     private void setParams(List<TaskParameter> list, Object bean) throws InvocationTargetException, IllegalAccessException {
@@ -57,19 +121,59 @@ public class FmsController {
         }
     }
 
-    public Response process(ServiceRequestMessageType appData, Environment env) {
+    public IncomingRequestsServiceV243 getPort(Environment env) {
         FmsService service = new FmsService();
         final IncomingRequestsServiceV243 port = service.getIncomingRequestsPort();
         if (!skipCxfInitFlag) {
             ClientProxy.getClient(port).getOutInterceptors().add(wss4JOutInterceptor);
         }
+        return port;
+    }
+
+    private ServiceRequestMessage createServiceRequestMessage(ServiceRequestMessageType appData) {
         ServiceRequestMessage baseMessage = new ServiceRequestMessage();
         baseMessage.setMessage(messageProvider.get());
         ServiceRequestMessageData messageData = new ServiceRequestMessageData();
         messageData.setAppData(appData);
         baseMessage.setMessageData(messageData);
-        final ProcessTaskResponseMessageType response = port.processTask(baseMessage).getMessageData().getAppData();
-        return Response.data(response);
+        return baseMessage;
+    }
+
+    public static class ExtendedPassportParams {
+        @NotNull @Size(max = 60)
+        @JsonProperty("CITIZEN_LASTNAME")
+        public String CITIZEN_LASTNAME;
+
+        @NotNull @Size(max = 60)
+        @JsonProperty("CITIZEN_FIRSTNAME")
+        public String CITIZEN_FIRSTNAME;
+
+        @Size(max = 60)
+        @JsonProperty("CITIZEN_GIVENNAME")
+        public String CITIZEN_GIVENNAME;
+
+        @NotNull @Pattern(regexp = "^(\\d{2}\\.){2}\\d{4}$", message = "Дата в формате ДД.ММ.ГГГГ")
+        @JsonProperty("CITIZEN_BIRTHDAY")
+        public String CITIZEN_BIRTHDAY;
+
+        @NotNull @Size(min = 4, max = 4)
+        @JsonProperty("DOC_SERIE")
+        public String DOC_SERIE;
+
+        @NotNull @Size(min = 6, max = 6)
+        @JsonProperty("DOC_NUMBER")
+        public String DOC_NUMBER;
+
+        @NotNull @Size(min = 6, max = 6)
+        @JsonProperty("DOC_ISSUER")
+        public String DOC_ISSUER;
+
+        @NotNull @Pattern(regexp = "^(\\d{2}\\.){2}\\d{4}$", message = "Дата в формате ДД.ММ.ГГГГ")
+        @JsonProperty("DOC_ISSUEDATE")
+        public String DOC_ISSUEDATE;
+
+        @JsonProperty("REGION_CODE")
+        public String REGION_CODE;
     }
 
     public static class SimplePassportParams {
@@ -83,31 +187,11 @@ public class FmsController {
         @JsonProperty("DOC_ISSUEDATE")
         public String DOC_ISSUEDATE;
 
-        public SimplePassportParams() {
-        }
+        public SimplePassportParams() {}
+    }
 
-        /*public String getDOC_SERIE() {
-            return DOC_SERIE;
-        }
-
-        public void setDOC_SERIE(String DOC_SERIE) {
-            this.DOC_SERIE = DOC_SERIE;
-        }
-
-        public String getDOC_NUMBER() {
-            return DOC_NUMBER;
-        }
-
-        public void setDOC_NUMBER(String DOC_NUMBER) {
-            this.DOC_NUMBER = DOC_NUMBER;
-        }
-
-        public String getDOC_ISSUEDATE() {
-            return DOC_ISSUEDATE;
-        }
-
-        public void setDOC_ISSUEDATE(String DOC_ISSUEDATE) {
-            this.DOC_ISSUEDATE = DOC_ISSUEDATE;
-        }*/
+    private static class ErrorReport {
+        @NotNull
+        public String errorReport;
     }
 }
