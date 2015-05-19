@@ -17,6 +17,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
@@ -46,6 +47,7 @@ import static java.util.Collections.singletonMap;
 @SuppressWarnings("SpringJavaAutowiringInspection")
 @RestController
 @SpringBootApplication
+@ComponentScan("ru.synq.smev")
 @ImportResource("beans.xml")
 public class Application {
     private static Logger log = LoggerFactory.getLogger(Application.class);
@@ -54,8 +56,7 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-    @Value("${org.apache.ws.security.crypto.merlin.keystore.file}") String hdImageStorePath;
-    @Value("${crypto.user}") String cryptoUser;
+    @Value("${org.apache.ws.security.crypto.merlin.keystore.file}") String keyStoreDir;
     @Value("${skip-cxf-init:false}") boolean skipCxfInitFlag;
 
     @PostConstruct
@@ -65,12 +66,12 @@ public class Application {
             return;
         }
 
-        if (hdImageStorePath.startsWith("/")) { // run only under linux
-            HDImageStore.setDir(hdImageStorePath);
+        if (keyStoreDir.startsWith("/")) { // run only under linux
+            HDImageStore.setDir(keyStoreDir);
         } else {
             SecureRandom.getInstance("SHA1PRNG");
         }
-	    log.info("HDImageStore path: {}, user: {}", HDImageStore.getDir(), cryptoUser);
+	    log.info("HDImageStore dir: {}", HDImageStore.getDir());
 	    XmlDSignTools.init();
         SpringBusFactory bf = new SpringBusFactory();
         Bus bus = bf.createBus();
@@ -97,15 +98,13 @@ public class Application {
         return registration;
     }
 
-    @Bean
-    public WSS4JOutInterceptor wsConfig() {
+    private Map<String, Object> properties() {
         final HashMap<String, Object> outProps = new HashMap<>();
         Map<Integer, Class<?>> wssConfigMap = new HashMap<>();
         wssConfigMap.put(WSConstants.SIGN, LocalSignatureAction.class);
         outProps.put("wss4j.action.map", wssConfigMap);
         outProps.put("action", "Signature");
         outProps.put("passwordType", "PasswordDigest");
-        outProps.put("user", cryptoUser);
         outProps.put("actor", "http://smev.gosuslugi.ru/actors/smev");
         outProps.put("passwordCallbackClass", "ru.synq.smev.soap.client.UTPasswordCallback");
         outProps.put("signaturePropFile", "application.properties");
@@ -114,7 +113,35 @@ public class Application {
         outProps.put("signatureAlgorithm", "http://www.w3.org/2001/04/xmldsig-more#gostr34102001-gostr3411");
         outProps.put("signatureDigestAlgorithm", "http://www.w3.org/2001/04/xmldsig-more#gostr3411");
         outProps.put("mustUnderstand", "false");
-        return new WSS4JOutInterceptor(outProps);
+        return outProps;
+    }
+
+    @Bean(name = "testConfig")
+    public WSS4JOutInterceptor testConfig() {
+        Map<String, Object> properties = properties();
+        properties.put("user", "RaUser");
+        return new WSS4JOutInterceptor(properties);
+    }
+
+    @Bean(name = "prodConfig")
+    public WSS4JOutInterceptor prodConfig() {
+        Map<String, Object> properties = properties();
+        properties.put("user", "prod");
+        return new WSS4JOutInterceptor(properties);
+    }
+
+    @Bean(name = "fmsTestConfig")
+    public WSS4JOutInterceptor fmsTestConfig() {
+        Map<String, Object> properties = properties();
+        properties.put("user", "FMSTest");
+        return new WSS4JOutInterceptor(properties);
+    }
+
+    @Bean(name = "fmsProdConfig")
+    public WSS4JOutInterceptor fmsProdConfig() {
+        Map<String, Object> properties = properties();
+        properties.put("user", "FMSProd");
+        return new WSS4JOutInterceptor(properties);
     }
 
     @Bean(name = "currentDate")

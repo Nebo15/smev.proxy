@@ -1,6 +1,7 @@
 package ru.synq.smev.services.fms;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.frontend.ClientProxy;
 import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,8 @@ import java.util.List;
 @RequestMapping("{env}/fms")
 public class FmsController {
     @Value("${skip-cxf-init:false}") boolean skipCxfInitFlag;
-    @Autowired WSS4JOutInterceptor wss4JOutInterceptor;
+    @Autowired @Qualifier("fmsTestConfig") WSS4JOutInterceptor testWss4JOutInterceptor;
+    @Autowired @Qualifier("fmsProdConfig") WSS4JOutInterceptor prodWss4JOutInterceptor;
     @Inject @Qualifier("fmsMessage") Provider<MessageType> messageProvider;
 
     @RequestMapping
@@ -125,7 +127,9 @@ public class FmsController {
         FmsService service = new FmsService();
         final IncomingRequestsServiceV243 port = service.getIncomingRequestsPort();
         if (!skipCxfInitFlag) {
-            ClientProxy.getClient(port).getOutInterceptors().add(wss4JOutInterceptor);
+            final Client client = ClientProxy.getClient(port);
+            client.getOutInterceptors().add(env.isProd() ? prodWss4JOutInterceptor : testWss4JOutInterceptor);
+//            client.getOutInterceptors().add(hdImageStoreSetterInterceptorProvider.get(env));
         }
         return port;
     }

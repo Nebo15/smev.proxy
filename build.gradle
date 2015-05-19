@@ -20,12 +20,12 @@ buildscript {
     }
     dependencies {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
-        classpath 'no.nils:wsdl2java:0.6'
+//        classpath 'no.nils:wsdl2java:0.6'
     }
 }
 
 apply plugin: 'java'
-apply plugin: 'no.nils.wsdl2java'
+//apply plugin: 'no.nils.wsdl2java'
 apply plugin: 'spring-boot'
 mainClassName = 'ru.synq.smev.Application'
 

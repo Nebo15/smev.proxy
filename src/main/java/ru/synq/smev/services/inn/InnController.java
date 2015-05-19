@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import ru.gosuslugi.smev.rev111111.INNFLRs;
 import ru.gosuslugi.smev.rev111111.MessageType;
+import ru.synq.smev.Environment;
 import ru.synq.smev.services.inn.group.InnGroupAppData;
 import ru.synq.smev.services.inn.group.InnGroupDocument;
 import ru.synq.smev.services.inn.group.InnGroupMessageData;
@@ -32,10 +33,11 @@ import java.util.UUID;
  * в рамках единой системы межведомственного электронного взаимодействия (СМЭВ)
  */
 @RestController
-@RequestMapping({"inn","SID0003450"})
+@RequestMapping("{env}/inn")
 public class InnController {
     @Value("${skip-cxf-init:false}") boolean skipCxfInitFlag;
-    @Autowired WSS4JOutInterceptor wss4JOutInterceptor;
+    @Autowired @Qualifier("testConfig") WSS4JOutInterceptor testWss4JOutInterceptor;
+    @Autowired @Qualifier("prodConfig") WSS4JOutInterceptor prodWss4JOutInterceptor;
     @Inject @Qualifier("innMessage") Provider<MessageType> messageProvider;
 
     /**
@@ -48,14 +50,14 @@ public class InnController {
      - строку с xml <noreturn КодОбр="90"> (по заданным сведениям о ФЛ не найдено ни одного либо найдено несколько ИНН ФЛ).
      */
     @RequestMapping
-    public INNFLRs queryGet(@Valid InnIndividualDocument doc) {
-        return query(doc);
+    public INNFLRs queryGet(@Valid InnIndividualDocument doc, @PathVariable Environment env) {
+        return query(doc, env);
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public INNFLRs query(@Valid @RequestBody InnIndividualDocument doc) {
+    public INNFLRs query(@Valid @RequestBody InnIndividualDocument doc, @PathVariable Environment env) {
         doc.setИдЗапрос(UUID.randomUUID().toString());
-        final InnPort port = getPort();
+        final InnPort port = getPort(env);
         final InnIndividualRequest inn = new InnIndividualRequest();
         InnIndividualAppData appData = new InnIndividualAppData();
         appData.setДокумент(doc);
@@ -73,12 +75,12 @@ public class InnController {
      * Передача группового запроса для определения ИНН ФЛ в формате XML и получение строки с идентификатором группы запросов.
      */
     @RequestMapping(value = "group", method = RequestMethod.POST)
-    public INNFLRs groupQuery(@Valid @RequestBody InnGroupDocument doc) {
+    public INNFLRs groupQuery(@Valid @RequestBody InnGroupDocument doc, @PathVariable Environment env) {
         if (doc.getИдПакетЗапрос() == null)
         for (InnGroupDocument.Запрос request : doc.getЗапрос()) {
             request.setIndex(String.valueOf(doc.getЗапрос().indexOf(request)+1));
         }
-        final InnPort port = getPort();
+        final InnPort port = getPort(env);
         final InnGroupRequest inn = new InnGroupRequest();
         InnGroupAppData appData = new InnGroupAppData();
         appData.setДокумент(doc);
@@ -99,16 +101,16 @@ public class InnController {
      - в виде строки с xml <noreturn КодОбр="91"> (групповой запрос не найден) или с xml <noreturn КодОбр="92"> (групповой запрос не обработан)
      */
     @RequestMapping("group/{id:\\d+}")
-    public INNFLRs groupGet(@PathVariable String id) {
+    public INNFLRs groupGet(@PathVariable String id, @PathVariable Environment env) {
         InnGroupDocument doc = new InnGroupDocument(id);
-        return groupQuery(doc);
+        return groupQuery(doc, env);
     }
 
-    protected InnPort getPort() {
+    protected InnPort getPort(Environment env) {
         InnService service = new InnService();
         InnPort port = service.getFNSINNSvc24Port();
         if (!skipCxfInitFlag) {
-            ClientProxy.getClient(port).getOutInterceptors().add(wss4JOutInterceptor);
+            ClientProxy.getClient(port).getOutInterceptors().add(env.isProd() ? prodWss4JOutInterceptor : testWss4JOutInterceptor);
         }
         return port;
     }

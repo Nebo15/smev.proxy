@@ -7,7 +7,6 @@ import org.apache.cxf.frontend.ClientProxy;
 import org.apache.cxf.transport.http.HTTPConduit;
 import org.apache.cxf.transports.http.configuration.HTTPClientPolicy;
 import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 import ru.gosuslugi.smev.rev120315.HeaderType;
@@ -22,8 +21,10 @@ import javax.xml.ws.BindingProvider;
 @RestController
 @RequestMapping("{env}/snils")
 public class SnilsController {
-    @Autowired WSS4JOutInterceptor wss4JOutInterceptor;
+    @Inject @Qualifier("testConfig") WSS4JOutInterceptor testWss4JOutInterceptor;
+    @Inject @Qualifier("prodConfig") WSS4JOutInterceptor prodWss4JOutInterceptor;
     @Inject @Qualifier("snilsMessage") Provider<MessageType> messageProvider;
+
     private static final String productionUrl = "http://oraas.rt.ru:7777/gateway/services/SID0003822/1.0";
 
     @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET})
@@ -45,7 +46,7 @@ public class SnilsController {
         }
 
         final Client client = ClientProxy.getClient(port);
-        client.getOutInterceptors().add(wss4JOutInterceptor);
+        client.getOutInterceptors().add(env.isProd() ? prodWss4JOutInterceptor : testWss4JOutInterceptor);
         HTTPConduit http = (HTTPConduit) client.getConduit();
         HTTPClientPolicy httpClientPolicy = new HTTPClientPolicy();
 //        httpClientPolicy.setConnectionTimeout(0);
