@@ -3,6 +3,8 @@ package ru.synq.smev;
 import org.apache.cxf.Bus;
 import org.apache.cxf.BusFactory;
 import org.apache.cxf.bus.spring.SpringBusFactory;
+import org.apache.cxf.interceptor.LoggingInInterceptor;
+import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.interceptor.transform.TransformOutInterceptor;
 import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
 import org.apache.ws.security.WSConstants;
@@ -80,6 +82,8 @@ public class Application {
         TransformOutInterceptor transformOutInterceptor = new TransformOutInterceptor();
         transformOutInterceptor.setOutTransformElements(singletonMap("{http://www.w3.org/2005/08/addressing}Action", ""));
         bus.getOutInterceptors().add(transformOutInterceptor);
+        bus.getInInterceptors().add(new LoggingInInterceptor());
+        bus.getOutInterceptors().add(new LoggingOutInterceptor());
     }
 
     @RequestMapping("**")
