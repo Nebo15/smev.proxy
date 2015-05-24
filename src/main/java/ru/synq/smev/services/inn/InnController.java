@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
-import ru.gosuslugi.smev.rev111111.INNFLRs;
 import ru.gosuslugi.smev.rev111111.MessageType;
 import ru.synq.smev.Environment;
+import ru.synq.smev.Response;
 import ru.synq.smev.services.inn.group.InnGroupAppData;
 import ru.synq.smev.services.inn.group.InnGroupDocument;
 import ru.synq.smev.services.inn.group.InnGroupMessageData;
@@ -22,6 +22,8 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.validation.Valid;
 import java.util.UUID;
+
+import static ru.synq.smev.MapBuilder.map;
 
 /**
  * Наименование:
@@ -50,12 +52,12 @@ public class InnController {
      - строку с xml <noreturn КодОбр="90"> (по заданным сведениям о ФЛ не найдено ни одного либо найдено несколько ИНН ФЛ).
      */
     @RequestMapping
-    public INNFLRs queryGet(@Valid InnIndividualDocument doc, @PathVariable Environment env) {
+    public Response queryGet(@Valid InnIndividualDocument doc, @PathVariable Environment env) {
         return query(doc, env);
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public INNFLRs query(@Valid @RequestBody InnIndividualDocument doc, @PathVariable Environment env) {
+    public Response query(@Valid @RequestBody InnIndividualDocument doc, @PathVariable Environment env) {
         doc.setИдЗапрос(UUID.randomUUID().toString());
         final InnPort port = getPort(env);
         final InnIndividualRequest inn = new InnIndividualRequest();
@@ -65,7 +67,22 @@ public class InnController {
         mData.setAppData(appData);
         inn.setMessageData(mData);
         inn.setMessage(messageProvider.get());
-        return port.queryIndividual(inn);
+        final InnResponse.AppData response = port.queryIndividual(inn).messageData.appData;
+        if (response.noreturn != null) {
+            return presentError(response.noreturn);
+        }
+        return Response.data(response.returnValue);
+    }
+
+    private Response presentError(InnResponse.AppData.NoReturn noreturn) {
+        String message = "undefined";
+        switch (noreturn.code) {
+            case "90": message = "по заданным сведениям о ФЛ не найдено ни одного либо найдено несколько ИНН ФЛ"; break;
+            case "91": message = "групповой запрос не найден"; break;
+            case "92": message = "групповой запрос не обработан"; break;
+        }
+        return Response.data(map().put("error",
+                map().put("code", noreturn.code).put("message", message)));
     }
 
     /**
@@ -75,7 +92,15 @@ public class InnController {
      * Передача группового запроса для определения ИНН ФЛ в формате XML и получение строки с идентификатором группы запросов.
      */
     @RequestMapping(value = "group", method = RequestMethod.POST)
-    public INNFLRs groupQuery(@Valid @RequestBody InnGroupDocument doc, @PathVariable Environment env) {
+    public Response groupQuery(@Valid @RequestBody InnGroupDocument doc, @PathVariable Environment env) {
+        final InnResponse.AppData response = internalGroupQuery(doc, env);
+        if (response.noreturn != null) {
+            return presentError(response.noreturn);
+        }
+        return Response.data(response.returnValue);
+    }
+
+    public InnResponse.AppData internalGroupQuery(InnGroupDocument doc, @PathVariable Environment env) {
         if (doc.getИдПакетЗапрос() == null)
         for (InnGroupDocument.Запрос request : doc.getЗапрос()) {
             request.setIndex(String.valueOf(doc.getЗапрос().indexOf(request)+1));
@@ -88,7 +113,7 @@ public class InnController {
         mData.setAppData(appData);
         inn.setMessageData(mData);
         inn.setMessage(messageProvider.get());
-        return port.queryGroup(inn);
+        return port.queryGroup(inn).messageData.appData;
     }
 
     /**
@@ -101,9 +126,13 @@ public class InnController {
      - в виде строки с xml <noreturn КодОбр="91"> (групповой запрос не найден) или с xml <noreturn КодОбр="92"> (групповой запрос не обработан)
      */
     @RequestMapping("group/{id:\\d+}")
-    public INNFLRs groupGet(@PathVariable String id, @PathVariable Environment env) {
+    public Response groupGet(@PathVariable String id, @PathVariable Environment env) {
         InnGroupDocument doc = new InnGroupDocument(id);
-        return groupQuery(doc, env);
+        final InnResponse.AppData response = internalGroupQuery(doc, env);
+        if (response.noreturn != null) {
+            return presentError(response.noreturn);
+        }
+        return Response.data(response.doc.getОтвет());
     }
 
     protected InnPort getPort(Environment env) {

@@ -1,6 +1,8 @@
 
 package unisoft.ws.fnsinn.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -186,6 +188,7 @@ public class Документ {
         @XmlAttribute(name = "\u0418\u0434\u0417\u0430\u043f\u0440\u043e\u0441", required = true)
         protected String идЗапрос;
         @XmlAttribute(name = "\u0418\u041d\u041d\u0424\u041b")
+        @JsonProperty("ИННФЛ")
         protected String иннфл;
 
         /**

@@ -1,16 +1,13 @@
 
 package unisoft.ws;
 
+import ru.gosuslugi.smev.rev111111.*;
+import ru.synq.smev.services.inn.InnResponse;
+
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
 import javax.xml.namespace.QName;
-import ru.gosuslugi.smev.rev111111.INNFL;
-import ru.gosuslugi.smev.rev111111.INNFLGR;
-import ru.gosuslugi.smev.rev111111.INNFLGRRs;
-import ru.gosuslugi.smev.rev111111.INNFLRs;
-import ru.gosuslugi.smev.rev111111.OTINNFLGR;
-import ru.gosuslugi.smev.rev111111.ZPINNFLGR;
 
 
 /**
@@ -57,7 +54,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link OTINNFLGR }{@code >}}
-     * 
+     *
      */
     @XmlElementDecl(namespace = "http://ws.unisoft/", name = "getINNFLGRResponse")
     public JAXBElement<OTINNFLGR> createGetINNFLGRResponse(OTINNFLGR value) {
@@ -92,12 +89,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link INNFLRs }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link ru.synq.smev.services.inn.InnResponse }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://ws.unisoft/", name = "queryINNFLResponse")
-    public JAXBElement<INNFLRs> createQueryINNFLResponse(INNFLRs value) {
-        return new JAXBElement<INNFLRs>(_QueryINNFLResponse_QNAME, INNFLRs.class, null, value);
+    public JAXBElement<InnResponse> createQueryINNFLResponse(InnResponse value) {
+        return new JAXBElement<InnResponse>(_QueryINNFLResponse_QNAME, InnResponse.class, null, value);
     }
 
     /**
