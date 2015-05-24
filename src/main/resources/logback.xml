@@ -12,10 +12,10 @@
 
     <include resource="logback-base.xml"/>
 
-    <logger name="ru.synq" level="${logback.loglevel}"/>
+    <logger name="ru.synq" level="ALL"/>
     <logger name="ch.qos.logback" level="WARN"/>
     <logger name="org.apache" level="WARN"/>
-    <logger name="org.apache.cxf" level="ALL"/>
+    <logger name="org.apache.cxf" level="INFO"/>
     <logger name="org.hibernate.validator" level="WARN"/>
     <logger name="org.hibernate" level="WARN"/>
     <logger name="org.springframework" level="WARN"/>
@@ -24,5 +24,6 @@
     <logger name="org.springframework.cache" level="WARN"/>
 
     <logger name="org.springframework.transaction.interceptor.TransactionInterceptor" level="WARN"/>
+    <logger name="com.rstyle.skmv.snils_validation" level="ALL"/>
 
 </configuration>
