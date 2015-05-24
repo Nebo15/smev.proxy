@@ -17,6 +17,7 @@
 
     <bean id="fmsMessage" class="ru.gosuslugi.smev.rev111111.MessageType" scope="prototype"
           p:status="REQUEST" p:exchangeType="3" p:date-ref="currentDate" p:typeCode="GSRV"
-          p:sender-ref="fmsSender" p:originator-ref="fmsSender" p:recipient-ref="fmsSender"/>
-    <bean id="fmsSender" class="ru.gosuslugi.smev.rev111111.OrgExternalType" p:code="FMS001001" p:name="ФМС России"/>
+          p:sender-ref="fmsSender" p:originator-ref="fmsRecipient" p:recipient-ref="fmsRecipient"/>
+    <bean id="fmsSender" class="ru.gosuslugi.smev.rev111111.OrgExternalType" p:code="974901" p:name="ФМС России"/>
+    <bean id="fmsRecipient" class="ru.gosuslugi.smev.rev111111.OrgExternalType" p:code="FMS001001" p:name="ФМС России"/>
 </beans>

@@ -25,10 +25,10 @@ public class SnilsValidationData {
     @NotNull @Valid
     protected SnilsFio fio;
     @XmlElement(required = true)
-    @NotNull @Pattern(regexp = "^\\d{3}-\\d{3}-\\d{3}\\s\\d{2}$", message = "\\d{3}-\\d{3}-\\d{3}\\s\\d{2} '123-456-789 11'")
+    @NotNull @Pattern(regexp = "^\\d{3}-\\d{3}-\\d{3}\\s\\d{2}$", message = "expect \\d{3}-\\d{3}-\\d{3}\\s\\d{2} for example '123-456-789 11'")
     protected String snils;
     protected GENDER gender;
-    @Pattern(regexp = "^\\d{1,2}-\\d{1,2}-\\d{4}$", message = "\\d{1,2}-\\d{1,2}-\\d{4} dd-mm-yyyy")
+    @Pattern(regexp = "^\\d{1,2}-\\d{1,2}-\\d{4}$", message = "expect \\d{1,2}-\\d{1,2}-\\d{4} (dd-mm-yyyy)")
     protected String birthDate;
 
     /**

@@ -48,9 +48,12 @@ repositories {
 
 dependencies {
     compile "org.springframework.boot:spring-boot-starter-web",
+            "org.springframework.boot:spring-boot-starter-security",
             "org.springframework.boot:spring-boot-starter-data-rest",
             "org.bouncycastle:bcpg-jdk15on:$bouncycastleVersion",
             "org.slf4j:slf4j-api:1.7.2",
+            "commons-io:commons-io:2.4",
+            'org.apache.commons:commons-lang3:3.4',
             'javax.inject:javax.inject:1'
 
 

@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -32,14 +31,12 @@ import ru.synq.smev.soap.xml.security.XmlDSignTools;
 import ru.synq.smev.soap.xml.security.action.LocalSignatureAction;
 
 import javax.annotation.PostConstruct;
-import javax.servlet.DispatcherType;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.EnumSet;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -90,16 +87,6 @@ public class Application {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorResponse notFoundError() {
         return Response.error(HttpStatus.NOT_FOUND);
-    }
-
-    @Bean
-    @Autowired
-    public FilterRegistrationBean authenticationFilter(AuthenticationFilter filter) {
-        FilterRegistrationBean registration = new FilterRegistrationBean();
-        registration.setFilter(filter);
-        registration.setDispatcherTypes(EnumSet.allOf(DispatcherType.class));
-        registration.addUrlPatterns("/**");
-        return registration;
     }
 
     private Map<String, Object> properties() {
@@ -159,5 +146,10 @@ public class Application {
         LocalValidatorFactoryBean validatorFactoryBean = new LocalValidatorFactoryBean();
         validatorFactoryBean.setValidationMessageSource(messageSource);
         return validatorFactoryBean;
+    }
+
+    @Bean
+    public RequestLoggingFilter loggingFilter() {
+        return RequestLoggingFilter.builder().build();
     }
 }

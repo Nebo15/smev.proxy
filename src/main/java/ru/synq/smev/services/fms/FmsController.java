@@ -28,39 +28,37 @@ import java.util.List;
 @RequestMapping("{env}/fms")
 public class FmsController {
     @Value("${skip-cxf-init:false}") boolean skipCxfInitFlag;
-    @Autowired @Qualifier("fmsTestConfig") WSS4JOutInterceptor testWss4JOutInterceptor;
-    @Autowired @Qualifier("fmsProdConfig") WSS4JOutInterceptor prodWss4JOutInterceptor;
+    @Autowired @Qualifier("testConfig") WSS4JOutInterceptor testWss4JOutInterceptor;
+    @Autowired @Qualifier("prodConfig") WSS4JOutInterceptor prodWss4JOutInterceptor;
     @Inject @Qualifier("fmsMessage") Provider<MessageType> messageProvider;
 
-    @RequestMapping
+    @RequestMapping(value = "passport", method = RequestMethod.POST)
     public Response passport(@PathVariable Environment env,
-                             @Valid @RequestBody User user,
-                             @Valid @RequestBody SimplePassportParams params
+                             @Valid @RequestBody SimplePassportInput input
     ) throws InvocationTargetException, IllegalAccessException {
         ServiceRequestMessageType appData = new ServiceRequestMessageType();
-        appData.setUser(user);
+        appData.setUser(input.user);
         appData.setServiceCode("P001");
         appData.setVersionCode("001");
-        setParams(appData.getParameters(), params);
+        setParams(appData.getParameters(), input.passport);
         final ProcessTaskResponseMessage response = getPort(env).processTask(createServiceRequestMessage(appData));
         return Response.data(response.getMessageData().getAppData());
     }
 
-    @RequestMapping("extended")
+    @RequestMapping(value = "passport/extended", method = RequestMethod.POST)
     public Response passportExtended(@PathVariable Environment env,
-                                     @Valid @RequestBody User user,
-                                     @Valid @RequestBody ExtendedPassportParams params
+                                     @Valid @RequestBody ExtendedPassportInput in
     ) throws InvocationTargetException, IllegalAccessException {
         ServiceRequestMessageType appData = new ServiceRequestMessageType();
-        appData.setUser(user);
+        appData.setUser(in.user);
         appData.setServiceCode("P002");
         appData.setVersionCode("001");
-        setParams(appData.getParameters(), params);
+        setParams(appData.getParameters(), in.passport);
         final BookRequestResponseMessage response = getPort(env).bookRequest(createServiceRequestMessage(appData));
         return Response.data(response.getMessageData().getAppData());
     }
 
-    @RequestMapping("extended/{taskId}")
+    @RequestMapping("passport/extended/{taskId}")
     public Response passportExtended(@PathVariable Environment env,
                                      @PathVariable String taskId
     ) throws InvocationTargetException, IllegalAccessException {
@@ -77,17 +75,17 @@ public class FmsController {
         return Response.data(result);
     }
 
-    @RequestMapping("dictionary/{code}")
+    @RequestMapping(value = "dictionary/{code}", method = RequestMethod.POST)
     public Response getDictionary(@PathVariable Environment env,
                                   @PathVariable String code,
-                                  @Valid @RequestBody User user
+                                  @Valid @RequestBody GetDictionaryInput in
     ) throws InvocationTargetException, IllegalAccessException {
         final GetDictionaryValuesMessage message = new GetDictionaryValuesMessage();
         message.setMessage(messageProvider.get());
         GetDictionaryValuesMessageData messageData = new GetDictionaryValuesMessageData();
         GetDictionaryValuesMessageType appData = new GetDictionaryValuesMessageType();
         appData.setDictionaryCode(code);
-        appData.setUser(user);
+        appData.setUser(in.user);
         messageData.setAppData(appData);
         message.setMessageData(messageData);
         final GetDictionaryValuesResponseMessage response = getPort(env).getDictionaryValues(message);
@@ -101,7 +99,6 @@ public class FmsController {
     @RequestMapping(value = "error_report/{taskId}", method = RequestMethod.POST)
     public Response getDictionary(@PathVariable Environment env,
                                   @PathVariable String taskId,
-                                  @Valid @RequestBody User user,
                                   @Valid @RequestBody ErrorReport errorReport
     ) throws InvocationTargetException, IllegalAccessException {
         final SendErrorReportMessage message = new SendErrorReportMessage();
@@ -109,7 +106,7 @@ public class FmsController {
         SendErrorReportMessageData messageData = new SendErrorReportMessageData();
         SendErrorReportMessageType appData = new SendErrorReportMessageType();
         appData.setTaskId(taskId);
-        appData.setUser(user);
+        appData.setUser(errorReport.user);
         appData.setErrorReport(errorReport.errorReport);
         messageData.setAppData(appData);
         message.setMessageData(messageData);
@@ -143,59 +140,87 @@ public class FmsController {
         return baseMessage;
     }
 
-    public static class ExtendedPassportParams {
-        @NotNull @Size(max = 60)
-        @JsonProperty("CITIZEN_LASTNAME")
-        public String CITIZEN_LASTNAME;
+    public static class ExtendedPassportInput {
+        @NotNull @Valid
+        public User user;
+        @NotNull @Valid
+        public ExtendedPassportParams passport;
 
-        @NotNull @Size(max = 60)
-        @JsonProperty("CITIZEN_FIRSTNAME")
-        public String CITIZEN_FIRSTNAME;
+        public static class ExtendedPassportParams {
+            @NotNull
+            @Size(max = 60)
+            @JsonProperty("CITIZEN_LASTNAME")
+            public String CITIZEN_LASTNAME;
 
-        @Size(max = 60)
-        @JsonProperty("CITIZEN_GIVENNAME")
-        public String CITIZEN_GIVENNAME;
+            @NotNull
+            @Size(max = 60)
+            @JsonProperty("CITIZEN_FIRSTNAME")
+            public String CITIZEN_FIRSTNAME;
 
-        @NotNull @Pattern(regexp = "^(\\d{2}\\.){2}\\d{4}$", message = "Дата в формате ДД.ММ.ГГГГ")
-        @JsonProperty("CITIZEN_BIRTHDAY")
-        public String CITIZEN_BIRTHDAY;
+            @Size(max = 60)
+            @JsonProperty("CITIZEN_GIVENNAME")
+            public String CITIZEN_GIVENNAME;
 
-        @NotNull @Size(min = 4, max = 4)
-        @JsonProperty("DOC_SERIE")
-        public String DOC_SERIE;
+            @NotNull
+            @Pattern(regexp = "^(\\d{2}\\.){2}\\d{4}$", message = "Дата в формате ДД.ММ.ГГГГ")
+            @JsonProperty("CITIZEN_BIRTHDAY")
+            public String CITIZEN_BIRTHDAY;
 
-        @NotNull @Size(min = 6, max = 6)
-        @JsonProperty("DOC_NUMBER")
-        public String DOC_NUMBER;
+            @NotNull
+            @Size(min = 4, max = 4)
+            @JsonProperty("DOC_SERIE")
+            public String DOC_SERIE;
 
-        @NotNull @Size(min = 6, max = 6)
-        @JsonProperty("DOC_ISSUER")
-        public String DOC_ISSUER;
+            @NotNull
+            @Size(min = 6, max = 6)
+            @JsonProperty("DOC_NUMBER")
+            public String DOC_NUMBER;
 
-        @NotNull @Pattern(regexp = "^(\\d{2}\\.){2}\\d{4}$", message = "Дата в формате ДД.ММ.ГГГГ")
-        @JsonProperty("DOC_ISSUEDATE")
-        public String DOC_ISSUEDATE;
+            @NotNull
+            @Size(min = 6, max = 6)
+            @JsonProperty("DOC_ISSUER")
+            public String DOC_ISSUER;
 
-        @JsonProperty("REGION_CODE")
-        public String REGION_CODE;
+            @NotNull
+            @Pattern(regexp = "^(\\d{2}\\.){2}\\d{4}$", message = "Дата в формате ДД.ММ.ГГГГ")
+            @JsonProperty("DOC_ISSUEDATE")
+            public String DOC_ISSUEDATE;
+
+            @JsonProperty("REGION_CODE")
+            public String REGION_CODE;
+        }
     }
 
-    public static class SimplePassportParams {
-        @NotNull @Size(min = 4, max = 4)
-        @JsonProperty("DOC_SERIE")
-        public String DOC_SERIE;
-        @NotNull @Size(min = 6, max = 6)
-        @JsonProperty("DOC_NUMBER")
-        public String DOC_NUMBER;
-        @Pattern(regexp = "^(\\d{2}\\.){2}\\d{4}$", message = "Дата в формате ДД.ММ.ГГГГ")
-        @JsonProperty("DOC_ISSUEDATE")
-        public String DOC_ISSUEDATE;
+    public static class SimplePassportInput {
+        @NotNull @Valid
+        public User user;
+        @NotNull @Valid
+        public SimplePassportParams passport;
 
-        public SimplePassportParams() {}
+        public static class SimplePassportParams {
+            @NotNull
+            @Size(min = 4, max = 4)
+            @JsonProperty("DOC_SERIE")
+            public String DOC_SERIE;
+            @NotNull
+            @Size(min = 6, max = 6)
+            @JsonProperty("DOC_NUMBER")
+            public String DOC_NUMBER;
+            @Pattern(regexp = "^(\\d{2}\\.){2}\\d{4}$", message = "Дата в формате ДД.ММ.ГГГГ")
+            @JsonProperty("DOC_ISSUEDATE")
+            public String DOC_ISSUEDATE;
+        }
     }
 
     private static class ErrorReport {
+        @NotNull @Valid
+        public User user;
         @NotNull
         public String errorReport;
+    }
+
+    private static class GetDictionaryInput {
+        @NotNull @Valid
+        public User user;
     }
 }

@@ -1,6 +1,7 @@
 
 package ru.fms.sx.kernel.webservices.border.basetypes;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.w3._2000._09.xmldsig.SignatureType;
 
 import javax.xml.bind.annotation.*;
@@ -43,6 +44,7 @@ import javax.xml.bind.annotation.*;
     EditRequestResponseMessageType.class,
     SendErrorReportResponseMessageType.class
 })
+@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
 public abstract class BaseResponseMessageType {
 
     @XmlElement(name = "Signature", namespace = "http://www.w3.org/2000/09/xmldsig#")

@@ -8,6 +8,7 @@ import java.util.List;
 
 @JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
 public class Response {
+    @JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
     public Object data;
 
     public Response(Object data) {
