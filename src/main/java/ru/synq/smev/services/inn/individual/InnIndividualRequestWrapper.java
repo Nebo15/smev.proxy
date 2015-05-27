@@ -1,12 +1,15 @@
 
 package ru.synq.smev.services.inn.individual;
 
+import org.apache.cxf.databinding.WrapperHelper;
+import org.apache.cxf.interceptor.Fault;
 import ru.gosuslugi.smev.rev111111.MessageType;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.List;
 
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -14,12 +17,15 @@ import javax.xml.bind.annotation.XmlType;
         "message",
         "messageData"
 })
-public class InnIndividualRequest
+public class InnIndividualRequestWrapper implements WrapperHelper
 {
     @XmlElement(name = "Message", required = true, namespace = "http://smev.gosuslugi.ru/rev111111")
     protected MessageType message;
     @XmlElement(name = "MessageData", required = true, namespace = "http://smev.gosuslugi.ru/rev111111")
     protected InnIndividualMessageData messageData;
+
+    public InnIndividualRequestWrapper() {
+    }
 
     public MessageType getMessage() {
         return message;
@@ -37,4 +43,18 @@ public class InnIndividualRequest
         this.messageData = value;
     }
 
+    @Override
+    public Object createWrapperObject(List<?> lst) throws Fault {
+        return null;
+    }
+
+    @Override
+    public List<Object> getWrapperParts(Object o) throws Fault {
+        return null;
+    }
+
+    @Override
+    public String getSignature() {
+        return null;
+    }
 }

@@ -150,7 +150,7 @@
     </binding>
     <service name="incomingRequests_v2_4_3">
         <port name="incomingRequestsPort" binding="tns:incomingRequestsBinding">
-            <soap:address location="http://fms-sx.reksoft.ru:8080/serviceConcentrator/incomingRequests_v2_4_3"/>
+            <soap:address location="http://smev-mvf.test.gosuslugi.ru:7777/gateway/services/SID0003110"/>
         </port>
     </service>
 

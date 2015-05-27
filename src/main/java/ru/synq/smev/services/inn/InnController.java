@@ -2,7 +2,6 @@ package ru.synq.smev.services.inn;
 
 import org.apache.cxf.frontend.ClientProxy;
 import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +12,8 @@ import ru.synq.smev.services.inn.group.InnGroupAppData;
 import ru.synq.smev.services.inn.group.InnGroupDocument;
 import ru.synq.smev.services.inn.group.InnGroupMessageData;
 import ru.synq.smev.services.inn.group.InnGroupRequest;
+import ru.synq.smev.services.inn.group.get.InnGroupGetRequest;
+import ru.synq.smev.services.inn.group.query.InnGroupQueryRequest;
 import ru.synq.smev.services.inn.individual.InnIndividualAppData;
 import ru.synq.smev.services.inn.individual.InnIndividualDocument;
 import ru.synq.smev.services.inn.individual.InnIndividualMessageData;
@@ -38,8 +39,8 @@ import static ru.synq.smev.MapBuilder.map;
 @RequestMapping("{env}/inn")
 public class InnController {
     @Value("${skip-cxf-init:false}") boolean skipCxfInitFlag;
-    @Autowired @Qualifier("testConfig") WSS4JOutInterceptor testWss4JOutInterceptor;
-    @Autowired @Qualifier("prodConfig") WSS4JOutInterceptor prodWss4JOutInterceptor;
+    @Inject @Qualifier("testConfig") WSS4JOutInterceptor testWss4JOutInterceptor;
+    @Inject @Qualifier("prodConfig") WSS4JOutInterceptor prodWss4JOutInterceptor;
     @Inject @Qualifier("innMessage") Provider<MessageType> messageProvider;
 
     /**
@@ -67,7 +68,7 @@ public class InnController {
         mData.setAppData(appData);
         inn.setMessageData(mData);
         inn.setMessage(messageProvider.get());
-        final InnResponse.AppData response = port.queryIndividual(inn).messageData.appData;
+        final InnResponse.AppData response = port.individualQuery(inn).messageData.appData;
         if (response.noreturn != null) {
             return presentError(response.noreturn);
         }
@@ -77,9 +78,9 @@ public class InnController {
     private Response presentError(InnResponse.AppData.NoReturn noreturn) {
         String message = "undefined";
         switch (noreturn.code) {
-            case "90": message = "по заданным сведениям о ФЛ не найдено ни одного либо найдено несколько ИНН ФЛ"; break;
-            case "91": message = "групповой запрос не найден"; break;
-            case "92": message = "групповой запрос не обработан"; break;
+            case "90": message = "По заданным сведениям о ФЛ не найдено ни одного либо найдено несколько ИНН ФЛ"; break;
+            case "91": message = "Групповой запрос не найден"; break;
+            case "92": message = "Групповой запрос не обработан"; break;
         }
         return Response.data(map().put("error",
                 map().put("code", noreturn.code).put("message", message)));
@@ -92,28 +93,31 @@ public class InnController {
      * Передача группового запроса для определения ИНН ФЛ в формате XML и получение строки с идентификатором группы запросов.
      */
     @RequestMapping(value = "group", method = RequestMethod.POST)
-    public Response groupQuery(@Valid @RequestBody InnGroupDocument doc, @PathVariable Environment env) {
-        final InnResponse.AppData response = internalGroupQuery(doc, env);
+    public Response groupQuery(@Valid @RequestBody InnGroupDocument doc, @PathVariable Environment env) throws InstantiationException, IllegalAccessException {
+        final InnResponse.AppData response = internalGroupQuery(doc, env, InnGroupQueryRequest.class);
         if (response.noreturn != null) {
             return presentError(response.noreturn);
         }
         return Response.data(response.returnValue);
     }
 
-    public InnResponse.AppData internalGroupQuery(InnGroupDocument doc, @PathVariable Environment env) {
+    @SuppressWarnings("ConstantConditions")
+    public InnResponse.AppData internalGroupQuery(InnGroupDocument doc, @PathVariable Environment env, Class<? extends InnGroupRequest> requestClass) throws IllegalAccessException, InstantiationException {
         if (doc.getИдПакетЗапрос() == null)
         for (InnGroupDocument.Запрос request : doc.getЗапрос()) {
             request.setIndex(String.valueOf(doc.getЗапрос().indexOf(request)+1));
         }
         final InnPort port = getPort(env);
-        final InnGroupRequest inn = new InnGroupRequest();
-        InnGroupAppData appData = new InnGroupAppData();
+        final InnGroupRequest inn = requestClass.newInstance();
+        InnGroupMessageData mData = inn.createMessageData();
+        InnGroupAppData appData = inn.createAppData();
         appData.setДокумент(doc);
-        InnGroupMessageData mData = new InnGroupMessageData();
         mData.setAppData(appData);
         inn.setMessageData(mData);
         inn.setMessage(messageProvider.get());
-        return port.queryGroup(inn).messageData.appData;
+        return requestClass == InnGroupQueryRequest.class
+                ? port.groupQuery((InnGroupQueryRequest) inn).messageData.appData
+                : port.groupGet((InnGroupGetRequest) inn).messageData.appData;
     }
 
     /**
@@ -126,9 +130,9 @@ public class InnController {
      - в виде строки с xml <noreturn КодОбр="91"> (групповой запрос не найден) или с xml <noreturn КодОбр="92"> (групповой запрос не обработан)
      */
     @RequestMapping("group/{id:\\d+}")
-    public Response groupGet(@PathVariable String id, @PathVariable Environment env) {
+    public Response groupGet(@PathVariable String id, @PathVariable Environment env) throws InstantiationException, IllegalAccessException {
         InnGroupDocument doc = new InnGroupDocument(id);
-        final InnResponse.AppData response = internalGroupQuery(doc, env);
+        final InnResponse.AppData response = internalGroupQuery(doc, env, InnGroupGetRequest.class);
         if (response.noreturn != null) {
             return presentError(response.noreturn);
         }
@@ -137,7 +141,7 @@ public class InnController {
 
     protected InnPort getPort(Environment env) {
         InnService service = new InnService();
-        InnPort port = service.getFNSINNSvc24Port();
+        InnPort port = service.getPort();
         if (!skipCxfInitFlag) {
             ClientProxy.getClient(port).getOutInterceptors().add(env.isProd() ? prodWss4JOutInterceptor : testWss4JOutInterceptor);
         }

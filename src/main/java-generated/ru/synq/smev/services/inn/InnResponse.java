@@ -7,6 +7,7 @@ import unisoft.ws.fnsinn.response.Документ;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 
 public class InnResponse {
     private static final String NS = "http://smev.gosuslugi.ru/rev111111";
@@ -36,4 +37,13 @@ public class InnResponse {
             public String code;
         }
     }
+
+    @XmlType(name = "INNFLRs")
+    public static class IndividualQuery extends InnResponse {}
+
+    @XmlType(name = "INNFLGR_Rs")
+    public static class GroupQuery extends InnResponse {}
+
+    @XmlType(name = "OTINNFLGR")
+    public static class GroupGet extends InnResponse {}
 }

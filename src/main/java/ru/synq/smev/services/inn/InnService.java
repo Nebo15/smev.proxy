@@ -14,7 +14,7 @@ import java.net.URL;
  * 
  */
 @WebServiceClient(name = "FNSINNSvc_24", 
-                  wsdlLocation = "wsdl/SID0003450/smev/v_2_4/FNSINNSvc.wsdl",
+                  wsdlLocation = "wsdl/SID0003450/inn.wsdl",
                   targetNamespace = "http://ws.unisoft/") 
 public class InnService extends Service {
 
@@ -23,7 +23,7 @@ public class InnService extends Service {
     public final static QName SERVICE = new QName("http://ws.unisoft/", "FNSINNSvc_24");
     public final static QName FNSINNSvc24Port = new QName("http://ws.unisoft/", "FNSINNSvc_24Port");
     static {
-        WSDL_LOCATION = InnService.class.getClassLoader().getResource("wsdl/SID0003450/smev/v_2_4/FNSINNSvc.wsdl");
+        WSDL_LOCATION = InnService.class.getClassLoader().getResource("wsdl/SID0003450/inn.wsdl");
     }
 
     public InnService(URL wsdlLocation) {
@@ -65,7 +65,7 @@ public class InnService extends Service {
      *     returns FNSINNSvc24Port
      */
     @WebEndpoint(name = "FNSINNSvc_24Port")
-    public InnPort getFNSINNSvc24Port() {
+    public InnPort getPort() {
         return super.getPort(FNSINNSvc24Port, InnPort.class);
     }
 

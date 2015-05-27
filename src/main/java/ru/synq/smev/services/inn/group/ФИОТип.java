@@ -1,6 +1,9 @@
 
 package ru.synq.smev.services.inn.group;
 
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import ru.synq.smev.services.inn.InnNamingStrategy;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -51,6 +54,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "\u0424\u0418\u041e\u0422\u0438\u043f")
+@JsonNaming(InnNamingStrategy.class)
 public class ФИОТип {
 
     @XmlAttribute(name = "\u0424\u0430\u043c\u0438\u043b\u0438\u044f", required = true)
