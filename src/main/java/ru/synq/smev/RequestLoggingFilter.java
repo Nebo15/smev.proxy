@@ -90,7 +90,8 @@ public class RequestLoggingFilter extends OncePerRequestFilter {
                 final ResettableStreamHttpServletRequest wrapper = new ResettableStreamHttpServletRequest(request);
                 final String payload = IOUtils.toString(wrapper.getInputStream(), wrapper.getCharacterEncoding());
                 wrapper.resetInputStream();
-                final String message = "method=" + request.getMethod() + ";uri=" + uri + (query==null? "" : "?" + query) + ";body=" + doReplaces(payload);
+                final String message = "method=" + request.getMethod() + ";uri=" + uri + (query==null? "" : "?" + query)
+                        + (payload != null && !payload.isEmpty() ? ";body=" + doReplaces(payload) : "");
                 requestLog.info(message);
                 requestToUse = wrapper;
             }
