@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is Metro/2.1.1 (branches/2.1-6844; 2011-07-29T12:07:24+0000) JAXWS-RI/2.2.5 JAXWS/2.2. --><wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:smev="http://smev.gosuslugi.ru/rev111111" xmlns:tns="http://ws.unisoft/" targetNamespace="http://ws.unisoft/">
+	<wsdl:documentation>Веб-сервис ФНС России - Поедоставление сведений об ИНН. СМЭВ версия от 11.11.2011</wsdl:documentation>
+	<wsdl:types>
+		<xs:schema targetNamespace="http://ws.unisoft/">
+			<xs:import namespace="http://smev.gosuslugi.ru/rev111111" schemaLocation="smev_bridge.xsd"/>
+			<xs:element name="queryINNFL" type="smev:INNFL">
+			</xs:element>
+			<xs:element name="queryINNFLResponse" type="smev:INNFL_Rs">
+			</xs:element>
+			<xs:element name="queryINNFLGR" type="smev:INNFLGR">
+			</xs:element>
+			<xs:element name="queryINNFLGRResponse" type="smev:INNFLGR_Rs">
+			</xs:element>
+			<xs:element name="getINNFLGR" type="smev:ZPINNFLGR">
+			</xs:element>
+			<xs:element name="getINNFLGRResponse" type="smev:OTINNFLGR">
+			</xs:element>
+			<xs:element name="TestRequest">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="TestResponse">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="queryINNFL">
+		<wsdl:part name="queryINNFL_IN" element="tns:queryINNFL"/>
+	</wsdl:message>
+	<wsdl:message name="queryINNFLResponse">
+		<wsdl:part name="queryINNFL_OUT" element="tns:queryINNFLResponse"/>
+	</wsdl:message>
+	<wsdl:message name="queryINNFLGR">
+		<wsdl:part name="queryINNFLGR_IN" element="tns:queryINNFLGR"/>
+	</wsdl:message>
+	<wsdl:message name="queryINNFLGRResponse">
+		<wsdl:part name="queryINNFLGR_OUT" element="tns:queryINNFLGRResponse"/>
+	</wsdl:message>
+	<wsdl:message name="getINNFLGR">
+		<wsdl:part name="getINNFLGR_IN" element="tns:getINNFLGR"/>
+	</wsdl:message>
+	<wsdl:message name="getINNFLGRResponse">
+		<wsdl:part name="getINNFLGR_OUT" element="tns:getINNFLGRResponse"/>
+	</wsdl:message>
+	<wsdl:message name="TestRequest_InputMessage">
+		<wsdl:part name="TestRequest_IN" element="tns:TestRequest"/>
+	</wsdl:message>
+	<wsdl:message name="TestRequest_OutputMessage">
+		<wsdl:part name="TestRequest_OUT" element="tns:TestResponse"/>
+	</wsdl:message>
+	<wsdl:portType name="FNSINNSvc_24Port">
+		<wsdl:operation name="queryINNFL">
+			<wsdl:input message="tns:queryINNFL"/>
+			<wsdl:output message="tns:queryINNFLResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="queryINNFLGR">
+			<wsdl:input message="tns:queryINNFLGR"/>
+			<wsdl:output message="tns:queryINNFLGRResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="getINNFLGR">
+			<wsdl:input message="tns:getINNFLGR"/>
+			<wsdl:output message="tns:getINNFLGRResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="test">
+			<wsdl:input message="tns:TestRequest_InputMessage"/>
+			<wsdl:output message="tns:TestRequest_OutputMessage"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="FNSINNSvcSoap11" type="tns:FNSINNSvc_24Port">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="queryINNFL">
+			<soap:operation soapAction="queryINNFL" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="queryINNFLGR">
+			<soap:operation soapAction="queryINNFLGR" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getINNFLGR">
+			<soap:operation soapAction="getINNFLGR" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="test">
+			<soap:operation soapAction="test" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="FNSINNSvc_24">
+		<wsdl:port name="FNSINNSvc_24Port" binding="tns:FNSINNSvcSoap11">
+			<soap:address location="http://94.125.90.50:6336/FNSINNWS/FNSINNSvc_24"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

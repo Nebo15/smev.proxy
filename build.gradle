@@ -1,0 +1,88 @@
+buildscript {
+    ext {
+        springBootVersion = '1.2.3.RELEASE'
+        bouncycastleVersion = "1.52"
+        cxfVersion = "2.6.1"
+        cxfArtifacts = [
+                'cxf-rt-frontend-jaxws',
+                'cxf-rt-transports-http',
+                'cxf-rt-ws-rm',
+                'cxf-rt-ws-security',
+                'cxf-rt-ws-addr',
+                'cxf-rt-ws-policy',
+        ]
+    }
+    repositories {
+        jcenter()
+        mavenCentral()
+        maven { url 'http://repo.spring.io/release' }
+        maven { url 'http://repo.spring.io/milestone' }
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+//        classpath 'no.nils:wsdl2java:0.6'
+    }
+}
+
+apply plugin: 'java'
+//apply plugin: 'no.nils.wsdl2java'
+apply plugin: 'spring-boot'
+mainClassName = 'ru.synq.smev.Application'
+
+jar {
+    baseName = 'smev-proxy'
+    version = '0.1-SNAPSHOT'
+    manifest {
+        attributes 'Implementation-Title': project.name, 'Implementation-Version': version
+    }
+}
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+
+repositories {
+    mavenCentral()
+    maven { url 'http://repo.spring.io/release' }
+    maven { url 'http://repo.spring.io/milestone' }
+}
+
+dependencies {
+    compile "org.springframework.boot:spring-boot-starter-web",
+            "org.springframework.boot:spring-boot-starter-security",
+            "org.springframework.boot:spring-boot-starter-data-rest",
+            "org.bouncycastle:bcpg-jdk15on:$bouncycastleVersion",
+            "org.slf4j:slf4j-api:1.7.2",
+            "commons-io:commons-io:2.4",
+            'org.apache.commons:commons-lang3:3.4',
+            'javax.inject:javax.inject:1'
+
+
+    cxfArtifacts.each { artifact ->
+        compile "org.apache.cxf:$artifact:$cxfVersion"
+    }
+
+    runtime 'ch.qos.logback:logback-classic:1.0.9', // we use logback
+            'org.slf4j:log4j-over-slf4j:1.7.2'      // and the log4j bridge
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.3'
+}
+
+/*wsdl2java {
+    generatedWsdlDir = file("src/main/java-generated")  // target directory for generated source code
+    wsdlDir = file("src/main/resources/wsdl") // define to support incremental build
+    wsdlsToGenerate = [
+            ["$projectDir/src/main/resources/wsdl/SID0003450/smev/v_2_4/FNSINNSvc.wsdl"],
+            ["$projectDir/src/main/resources/wsdl/SID0003418/fms.wsdl"],
+            ["$projectDir/src/main/resources/wsdl/SNILS/snils.wsdl"],
+    ]
+    cxfVersion = "2.6.1"
+}*/
+
+sourceSets.main.java.srcDirs 'src/main/java-generated', 'src/main/java'
+/*
+// Remote debug
+run {
+    jvmArgs = ['-Xdebug', '-Xrunjdwp:server=y,transport=dt_socket,address=4000,suspend=y']
+}*/
